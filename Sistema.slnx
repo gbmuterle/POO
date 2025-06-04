@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Modelos/Modelos.csproj" />
+  <Project Path="Servicos/Servicos.csproj" />
+  <Project Path="Sistema/Sistema.csproj" />
+</Solution>
