@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Servicos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b06ef9996ddecc3af902bcb33936ca0538c0388")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ec11f6ac361009a061d94614f3b709d24575921")]
 [assembly: System.Reflection.AssemblyProductAttribute("Servicos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Servicos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
