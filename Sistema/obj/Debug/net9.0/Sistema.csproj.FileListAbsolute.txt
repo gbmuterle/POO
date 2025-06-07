@@ -17,3 +17,9 @@ C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\obj\Debug\net9.0\refint\Sistema.
 C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\obj\Debug\net9.0\Sistema.pdb
 C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\obj\Debug\net9.0\Sistema.genruntimeconfig.cache
 C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\obj\Debug\net9.0\ref\Sistema.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Repositorios.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Servicos.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Telas.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Repositorios.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Servicos.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Telas.pdb

@@ -4,11 +4,11 @@
     using Modelos;
     using Repositorios;
 
-    public class ProdutoServico
+    public class ServicoProduto
     {
         private readonly IProdutoRepositorio _repositorio;
 
-        public ProdutoServico(IProdutoRepositorio repositorio)
+        public ServicoProduto(IProdutoRepositorio repositorio)
         {
             _repositorio = repositorio;
         }

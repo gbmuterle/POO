@@ -1,11 +1,68 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "Modelos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Modelos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Modelos.dll": {}
+        }
+      },
+      "Repositorios/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Modelos": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repositorios.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repositorios.dll": {}
+        }
+      },
+      "Servicos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Modelos": "1.0.0",
+          "Repositorios": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Servicos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Servicos.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Modelos/1.0.0": {
+      "type": "project",
+      "path": "../Modelos/Modelos.csproj",
+      "msbuildProject": "../Modelos/Modelos.csproj"
+    },
+    "Repositorios/1.0.0": {
+      "type": "project",
+      "path": "../Repositorios/Repositorios.csproj",
+      "msbuildProject": "../Repositorios/Repositorios.csproj"
+    },
+    "Servicos/1.0.0": {
+      "type": "project",
+      "path": "../Servicos/Servicos.csproj",
+      "msbuildProject": "../Servicos/Servicos.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "Modelos >= 1.0.0",
+      "Servicos >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\gbmuterle\\.nuget\\packages\\": {}
@@ -33,7 +90,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+            },
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

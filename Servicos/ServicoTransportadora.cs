@@ -4,11 +4,11 @@ namespace Servicos
     using Modelos;
     using Repositorios;
 
-    public class TransportadoraServico
+    public class ServicoTransportadora
     {
         private readonly ITransportadoraRepositorio _repositorio;
 
-        public TransportadoraServico(ITransportadoraRepositorio repositorio)
+        public ServicoTransportadora(ITransportadoraRepositorio repositorio)
         {
             _repositorio = repositorio;
         }

@@ -8,7 +8,10 @@
     ".NETCoreApp,Version=v9.0": {
       "Sistema/1.0.0": {
         "dependencies": {
-          "Modelos": "1.0.0"
+          "Modelos": "1.0.0",
+          "Repositorios": "1.0.0",
+          "Servicos": "1.0.0",
+          "Telas": "1.0.0"
         },
         "runtime": {
           "Sistema.dll": {}
@@ -17,6 +20,41 @@
       "Modelos/1.0.0": {
         "runtime": {
           "Modelos.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Repositorios/1.0.0": {
+        "dependencies": {
+          "Modelos": "1.0.0"
+        },
+        "runtime": {
+          "Repositorios.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Servicos/1.0.0": {
+        "dependencies": {
+          "Modelos": "1.0.0",
+          "Repositorios": "1.0.0"
+        },
+        "runtime": {
+          "Servicos.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Telas/1.0.0": {
+        "dependencies": {
+          "Modelos": "1.0.0",
+          "Servicos": "1.0.0"
+        },
+        "runtime": {
+          "Telas.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -31,6 +69,21 @@
       "sha512": ""
     },
     "Modelos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Repositorios/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Servicos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Telas/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

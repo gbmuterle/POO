@@ -1,0 +1,16 @@
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\bin\Debug\net9.0\Repositorios.deps.json
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\bin\Debug\net9.0\Repositorios.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\bin\Debug\net9.0\Repositorios.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\bin\Debug\net9.0\Modelos.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\bin\Debug\net9.0\Modelos.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.csproj.AssemblyReference.cache
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.AssemblyInfoInputs.cache
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.AssemblyInfo.cs
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.csproj.CoreCompileInputs.cache
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.sourcelink.json
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Reposito.39D5CB08.Up2Date
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\refint\Repositorios.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\Repositorios.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Repositorios\obj\Debug\net9.0\ref\Repositorios.dll

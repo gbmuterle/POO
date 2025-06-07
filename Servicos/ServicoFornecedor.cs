@@ -4,11 +4,11 @@ namespace Servicos
     using Modelos;
     using Repositorios;
 
-    public class FornecedorServico
+    public class ServicoFornecedor
     {
         private readonly IFornecedorRepositorio _repositorio;
 
-        public FornecedorServico(IFornecedorRepositorio repositorio)
+        public ServicoFornecedor(IFornecedorRepositorio repositorio)
         {
             _repositorio = repositorio;
         }

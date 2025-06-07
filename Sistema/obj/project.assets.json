@@ -11,6 +11,47 @@
         "runtime": {
           "bin/placeholder/Modelos.dll": {}
         }
+      },
+      "Repositorios/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Modelos": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repositorios.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repositorios.dll": {}
+        }
+      },
+      "Servicos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Modelos": "1.0.0",
+          "Repositorios": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Servicos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Servicos.dll": {}
+        }
+      },
+      "Telas/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Modelos": "1.0.0",
+          "Servicos": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Telas.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Telas.dll": {}
+        }
       }
     }
   },
@@ -19,11 +60,29 @@
       "type": "project",
       "path": "../Modelos/Modelos.csproj",
       "msbuildProject": "../Modelos/Modelos.csproj"
+    },
+    "Repositorios/1.0.0": {
+      "type": "project",
+      "path": "../Repositorios/Repositorios.csproj",
+      "msbuildProject": "../Repositorios/Repositorios.csproj"
+    },
+    "Servicos/1.0.0": {
+      "type": "project",
+      "path": "../Servicos/Servicos.csproj",
+      "msbuildProject": "../Servicos/Servicos.csproj"
+    },
+    "Telas/1.0.0": {
+      "type": "project",
+      "path": "../Telas/Telas.csproj",
+      "msbuildProject": "../Telas/Telas.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Modelos >= 1.0.0"
+      "Modelos >= 1.0.0",
+      "Repositorios >= 1.0.0",
+      "Servicos >= 1.0.0",
+      "Telas >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -55,6 +114,15 @@
           "projectReferences": {
             "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
               "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+            },
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj"
+            },
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj"
+            },
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj"
             }
           }
         }
