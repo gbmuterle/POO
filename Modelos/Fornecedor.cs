@@ -1,4 +1,4 @@
-namespace Modelos.Classes
+namespace Modelos
 {
     public class Fornecedor : Pessoa
     {

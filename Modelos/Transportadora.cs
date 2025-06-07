@@ -1,4 +1,4 @@
-namespace Modelos.Classes
+namespace Modelos
 {
     public class Transportadora : Pessoa
     {
@@ -14,7 +14,7 @@ namespace Modelos.Classes
 
         public override string ToString()
         {
-            return $"Código: {Codigo}, Nome: {Nome}, Telefone: {Telefone}, Email: {Email}, CNPJ: {Cnpj}, Preço por Km: {PrecoPorKm}";
+            return $"Código: {Codigo}, Nome: {Nome}, Telefone: {Telefone}, Email: {Email}, CNPJ: {Cnpj}, Preço por Km: {PrecoPorKm:C}";
         }
     }
 }

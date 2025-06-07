@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Modelos.Classes
+namespace Modelos
 {
     public abstract class Pessoa
     {
