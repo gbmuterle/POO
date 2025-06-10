@@ -4,7 +4,7 @@ namespace Repositorios
     using System.Linq;
     using Modelos;
 
-    public class ProdutoRepositorioLista : IProdutoRepositorio
+    public class RepositorioProdutoLista : IRepositorioProduto
     {
         private List<Produto> produtos = new List<Produto>();
 
@@ -34,7 +34,7 @@ namespace Repositorios
             }
         }
 
-        public Produto BuscarPorCodigo(int codigo)
+        public Produto? BuscarPorCodigo(int codigo)
         {
             return produtos.FirstOrDefault(p => p.Codigo == codigo);
         }

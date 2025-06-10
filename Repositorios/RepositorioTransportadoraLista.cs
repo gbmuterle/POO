@@ -4,7 +4,7 @@ namespace Repositorios
     using System.Linq;
     using Modelos;
 
-    public class TransportadoraRepositorioLista : ITransportadoraRepositorio
+    public class RepositorioTransportadoraLista : IRepositorioTransportadora
     {
         private List<Transportadora> transportadoras = new List<Transportadora>();
 
@@ -35,7 +35,7 @@ namespace Repositorios
             }
         }
 
-        public Transportadora BuscarPorCodigo(int codigo)
+        public Transportadora? BuscarPorCodigo(int codigo)
         {
             return transportadoras.FirstOrDefault(t => t.Codigo == codigo);
         }

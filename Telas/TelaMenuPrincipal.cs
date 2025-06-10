@@ -27,7 +27,7 @@ namespace Telas
                 Console.WriteLine("0 - Sair");
                 Console.Write("Escolha uma opção: ");
 
-                string opcao = Console.ReadLine();
+                string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
                 {

@@ -6,9 +6,9 @@
 
     public class ServicoProduto
     {
-        private readonly IProdutoRepositorio _repositorio;
+        private readonly IRepositorioProduto _repositorio;
 
-        public ServicoProduto(IProdutoRepositorio repositorio)
+        public ServicoProduto(IRepositorioProduto repositorio)
         {
             _repositorio = repositorio;
         }
@@ -28,7 +28,7 @@
             _repositorio.Remover(codigo);
         }
 
-        public Produto BuscarPorCodigo(int codigo)
+        public Produto? BuscarPorCodigo(int codigo)
         {
             return _repositorio.BuscarPorCodigo(codigo);
         }

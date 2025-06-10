@@ -3,7 +3,7 @@ namespace Repositorios
     using System.Collections.Generic;
     using Modelos;
 
-    public class ProdutoRepositorioVetor : IProdutoRepositorio
+    public class RepositorioProdutoVetor : IRepositorioProduto
     {
         private Produto[] produtos = new Produto[0];
 
@@ -53,7 +53,7 @@ namespace Repositorios
             }
         }
 
-        public Produto BuscarPorCodigo(int codigo)
+        public Produto? BuscarPorCodigo(int codigo)
         {
             for (int i = 0; i < produtos.Length; i++)
             {

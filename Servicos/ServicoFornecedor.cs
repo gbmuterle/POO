@@ -6,9 +6,9 @@ namespace Servicos
 
     public class ServicoFornecedor
     {
-        private readonly IFornecedorRepositorio _repositorio;
+        private readonly IRepositorioFornecedor _repositorio;
 
-        public ServicoFornecedor(IFornecedorRepositorio repositorio)
+        public ServicoFornecedor(IRepositorioFornecedor repositorio)
         {
             _repositorio = repositorio;
         }
@@ -28,7 +28,7 @@ namespace Servicos
             _repositorio.Remover(codigo);
         }
 
-        public Fornecedor BuscarPorCodigo(int codigo)
+        public Fornecedor? BuscarPorCodigo(int codigo)
         {
             return _repositorio.BuscarPorCodigo(codigo);
         }

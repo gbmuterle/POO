@@ -10,14 +10,14 @@ namespace Sistema
         static void Main(string[] args)
         {
             // Instanciar repositórios usando os nomes antigos
-            var produtoRepositorio = new ProdutoRepositorioLista();
-            var fornecedorRepositorio = new FornecedorRepositorioLista();
-            var transportadoraRepositorio = new TransportadoraRepositorioLista();
+            var repositorioProduto = new RepositorioProdutoLista();
+            var repositorioFornecedor = new RepositorioFornecedorLista();
+            var repositorioTransportadora = new RepositorioTransportadoraLista();
 
             // Instanciar serviços usando o novo padrão
-            var servicoProduto = new ServicoProduto(produtoRepositorio);
-            var servicoFornecedor = new ServicoFornecedor(fornecedorRepositorio);
-            var servicoTransportadora = new ServicoTransportadora(transportadoraRepositorio);
+            var servicoProduto = new ServicoProduto(repositorioProduto);
+            var servicoFornecedor = new ServicoFornecedor(repositorioFornecedor);
+            var servicoTransportadora = new ServicoTransportadora(repositorioTransportadora);
 
             // Instanciar telas usando o novo padrão
             var telaProduto = new TelaProduto(servicoProduto, servicoFornecedor);

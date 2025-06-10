@@ -28,7 +28,7 @@ namespace Telas
                 Console.WriteLine("0 - Voltar");
                 Console.Write("Escolha uma opção: ");
 
-                string opcao = Console.ReadLine();
+                string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
                 {
@@ -67,13 +67,13 @@ namespace Telas
             Console.Write("Código: ");
             int codigo = int.Parse(Console.ReadLine() ?? "0");
             Console.Write("Nome: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
+            string telefone = Console.ReadLine() ?? "";
             Console.Write("Email: ");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? "";
             Console.Write("CNPJ: ");
-            string cnpj = Console.ReadLine();
+            string cnpj = Console.ReadLine() ?? "";
             Console.Write("Preço por Km: ");
             double precoPorKm = double.Parse(Console.ReadLine() ?? "0");
 
@@ -119,13 +119,13 @@ namespace Telas
             }
 
             Console.Write("Novo nome: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             Console.Write("Novo telefone: ");
-            string telefone = Console.ReadLine();
+            string telefone = Console.ReadLine() ?? "";
             Console.Write("Novo email: ");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? "";
             Console.Write("Novo CNPJ: ");
-            string cnpj = Console.ReadLine();
+            string cnpj = Console.ReadLine() ?? "";
             Console.Write("Novo preço por Km: ");
             double precoPorKm = double.Parse(Console.ReadLine() ?? "0");
 
@@ -172,7 +172,7 @@ namespace Telas
         {
             Console.Clear();
             Console.Write("Digite parte do nome da transportadora: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             var transportadoras = _servicoTransportadora.BuscarPorNome(nome);
             if (transportadoras.Count > 0)
                 transportadoras.ForEach(t => Console.WriteLine(t));

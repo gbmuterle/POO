@@ -3,7 +3,7 @@ namespace Repositorios
     using System;
     using Modelos;
 
-    public class FornecedorRepositorioVetor : IFornecedorRepositorio
+    public class RepositorioFornecedorVetor : IRepositorioFornecedor
     {
         private Fornecedor[] fornecedores = new Fornecedor[0];
 
@@ -44,7 +44,7 @@ namespace Repositorios
             }
         }
 
-        public Fornecedor BuscarPorCodigo(int codigo)
+        public Fornecedor? BuscarPorCodigo(int codigo)
         {
             for (int i = 0; i < fornecedores.Length; i++)
             {

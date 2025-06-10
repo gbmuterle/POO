@@ -28,7 +28,7 @@ namespace Telas
                 Console.WriteLine("0 - Voltar");
                 Console.Write("Escolha uma opção: ");
 
-                string opcao = Console.ReadLine();
+                string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
                 {
@@ -67,34 +67,34 @@ namespace Telas
             Console.Write("Código: ");
             int codigo = int.Parse(Console.ReadLine() ?? "0");
             Console.Write("Nome: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             Console.Write("Descrição: ");
-            string descricao = Console.ReadLine();
+            string descricao = Console.ReadLine() ?? "";
             Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
+            string telefone = Console.ReadLine() ?? "";
             Console.Write("Email: ");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? "";
 
             Console.WriteLine("--- Endereço do Fornecedor ---");
             Console.Write("Rua: ");
-            string rua = Console.ReadLine();
+            string rua = Console.ReadLine() ?? "";
             Console.Write("Número: ");
-            string numero = Console.ReadLine();
+            string numero = Console.ReadLine() ?? "";
             Console.Write("Complemento: ");
-            string complemento = Console.ReadLine();
+            string complemento = Console.ReadLine() ?? "";
             Console.Write("Bairro: ");
-            string bairro = Console.ReadLine();
+            string bairro = Console.ReadLine() ?? "";
             Console.Write("Cidade: ");
-            string cidade = Console.ReadLine();
+            string cidade = Console.ReadLine() ?? "";
             Console.Write("Estado (UF): ");
-            string estado = Console.ReadLine();
+            string estado = Console.ReadLine() ?? "";
             Console.Write("CEP: ");
-            string cep = Console.ReadLine();
+            string cep = Console.ReadLine() ?? "";
 
             var endereco = new Endereco(rua, numero, complemento, bairro, cidade, estado, cep);
 
             Console.Write("CNPJ: ");
-            string cnpj = Console.ReadLine();
+            string cnpj = Console.ReadLine() ?? "";
 
             var fornecedor = new Fornecedor(codigo, nome, descricao, telefone, email, endereco, cnpj);
             _servicoFornecedor.Cadastrar(fornecedor);
@@ -138,34 +138,34 @@ namespace Telas
             }
 
             Console.Write("Novo nome: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             Console.Write("Nova descrição: ");
-            string descricao = Console.ReadLine();
+            string descricao = Console.ReadLine() ?? "";
             Console.Write("Novo telefone: ");
-            string telefone = Console.ReadLine();
+            string telefone = Console.ReadLine() ?? "";
             Console.Write("Novo email: ");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? "";
 
             Console.WriteLine("--- Novo Endereço ---");
             Console.Write("Rua: ");
-            string rua = Console.ReadLine();
+            string rua = Console.ReadLine() ?? "";
             Console.Write("Número: ");
-            string numero = Console.ReadLine();
+            string numero = Console.ReadLine() ?? "";
             Console.Write("Complemento: ");
-            string complemento = Console.ReadLine();
+            string complemento = Console.ReadLine() ?? "";
             Console.Write("Bairro: ");
-            string bairro = Console.ReadLine();
+            string bairro = Console.ReadLine() ?? "";
             Console.Write("Cidade: ");
-            string cidade = Console.ReadLine();
+            string cidade = Console.ReadLine() ?? "";
             Console.Write("Estado (UF): ");
-            string estado = Console.ReadLine();
+            string estado = Console.ReadLine() ?? "";
             Console.Write("CEP: ");
-            string cep = Console.ReadLine();
+            string cep = Console.ReadLine() ?? "";
 
             var endereco = new Endereco(rua, numero, complemento, bairro, cidade, estado, cep);
 
             Console.Write("Novo CNPJ: ");
-            string cnpj = Console.ReadLine();
+            string cnpj = Console.ReadLine() ?? "";
 
             var novoFornecedor = new Fornecedor(codigo, nome, descricao, telefone, email, endereco, cnpj);
             _servicoFornecedor.Alterar(novoFornecedor);
@@ -210,7 +210,7 @@ namespace Telas
         {
             Console.Clear();
             Console.Write("Digite parte do nome do fornecedor: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             var fornecedores = _servicoFornecedor.BuscarPorNome(nome);
             if (fornecedores.Count > 0)
                 fornecedores.ForEach(f => Console.WriteLine(f));

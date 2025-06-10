@@ -6,9 +6,9 @@ namespace Servicos
 
     public class ServicoTransportadora
     {
-        private readonly ITransportadoraRepositorio _repositorio;
+        private readonly IRepositorioTransportadora _repositorio;
 
-        public ServicoTransportadora(ITransportadoraRepositorio repositorio)
+        public ServicoTransportadora(IRepositorioTransportadora repositorio)
         {
             _repositorio = repositorio;
         }
@@ -28,7 +28,7 @@ namespace Servicos
             _repositorio.Remover(codigo);
         }
 
-        public Transportadora BuscarPorCodigo(int codigo)
+        public Transportadora? BuscarPorCodigo(int codigo)
         {
             return _repositorio.BuscarPorCodigo(codigo);
         }

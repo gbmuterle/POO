@@ -30,7 +30,7 @@ namespace Telas
                 Console.WriteLine("0 - Voltar");
                 Console.Write("Escolha uma opção: ");
 
-                string opcao = Console.ReadLine();
+                string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
                 {
@@ -69,7 +69,7 @@ namespace Telas
             Console.Write("Código: ");
             int codigo = int.Parse(Console.ReadLine() ?? "0");
             Console.Write("Nome: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             Console.Write("Valor: ");
             double valor = double.Parse(Console.ReadLine() ?? "0");
             Console.Write("Quantidade: ");
@@ -128,7 +128,7 @@ namespace Telas
             }
 
             Console.Write("Novo nome: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             Console.Write("Novo valor: ");
             double valor = double.Parse(Console.ReadLine() ?? "0");
             Console.Write("Nova quantidade: ");
@@ -188,7 +188,7 @@ namespace Telas
         {
             Console.Clear();
             Console.Write("Digite parte do nome do produto: ");
-            string nome = Console.ReadLine();
+            string nome = Console.ReadLine() ?? "";
             var produtos = _servicoProduto.BuscarPorNome(nome);
             if (produtos.Count > 0)
                 produtos.ForEach(p => Console.WriteLine(p));

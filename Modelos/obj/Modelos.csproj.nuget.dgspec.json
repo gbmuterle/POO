@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {}
+    "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+    "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
+        "projectUniqueName": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
         "projectName": "Modelos",
-        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
+        "projectPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
         "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\obj\\",
+        "outputPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
