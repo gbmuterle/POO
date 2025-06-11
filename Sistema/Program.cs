@@ -2,6 +2,8 @@
 using Telas;
 using Servicos;
 using Repositorios;
+using Autenticacao;
+using Modelos;
 
 namespace Sistema
 {
@@ -9,26 +11,38 @@ namespace Sistema
     {
         static void Main(string[] args)
         {
-            // Instanciar repositórios usando os nomes antigos
+            var repositorioUsuario = new RepositorioUsuario();
+            var autenticador = new Autenticador(repositorioUsuario.ObterTodos());
+            var telaLogin = new TelaLogin(autenticador);
+
             var repositorioProduto = new RepositorioProdutoLista();
             var repositorioFornecedor = new RepositorioFornecedorLista();
             var repositorioTransportadora = new RepositorioTransportadoraLista();
 
-            // Instanciar serviços usando o novo padrão
             var servicoProduto = new ServicoProduto(repositorioProduto);
             var servicoFornecedor = new ServicoFornecedor(repositorioFornecedor);
             var servicoTransportadora = new ServicoTransportadora(repositorioTransportadora);
 
-            // Instanciar telas usando o novo padrão
             var telaProduto = new TelaProduto(servicoProduto, servicoFornecedor);
             var telaFornecedor = new TelaFornecedor(servicoFornecedor);
             var telaTransportadora = new TelaTransportadora(servicoTransportadora);
 
-            // Instanciar tela principal
-            var telaMenuPrincipal = new TelaMenuPrincipal(telaProduto, telaFornecedor, telaTransportadora);
+            Usuario? usuarioLogado = null;
+            do
+            {
+                usuarioLogado = telaLogin.Executar();
+            } while (usuarioLogado == null);
 
-            // Executar o menu principal
-            telaMenuPrincipal.Exibir();
+            if (usuarioLogado.Perfil == "admin")
+            {
+                var telaMenuAdmin = new TelaMenuAdmin(telaProduto, telaFornecedor, telaTransportadora);
+                telaMenuAdmin.Exibir();
+            }
+            else
+            {
+                //var telaMenuUsuario = new TelaMenuUsuario(telaProduto, telaFornecedor, telaTransportadora);
+                //telaMenuUsuario.Exibir();
+            }
         }
     }
 }

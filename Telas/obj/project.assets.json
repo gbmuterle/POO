@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "Autenticacao/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Modelos": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Autenticacao.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Autenticacao.dll": {}
+        }
+      },
       "Modelos/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -42,6 +55,11 @@
     }
   },
   "libraries": {
+    "Autenticacao/1.0.0": {
+      "type": "project",
+      "path": "../Autenticacao/Autenticacao.csproj",
+      "msbuildProject": "../Autenticacao/Autenticacao.csproj"
+    },
     "Modelos/1.0.0": {
       "type": "project",
       "path": "../Modelos/Modelos.csproj",
@@ -60,6 +78,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Autenticacao >= 1.0.0",
       "Modelos >= 1.0.0",
       "Servicos >= 1.0.0"
     ]
@@ -70,11 +89,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
+      "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
       "projectName": "Telas",
-      "projectPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
+      "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
       "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\obj\\",
+      "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -91,8 +110,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-              "projectPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj"
+            },
+            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
             },
             "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
               "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj"

@@ -1,0 +1,16 @@
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\bin\Debug\net9.0\Autenticacao.deps.json
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\bin\Debug\net9.0\Autenticacao.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\bin\Debug\net9.0\Autenticacao.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\bin\Debug\net9.0\Modelos.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\bin\Debug\net9.0\Modelos.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.csproj.AssemblyReference.cache
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.AssemblyInfoInputs.cache
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.AssemblyInfo.cs
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.csproj.CoreCompileInputs.cache
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.sourcelink.json
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autentic.2D4CFDF1.Up2Date
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\refint\Autenticacao.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\Autenticacao.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Autenticacao\obj\Debug\net9.0\ref\Autenticacao.dll

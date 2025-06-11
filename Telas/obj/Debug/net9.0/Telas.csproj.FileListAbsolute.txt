@@ -18,3 +18,5 @@ C:\Users\gbmuterle\Documents\GitHub\POO\Telas\obj\Debug\net9.0\Telas.dll
 C:\Users\gbmuterle\Documents\GitHub\POO\Telas\obj\Debug\net9.0\refint\Telas.dll
 C:\Users\gbmuterle\Documents\GitHub\POO\Telas\obj\Debug\net9.0\Telas.pdb
 C:\Users\gbmuterle\Documents\GitHub\POO\Telas\obj\Debug\net9.0\ref\Telas.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Telas\bin\Debug\net9.0\Autenticacao.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Telas\bin\Debug\net9.0\Autenticacao.pdb

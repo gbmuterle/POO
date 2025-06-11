@@ -23,3 +23,5 @@ C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Telas.dll
 C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Repositorios.pdb
 C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Servicos.pdb
 C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Telas.pdb
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Autenticacao.dll
+C:\Users\gbmuterle\Documents\GitHub\POO\Sistema\bin\Debug\net9.0\Autenticacao.pdb

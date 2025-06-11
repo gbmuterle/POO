@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Sistema/1.0.0": {
         "dependencies": {
+          "Autenticacao": "1.0.0",
           "Modelos": "1.0.0",
           "Repositorios": "1.0.0",
           "Servicos": "1.0.0",
@@ -15,6 +16,17 @@
         },
         "runtime": {
           "Sistema.dll": {}
+        }
+      },
+      "Autenticacao/1.0.0": {
+        "dependencies": {
+          "Modelos": "1.0.0"
+        },
+        "runtime": {
+          "Autenticacao.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Modelos/1.0.0": {
@@ -50,6 +62,7 @@
       },
       "Telas/1.0.0": {
         "dependencies": {
+          "Autenticacao": "1.0.0",
           "Modelos": "1.0.0",
           "Servicos": "1.0.0"
         },
@@ -64,6 +77,11 @@
   },
   "libraries": {
     "Sistema/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Autenticacao/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -4,14 +4,14 @@
     "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {}
   },
   "projects": {
-    "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
+        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
         "projectName": "Modelos",
-        "projectPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
+        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
         "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\obj\\",
+        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -89,8 +89,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-                "projectPath": "c:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
               }
             }
           }

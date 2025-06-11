@@ -2,13 +2,13 @@ namespace Telas
 {
     using System;
 
-    public class TelaMenuPrincipal
+    public class TelaMenuAdmin
     {
         private readonly TelaProduto _telaProduto;
         private readonly TelaFornecedor _telaFornecedor;
         private readonly TelaTransportadora _telaTransportadora;
 
-        public TelaMenuPrincipal(TelaProduto telaProduto, TelaFornecedor telaFornecedor, TelaTransportadora telaTransportadora)
+        public TelaMenuAdmin(TelaProduto telaProduto, TelaFornecedor telaFornecedor, TelaTransportadora telaTransportadora)
         {
             _telaProduto = telaProduto;
             _telaFornecedor = telaFornecedor;

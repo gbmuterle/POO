@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Autenticacao\Autenticacao.csproj" />
     <ProjectReference Include="..\Modelos\Modelos.csproj" />
     <ProjectReference Include="..\Servicos\Servicos.csproj" />
   </ItemGroup>
