@@ -22,10 +22,12 @@ namespace Sistema
             var servicoProduto = new ServicoProduto(repositorioProduto);
             var servicoFornecedor = new ServicoFornecedor(repositorioFornecedor);
             var servicoTransportadora = new ServicoTransportadora(repositorioTransportadora);
+            var servicoUsuario = new ServicoUsuario(repositorioUsuario);
 
             var telaProduto = new TelaProduto(servicoProduto, servicoFornecedor);
             var telaFornecedor = new TelaFornecedor(servicoFornecedor);
             var telaTransportadora = new TelaTransportadora(servicoTransportadora);
+            var telaUsuario = new TelaUsuario(servicoUsuario);
 
             Usuario? usuarioLogado = null;
             do
@@ -35,7 +37,7 @@ namespace Sistema
 
             if (usuarioLogado.Perfil == "admin")
             {
-                var telaMenuAdmin = new TelaMenuAdmin(telaProduto, telaFornecedor, telaTransportadora);
+                var telaMenuAdmin = new TelaMenuAdmin(telaProduto, telaFornecedor, telaTransportadora, telaUsuario);
                 telaMenuAdmin.Exibir();
             }
             else

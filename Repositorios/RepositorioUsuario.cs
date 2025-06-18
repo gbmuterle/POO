@@ -18,22 +18,13 @@ namespace Repositorios
 
         public void Cadastrar(Usuario usuario)
         {
-            if (_usuarios.Any(u => u.Nome == usuario.Nome))
-                throw new InvalidOperationException("Já existe um usuário com esse nome.");
-
             _usuarios.Add(usuario);
         }
 
-        public void Alterar(Usuario usuario)
+        public void Alterar(Usuario usuarioAtual, Usuario usuarioAlterado)
         {
-            var usuarioExistente = BuscarPorNome(usuario.Nome);
-            if (usuarioExistente == null)
-            {
-                throw new InvalidOperationException("Usuário não encontrado.");
-            }
-
-            usuarioExistente.Senha = usuario.Senha;
-            usuarioExistente.Perfil = usuario.Perfil;
+            usuarioAtual.Senha = usuarioAlterado.Senha;
+            usuarioAtual.Perfil = usuarioAlterado.Perfil;
         }
 
         public void Remover(Usuario usuario)

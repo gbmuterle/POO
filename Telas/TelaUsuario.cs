@@ -19,10 +19,10 @@ namespace Telas
             {
                 Console.Clear();
                 Console.WriteLine("=== MENU DE USUÁRIOS ===");
-                Console.WriteLine("1 - Cadastrar usuário");
-                Console.WriteLine("2 - Listar usuários");
-                Console.WriteLine("3 - Alterar usuário");
-                Console.WriteLine("4 - Remover usuário");
+                Console.WriteLine("1 - Cadastrar");
+                Console.WriteLine("2 - Listar");
+                Console.WriteLine("3 - Alterar");
+                Console.WriteLine("4 - Remover");
                 Console.WriteLine("0 - Voltar");
 
                 Console.Write("Escolha uma opção: ");
@@ -45,8 +45,8 @@ namespace Telas
                     case "0":
                         return;
                     default:
-                        Console.WriteLine("Opção inválida. Pressione Enter para continuar...");
-                        Console.ReadLine();
+                        Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
                         break;
                 }
             }
@@ -56,7 +56,7 @@ namespace Telas
 
             string nome = InputObrigatorio("Nome");
             string senha = InputObrigatorio("Senha");
-            string perfil = InputObrigatorio("Perfil").ToLower();
+            string perfil = InputObrigatorio("Perfil (admin/usuario)").ToLower();
             var usuario = new Usuario(nome, senha, perfil);
 
             try
@@ -64,6 +64,7 @@ namespace Telas
                 _servicoUsuario.CadastrarUsuario(usuario);
                 Console.WriteLine("\nUsuário cadastrado com sucesso!");
             }
+
             catch (Exception ex)
             {
                 Console.WriteLine($"\nErro ao cadastrar usuário: {ex.Message}");
@@ -76,11 +77,21 @@ namespace Telas
         private void Listar()
         {
             var usuarios = _servicoUsuario.BuscarTodos();
-            Console.WriteLine("--- Lista de usuários ---");
-            foreach (var user in usuarios)
+
+            if (!usuarios.Any())
             {
-                Console.WriteLine($"Nome: {user.Nome}, Perfil: {user.Perfil}");
+                Console.WriteLine("Nenhum usuário cadastrado.");
             }
+
+            else
+            {
+                Console.WriteLine("--- Lista de usuários ---");
+                foreach (var user in usuarios)
+                {
+                    Console.WriteLine(user);
+                }
+            }
+
             Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
         }
@@ -89,31 +100,34 @@ namespace Telas
         {
             Console.Write("Informe o nome do usuário que deseja alterar: ");
             var nomeBusca = InputObrigatorio("Usuario");
-            var usuario = _servicoUsuario.BuscarPorNome(nomeBusca);
+            var usuarioAtual = _servicoUsuario.BuscarPorNome(nomeBusca);
 
-            if (usuario == null)
+            if (usuarioAtual == null)
             {
                 Console.WriteLine("Usuário não encontrado.");
             }
+
             else
             {
-                var novaSenha = InputAlteracao("Senha", usuario.Senha);
-                var novoPerfil = InputAlteracao("Perfil", usuario.Perfil);
-                usuario.Senha = novaSenha;
-                usuario.Perfil = novoPerfil;
+                var novaSenha = InputAlteracao("Senha", usuarioAtual.Senha);
+                var novoPerfil = InputAlteracao("Perfil (admin/usuario)", usuarioAtual.Perfil).ToLower();
+                var usuarioAlterado = new Usuario(usuarioAtual.Nome,novaSenha,novoPerfil);
+
                 try
                 {
-                    _servicoUsuario.AlterarUsuario(usuario);
+                    _servicoUsuario.AlterarUsuario(usuarioAlterado);
 
                     Console.WriteLine("Usuário alterado com sucesso!");
                 }
+
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Erro: {ex.Message}");
                 }
             }
+
             Console.WriteLine("\nPressione qualquer tecla para continuar...");
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private void Remover()
@@ -126,6 +140,7 @@ namespace Telas
             {
                 Console.WriteLine("Usuário não encontrado.");
             }
+
             else
             {
                 try
@@ -133,26 +148,16 @@ namespace Telas
                     _servicoUsuario.RemoverUsuario(usuario);
                     Console.WriteLine("Usuário removido com sucesso!");
                 }
+
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Erro: {ex.Message}");
                 }
             }
+
             Console.WriteLine("Pressione Enter para continuar...");
-            Console.ReadLine();
+            Console.ReadKey();
         }
-        public void Executar()
-        {
-            Console.Clear();
-            Console.WriteLine("=== CADASTRAR USUÁRIOS ===");
-
-            string nome = InputObrigatorio("Nome");
-            string senha = InputObrigatorio("Senha");
-            string perfil = InputObrigatorio("Perfil").ToLower();
-
-
-        }
-
         private string InputObrigatorio(string campo)
         {
             string valor;
@@ -160,6 +165,7 @@ namespace Telas
             {
                 Console.Write($"{campo}: ");
                 valor = Console.ReadLine()?.Trim() ?? "";
+
                 if (string.IsNullOrWhiteSpace(valor))
                 {
                     Console.WriteLine($"{campo} não pode ser vazio. Tente novamente.");
@@ -169,7 +175,7 @@ namespace Telas
         }
         private string InputAlteracao(string campo, string valorAtual)
         {
-            Console.Write($"{campo} ({valorAtual}): ");
+            Console.Write($"{campo}: ");
             string valor = Console.ReadLine()?.Trim() ?? "";
             return string.IsNullOrEmpty(valor) ? valorAtual : valor;
         }

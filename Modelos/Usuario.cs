@@ -12,5 +12,9 @@ namespace Modelos
             Senha = senha;
             Perfil = perfil;
         }
+        public override string ToString()
+        {
+            return $"Nome: {Nome}, Perfil: {Perfil}";
+        }
     }
 }

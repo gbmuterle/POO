@@ -26,27 +26,36 @@ namespace Servicos
 
             if (usuario.Perfil != "admin" && usuario.Perfil != "usuario")
                 throw new InvalidOperationException("Perfil inválido. Deve ser 'admin' ou 'usuario'.");
+            
+            if (_repositorioUsuario.BuscarPorNome(usuario.Nome) != null)
+                throw new InvalidOperationException("Já existe um usuário com esse nome.");
 
             _repositorioUsuario.Cadastrar(usuario);
         }
 
-        public void AlterarUsuario(Usuario usuario)
+        public void AlterarUsuario(Usuario usuarioAlterado)
         {
-            var usuarioExistente = _repositorioUsuario.BuscarPorNome(usuario.Nome);
-            if (usuarioExistente == null)
-                throw new InvalidOperationException("Usuário não encontrado.");
+            if (usuarioAlterado == null)
+                throw new InvalidOperationException("Usuário não pode ser nulo.");
 
-            if (usuario.Perfil != "admin" && usuario.Perfil != "usuario")
+            if (string.IsNullOrWhiteSpace(usuarioAlterado.Senha))
+                throw new InvalidOperationException("Senha não pode ser vazia.");
+
+            if (usuarioAlterado.Perfil != "admin" && usuarioAlterado.Perfil != "usuario")
                 throw new InvalidOperationException("Perfil inválido. Deve ser 'admin' ou 'usuario'.");
 
-            usuarioExistente.Senha = usuario.Senha;
-            usuarioExistente.Perfil = usuario.Perfil;
-
-            _repositorioUsuario.Alterar(usuarioExistente);
+            var usuarioAtual = _repositorioUsuario.BuscarPorNome(usuarioAlterado.Nome);
+            if (usuarioAtual == null)
+                throw new InvalidOperationException("Usuário não encontrado.");
+                
+            _repositorioUsuario.Alterar(usuarioAtual, usuarioAlterado);
         }
 
         public void RemoverUsuario(Usuario usuario)
         {
+            if (usuario == null)
+                throw new InvalidOperationException("Usuário não pode ser nulo.");
+                
             _repositorioUsuario.Remover(usuario);
         }
 
