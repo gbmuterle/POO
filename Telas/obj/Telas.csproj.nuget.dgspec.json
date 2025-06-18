@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj": {}
+    "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Telas\\Telas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj": {
+    "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj",
+        "projectUniqueName": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj",
         "projectName": "Autenticacao",
-        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj",
-        "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\obj\\",
+        "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj",
+        "packagesPath": "C:\\Users\\Grégori\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Autenticacao\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Grégori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
               }
             }
           }
@@ -44,7 +48,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -65,21 +69,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+    "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
+        "projectUniqueName": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
         "projectName": "Modelos",
-        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
-        "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\obj\\",
+        "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj",
+        "packagesPath": "C:\\Users\\Grégori\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Grégori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -105,7 +113,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -126,21 +134,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
+    "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj",
+        "projectUniqueName": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj",
         "projectName": "Repositorios",
-        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj",
-        "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\obj\\",
+        "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj",
+        "packagesPath": "C:\\Users\\Grégori\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Repositorios\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Grégori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -154,8 +166,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
               }
             }
           }
@@ -170,7 +182,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -191,21 +203,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
+    "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
+        "projectUniqueName": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
         "projectName": "Servicos",
-        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
-        "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\obj\\",
+        "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
+        "packagesPath": "C:\\Users\\Grégori\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Servicos\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Grégori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -219,11 +235,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
               },
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj"
               }
             }
           }
@@ -238,7 +254,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -259,21 +275,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj": {
+    "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Telas\\Telas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
+        "projectUniqueName": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
         "projectName": "Telas",
-        "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
-        "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Telas\\obj\\",
+        "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Telas\\Telas.csproj",
+        "packagesPath": "C:\\Users\\Grégori\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Telas\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Grégori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -287,14 +307,14 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Autenticacao\\Autenticacao.csproj"
               },
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
               },
-              "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
-                "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj"
+              "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj": {
+                "projectPath": "C:\\Users\\Grégori\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj"
               }
             }
           }
@@ -309,7 +329,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -330,7 +350,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

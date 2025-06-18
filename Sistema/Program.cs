@@ -12,7 +12,7 @@ namespace Sistema
         static void Main(string[] args)
         {
             var repositorioUsuario = new RepositorioUsuario();
-            var autenticador = new Autenticador(repositorioUsuario.ObterTodos());
+            var autenticador = new Autenticador(repositorioUsuario.BuscarTodos());
             var telaLogin = new TelaLogin(autenticador);
 
             var repositorioProduto = new RepositorioProdutoLista();

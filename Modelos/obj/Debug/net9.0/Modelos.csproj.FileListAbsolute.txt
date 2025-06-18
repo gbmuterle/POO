@@ -10,3 +10,15 @@ C:\Users\gbmuterle\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.dll
 C:\Users\gbmuterle\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\refint\Modelos.dll
 C:\Users\gbmuterle\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.pdb
 C:\Users\gbmuterle\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\ref\Modelos.dll
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\bin\Debug\net9.0\Modelos.deps.json
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\bin\Debug\net9.0\Modelos.dll
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\bin\Debug\net9.0\Modelos.pdb
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.AssemblyInfoInputs.cache
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.AssemblyInfo.cs
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.sourcelink.json
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.dll
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\refint\Modelos.dll
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\Modelos.pdb
+C:\Users\Grégori\Documents\GitHub\POO\Modelos\obj\Debug\net9.0\ref\Modelos.dll
