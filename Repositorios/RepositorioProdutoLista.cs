@@ -13,25 +13,17 @@ namespace Repositorios
             produtos.Add(produto);
         }
 
-        public void Alterar(Produto produto)
+        public void Alterar(Produto produtoAtual, Produto produtoAlterado)
         {
-            var produtoExistente = produtos.FirstOrDefault(p => p.Codigo == produto.Codigo);
-            if (produtoExistente != null)
-            {
-                produtoExistente.Nome = produto.Nome;
-                produtoExistente.Valor = produto.Valor;
-                produtoExistente.Quantidade = produto.Quantidade;
-                produtoExistente.Fornecedor = produto.Fornecedor;
-            }
+                produtoAtual.Nome = produtoAlterado.Nome;
+                produtoAtual.Valor = produtoAlterado.Valor;
+                produtoAtual.Quantidade = produtoAlterado.Quantidade;
+                produtoAtual.Fornecedor = produtoAlterado.Fornecedor;
         }
 
-        public void Remover(int codigo)
+        public void Remover(Produto produto)
         {
-            var produto = produtos.FirstOrDefault(p => p.Codigo == codigo);
-            if (produto != null)
-            {
-                produtos.Remove(produto);
-            }
+            produtos.Remove(produto);
         }
 
         public Produto? BuscarPorCodigo(int codigo)

@@ -16,24 +16,24 @@ namespace Repositorios
             produtos = novos;
         }
 
-        public void Alterar(Produto produto)
+        public void Alterar(Produto produtoAtual, Produto produtoAlterado)
         {
             for (int i = 0; i < produtos.Length; i++)
             {
-                if (produtos[i].Codigo == produto.Codigo)
+                if (produtos[i].Codigo == produtoAlterado.Codigo)
                 {
-                    produtos[i] = produto;
+                    produtos[i] = produtoAlterado;
                     break;
                 }
             }
         }
 
-        public void Remover(int codigo)
+        public void Remover(Produto produto)
         {
             int index = -1;
             for (int i = 0; i < produtos.Length; i++)
             {
-                if (produtos[i].Codigo == codigo)
+                if (produtos[i].Codigo == produto.Codigo)
                 {
                     index = i;
                     break;

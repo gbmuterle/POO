@@ -24,9 +24,8 @@ namespace Telas
                 Console.WriteLine("3 - Alterar");
                 Console.WriteLine("4 - Remover");
                 Console.WriteLine("0 - Voltar");
-
-                Console.Write("Escolha uma opção: ");
-                var opcao = Console.ReadLine();
+                Console.Write("\nEscolha uma opção: ");
+                string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
                 {
@@ -53,10 +52,10 @@ namespace Telas
         }
         private void Cadastrar()
         {
-
-            string nome = InputObrigatorio("Nome").ToLower();
-            string senha = InputObrigatorio("Senha");
-            string perfil = InputObrigatorio("Perfil (admin/usuario)").ToLower();
+            Console.Clear();
+            string nome = InputObrigatorioString("Nome").ToLower();
+            string senha = InputObrigatorioString("Senha");
+            string perfil = InputObrigatorioString("Perfil (admin/usuario)").ToLower();
             var usuario = new Usuario(nome, senha, perfil);
 
             try
@@ -76,6 +75,7 @@ namespace Telas
 
         private void Listar()
         {
+            Console.Clear();
             var usuarios = _servicoUsuario.BuscarTodos();
 
             if (!usuarios.Any())
@@ -98,8 +98,9 @@ namespace Telas
 
         private void Alterar()
         {
+            Console.Clear();
             Console.Write("Informe o nome do usuário que deseja alterar: ");
-            var nomeBusca = InputObrigatorio("Usuario").ToLower();
+            var nomeBusca = InputObrigatorioString("Usuario").ToLower();
             var usuarioAtual = _servicoUsuario.BuscarPorNome(nomeBusca);
 
             if (usuarioAtual == null)
@@ -109,8 +110,8 @@ namespace Telas
 
             else
             {
-                var novaSenha = InputAlteracao("Senha", usuarioAtual.Senha);
-                var novoPerfil = InputAlteracao("Perfil (admin/usuario)", usuarioAtual.Perfil).ToLower();
+                var novaSenha = InputAlteracaoString("Senha", usuarioAtual.Senha);
+                var novoPerfil = InputAlteracaoString("Perfil (admin/usuario)", usuarioAtual.Perfil).ToLower();
                 var usuarioAlterado = new Usuario(usuarioAtual.Nome,novaSenha,novoPerfil);
 
                 try
@@ -132,8 +133,9 @@ namespace Telas
 
         private void Remover()
         {
+            Console.Clear();
             Console.Write("Informe o nome do usuário que deseja remover: ");
-            var nomeBusca = InputObrigatorio("Usuario").ToLower();
+            var nomeBusca = InputObrigatorioString("Usuario").ToLower();
             var usuario = _servicoUsuario.BuscarPorNome(nomeBusca);
 
             if (usuario == null)
@@ -158,22 +160,18 @@ namespace Telas
             Console.WriteLine("Pressione Enter para continuar...");
             Console.ReadKey();
         }
-        private string InputObrigatorio(string campo)
+        private string InputObrigatorioString(string campo)
         {
-            string valor;
-            do
+            while (true)
             {
                 Console.Write($"{campo}: ");
-                valor = Console.ReadLine()?.Trim() ?? "";
-
-                if (string.IsNullOrWhiteSpace(valor))
-                {
-                    Console.WriteLine($"{campo} não pode ser vazio. Tente novamente.");
-                }
-            } while (string.IsNullOrWhiteSpace(valor));
-            return valor;
+                string valor = Console.ReadLine()?.Trim() ?? "";
+                if (!string.IsNullOrWhiteSpace(valor))
+                    return valor;
+                Console.WriteLine($"{campo} não pode ser vazio. Tente novamente.");
+            }
         }
-        private string InputAlteracao(string campo, string valorAtual)
+        private string InputAlteracaoString(string campo, string valorAtual)
         {
             Console.Write($"{campo}: ");
             string valor = Console.ReadLine()?.Trim() ?? "";

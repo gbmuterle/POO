@@ -6,8 +6,8 @@ namespace Repositorios
     public interface IRepositorioProduto
     {
         void Adicionar(Produto produto);
-        void Alterar(Produto produto);
-        void Remover(int codigo);
+        void Alterar(Produto produtoAtual, Produto produtoAlterado);
+        void Remover(Produto produto);
         Produto? BuscarPorCodigo(int codigo);
         List<Produto> BuscarTodos();
         List<Produto> BuscarPorNome(string nome);

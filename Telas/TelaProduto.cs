@@ -28,8 +28,7 @@ namespace Telas
                 Console.WriteLine("5 - Buscar por código");
                 Console.WriteLine("6 - Buscar por nome");
                 Console.WriteLine("0 - Voltar");
-                Console.Write("Escolha uma opção: ");
-
+                Console.Write("\nEscolha uma opção: ");
                 string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
@@ -55,8 +54,8 @@ namespace Telas
                     case "0":
                         return;
                     default:
-                        Console.WriteLine("Opção inválida!");
-                        PressioneParaContinuar();
+                        Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
                         break;
                 }
             }
@@ -65,34 +64,42 @@ namespace Telas
         private void Cadastrar()
         {
             Console.Clear();
-            Console.WriteLine("Cadastro de Produto:");
-            Console.Write("Código: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
-            Console.Write("Nome: ");
-            string nome = Console.ReadLine() ?? "";
-            Console.Write("Valor: ");
-            double valor = double.Parse(Console.ReadLine() ?? "0");
-            Console.Write("Quantidade: ");
-            int quantidade = int.Parse(Console.ReadLine() ?? "0");
+            int codigo = InputObrigatorioInt("Código");
+            string nome = InputObrigatorioString("Nome");
 
-            Console.Write("Código do Fornecedor: ");
-            int codFornecedor = int.Parse(Console.ReadLine() ?? "0");
+            Console.Write("Valor: ");
+            double valor = double.TryParse(Console.ReadLine()?.Trim(), out double v) ? v : 0;
+
+            Console.Write("Quantidade: ");
+            int quantidade = int.TryParse(Console.ReadLine()?.Trim(), out int q) ? q : 0;
+
+            int codFornecedor = InputObrigatorioInt("Código do Fornecedor");
             var fornecedor = _servicoFornecedor.BuscarPorCodigo(codFornecedor);
 
             if (fornecedor == null)
             {
                 Console.WriteLine("Fornecedor não encontrado!");
-                PressioneParaContinuar();
-                return;
             }
 
-            var produto = new Produto(codigo, nome, valor, quantidade, fornecedor);
-            _servicoProduto.Cadastrar(produto);
+            else
+            {
+                var produto = new Produto(codigo, nome, valor, quantidade, fornecedor);
 
-            Console.WriteLine("Produto cadastrado com sucesso!");
-            PressioneParaContinuar();
+                try
+                {
+                    _servicoProduto.Cadastrar(produto);
+                    Console.WriteLine("\nProduto cadastrado com sucesso!");
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\nErro ao cadastrar produto: {ex.Message}");
+                }
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
-
         private void Listar()
         {
             Console.Clear();
@@ -104,104 +111,156 @@ namespace Telas
             }
             else
             {
-                Console.WriteLine("--- PRODUTOS CADASTRADOS ---");
+                Console.WriteLine("--- PRODUTOS CADASTRADOS ---\n");
                 foreach (var p in produtos)
                     Console.WriteLine(p);
             }
 
-            PressioneParaContinuar();
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
 
         private void Alterar()
         {
             Console.Clear();
-            Console.WriteLine("Alteração de Produto:");
-            Console.Write("Código do produto a alterar: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
-            var produto = _servicoProduto.BuscarPorCodigo(codigo);
+            int codigo = InputObrigatorioInt("Código");
+            var produtoAtual = _servicoProduto.BuscarPorCodigo(codigo);
 
-            if (produto == null)
+            if (produtoAtual == null)
             {
                 Console.WriteLine("Produto não encontrado!");
-                PressioneParaContinuar();
-                return;
             }
 
-            Console.Write("Novo nome: ");
-            string nome = Console.ReadLine() ?? "";
-            Console.Write("Novo valor: ");
-            double valor = double.Parse(Console.ReadLine() ?? "0");
-            Console.Write("Nova quantidade: ");
-            int quantidade = int.Parse(Console.ReadLine() ?? "0");
-
-            Console.Write("Novo código do Fornecedor: ");
-            int codFornecedor = int.Parse(Console.ReadLine() ?? "0");
-            var fornecedor = _servicoFornecedor.BuscarPorCodigo(codFornecedor);
-
-            if (fornecedor == null)
+            else
             {
-                Console.WriteLine("Fornecedor não encontrado!");
-                PressioneParaContinuar();
-                return;
+                var novoNome = InputAlteracaoString("Nome", produtoAtual.Nome);
+                var novoValor = InputAlteracaoDouble("Valor", produtoAtual.Valor);
+                var novaQuantidade = InputAlteracaoInt("Quantidade", produtoAtual.Quantidade);
+                var novoCodFornecedor = InputAlteracaoInt("Código do Fornecedor", produtoAtual.Fornecedor.Codigo);
+
+                var novoFornecedor = _servicoFornecedor.BuscarPorCodigo(novoCodFornecedor);
+
+                if (novoFornecedor == null)
+                {
+                    Console.WriteLine("Fornecedor não encontrado!");
+                }
+
+                else
+                {
+                    var produtoAlterado = new Produto(codigo, novoNome, novoValor, novaQuantidade, novoFornecedor);
+                    try
+                    {
+                        _servicoProduto.Alterar(produtoAtual, produtoAlterado);
+                        Console.WriteLine("Produto alterado com sucesso!");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Erro: {ex.Message}");
+                    }
+                }
             }
-
-            var novoProduto = new Produto(codigo, nome, valor, quantidade, fornecedor);
-            _servicoProduto.Alterar(novoProduto);
-
-            Console.WriteLine("Produto alterado com sucesso!");
-            PressioneParaContinuar();
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
 
         private void Remover()
         {
             Console.Clear();
-            Console.Write("Código do produto a remover: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
+            int codigo = InputObrigatorioInt("Código");
             var produto = _servicoProduto.BuscarPorCodigo(codigo);
 
             if (produto == null)
             {
                 Console.WriteLine("Produto não encontrado!");
-                PressioneParaContinuar();
-                return;
             }
 
-            _servicoProduto.Remover(codigo);
-            Console.WriteLine("Produto removido com sucesso!");
-            PressioneParaContinuar();
+            else
+            {
+                try
+                {
+                    _servicoProduto.Remover(produto);
+                    Console.WriteLine("Produto removido com sucesso!");
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro: {ex.Message}");
+                }
+            }
+
+            Console.WriteLine("Pressione Enter para continuar...");
+            Console.ReadKey();
         }
 
         private void BuscarPorCodigo()
         {
             Console.Clear();
-            Console.Write("Digite o código do produto: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
+            int codigo = InputObrigatorioInt("Código");
             var produto = _servicoProduto.BuscarPorCodigo(codigo);
             if (produto != null)
                 Console.WriteLine(produto);
             else
                 Console.WriteLine("Produto não encontrado!");
-            PressioneParaContinuar();
+
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
 
         private void BuscarPorNome()
         {
             Console.Clear();
-            Console.Write("Digite parte do nome do produto: ");
             string nome = Console.ReadLine() ?? "";
             var produtos = _servicoProduto.BuscarPorNome(nome);
             if (produtos.Count > 0)
                 produtos.ForEach(p => Console.WriteLine(p));
             else
                 Console.WriteLine("Nenhum produto encontrado!");
-            PressioneParaContinuar();
+
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
 
-        private void PressioneParaContinuar()
+        private int InputObrigatorioInt(string campo)
         {
-            Console.WriteLine();
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            int valor;
+            while (true)
+            {
+                Console.Write($"{campo}: ");
+                string entrada = Console.ReadLine()?.Trim() ?? "";
+                if (int.TryParse(entrada, out valor))
+                    return valor;
+                Console.WriteLine($"{campo} deve ser um número inteiro válido. Tente novamente.");
+            }
+        }
+        private string InputObrigatorioString(string campo)
+        {
+            while (true)
+            {
+                Console.Write($"{campo}: ");
+                string valor = Console.ReadLine()?.Trim() ?? "";
+                if (!string.IsNullOrWhiteSpace(valor))
+                    return valor;
+                Console.WriteLine($"{campo} não pode ser vazio. Tente novamente.");
+            }
+        }
+        private string InputAlteracaoString(string campo, string valorAtual)
+        {
+            Console.Write($"{campo}: ");
+            string valor = Console.ReadLine()?.Trim() ?? "";
+            return string.IsNullOrEmpty(valor) ? valorAtual : valor;
+        }
+        private int InputAlteracaoInt(string campo, int valorAtual)
+        {
+            Console.Write($"{campo} ({valorAtual}): ");
+            string entrada = Console.ReadLine()?.Trim() ?? "";
+            return int.TryParse(entrada, out int valor) ? valor : valorAtual;
+        }
+
+        private double InputAlteracaoDouble(string campo, double valorAtual)
+        {
+            Console.Write($"{campo} ({valorAtual}): ");
+            string entrada = Console.ReadLine()?.Trim() ?? "";
+            return double.TryParse(entrada, out double valor) ? valor : valorAtual;
         }
     }
 }
