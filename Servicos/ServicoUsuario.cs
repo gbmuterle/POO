@@ -33,7 +33,7 @@ namespace Servicos
             _repositorioUsuario.Cadastrar(usuario);
         }
 
-        public void AlterarUsuario(Usuario usuarioAlterado)
+        public void AlterarUsuario(Usuario usuarioAtual, Usuario usuarioAlterado)
         {
             if (usuarioAlterado == null)
                 throw new InvalidOperationException("Usuário não pode ser nulo.");
@@ -43,10 +43,6 @@ namespace Servicos
 
             if (usuarioAlterado.Perfil != "admin" && usuarioAlterado.Perfil != "usuario")
                 throw new InvalidOperationException("Perfil inválido. Deve ser 'admin' ou 'usuario'.");
-
-            var usuarioAtual = _repositorioUsuario.BuscarPorNome(usuarioAlterado.Nome);
-            if (usuarioAtual == null)
-                throw new InvalidOperationException("Usuário não encontrado.");
                 
             _repositorioUsuario.Alterar(usuarioAtual, usuarioAlterado);
         }

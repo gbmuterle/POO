@@ -54,7 +54,7 @@ namespace Telas
         private void Cadastrar()
         {
 
-            string nome = InputObrigatorio("Nome");
+            string nome = InputObrigatorio("Nome").ToLower();
             string senha = InputObrigatorio("Senha");
             string perfil = InputObrigatorio("Perfil (admin/usuario)").ToLower();
             var usuario = new Usuario(nome, senha, perfil);
@@ -99,7 +99,7 @@ namespace Telas
         private void Alterar()
         {
             Console.Write("Informe o nome do usuário que deseja alterar: ");
-            var nomeBusca = InputObrigatorio("Usuario");
+            var nomeBusca = InputObrigatorio("Usuario").ToLower();
             var usuarioAtual = _servicoUsuario.BuscarPorNome(nomeBusca);
 
             if (usuarioAtual == null)
@@ -115,7 +115,7 @@ namespace Telas
 
                 try
                 {
-                    _servicoUsuario.AlterarUsuario(usuarioAlterado);
+                    _servicoUsuario.AlterarUsuario(usuarioAtual, usuarioAlterado);
 
                     Console.WriteLine("Usuário alterado com sucesso!");
                 }
@@ -133,7 +133,7 @@ namespace Telas
         private void Remover()
         {
             Console.Write("Informe o nome do usuário que deseja remover: ");
-            var nomeBusca = InputObrigatorio("Usuario");
+            var nomeBusca = InputObrigatorio("Usuario").ToLower();
             var usuario = _servicoUsuario.BuscarPorNome(nomeBusca);
 
             if (usuario == null)
