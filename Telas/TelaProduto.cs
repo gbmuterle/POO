@@ -83,7 +83,8 @@ namespace Telas
 
             else
             {
-                var produto = new Produto(codigo, nome, valor, quantidade, fornecedor);
+                string descricao = InputObrigatorioString("Descrição");
+                var produto = new Produto(codigo, nome, descricao, valor, quantidade, fornecedor);
 
                 try
                 {
@@ -147,7 +148,8 @@ namespace Telas
 
                 else
                 {
-                    var produtoAlterado = new Produto(codigo, novoNome, novoValor, novaQuantidade, novoFornecedor);
+                    var novaDescricao = InputAlteracaoString("Descrição", produtoAtual.Descricao);
+                    var produtoAlterado = new Produto(codigo, novoNome, novaDescricao, novoValor, novaQuantidade, novoFornecedor);
                     try
                     {
                         _servicoProduto.Alterar(produtoAtual, produtoAlterado);
