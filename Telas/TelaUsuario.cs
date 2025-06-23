@@ -18,7 +18,7 @@ namespace Telas
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("=== MENU DE USUÁRIOS ===");
+                Console.WriteLine("=== USUÁRIOS ===");
                 Console.WriteLine("1 - Cadastrar");
                 Console.WriteLine("2 - Listar");
                 Console.WriteLine("3 - Alterar");
@@ -44,24 +44,29 @@ namespace Telas
                     case "0":
                         return;
                     default:
-                        Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar...");
-                        Console.ReadKey();
-                        break;
+                        Console.WriteLine("Opção inválida.");
+                        PressioneParaContinuar();
+                        continue;
                 }
             }
         }
         private void Cadastrar()
         {
             Console.Clear();
-            string nome = InputObrigatorioString("Nome").ToLower();
-            string senha = InputObrigatorioString("Senha");
-            string perfil = InputObrigatorioString("Perfil (admin/usuario)").ToLower();
+            Console.Write("Nome: ");
+            string nome = (Console.ReadLine() ?? "").ToLower();
+
+            Console.Write("Senha: ");
+            string senha = Console.ReadLine() ?? "";
+
+            Console.Write("Perfil (admin/usuario): ");
+            string perfil = (Console.ReadLine() ?? "").ToLower();
             var usuario = new Usuario(nome, senha, perfil);
 
             try
             {
-                _servicoUsuario.CadastrarUsuario(usuario);
-                Console.WriteLine("\nUsuário cadastrado com sucesso!");
+                _servicoUsuario.Cadastrar(usuario);
+                Console.WriteLine("Usuário cadastrado com sucesso!");
             }
 
             catch (Exception ex)
@@ -69,8 +74,7 @@ namespace Telas
                 Console.WriteLine($"\nErro ao cadastrar usuário: {ex.Message}");
             }
 
-            Console.WriteLine("\nPressione qualquer tecla para continuar...");
-            Console.ReadKey();
+            PressioneParaContinuar();
         }
 
         private void Listar()
@@ -81,101 +85,116 @@ namespace Telas
             if (!usuarios.Any())
             {
                 Console.WriteLine("Nenhum usuário cadastrado.");
+                PressioneParaContinuar();
+                return;
             }
 
-            else
+            Console.WriteLine("--- Lista de usuários ---");
+            foreach (var u in usuarios)
             {
-                Console.WriteLine("--- Lista de usuários ---");
-                foreach (var user in usuarios)
-                {
-                    Console.WriteLine(user);
-                }
+                Console.WriteLine(u);
             }
 
-            Console.WriteLine("\nPressione qualquer tecla para continuar...");
-            Console.ReadKey();
+            PressioneParaContinuar();
         }
 
         private void Alterar()
         {
             Console.Clear();
-            Console.Write("Informe o nome do usuário que deseja alterar: ");
-            var nomeBusca = InputObrigatorioString("Usuario").ToLower();
-            var usuarioAtual = _servicoUsuario.BuscarPorNome(nomeBusca);
+            Console.Write("Nome do usuário a alterar: ");
+            string nome = (Console.ReadLine() ?? "").ToLower();
+
+            var usuarioAtual = _servicoUsuario.BuscarPorNome(nome);
 
             if (usuarioAtual == null)
             {
-                Console.WriteLine("Usuário não encontrado.");
+                Console.WriteLine("Usuário não encontrado!");
+                PressioneParaContinuar();
+                return;
             }
 
-            else
+            while (true)
             {
-                var novaSenha = InputAlteracaoString("Senha", usuarioAtual.Senha);
-                var novoPerfil = InputAlteracaoString("Perfil (admin/usuario)", usuarioAtual.Perfil).ToLower();
-                var usuarioAlterado = new Usuario(usuarioAtual.Nome,novaSenha,novoPerfil);
+                Console.Clear();
+                Console.WriteLine("--- Dados atuais ---");
+                Console.WriteLine(usuarioAtual);
+                Console.WriteLine("\nQual campo deseja alterar?");
+                Console.WriteLine("1 - Senha");
+                Console.WriteLine("2 - Perfil");
+                Console.Write("\nEscolha uma opção: ");
+                string opcao = Console.ReadLine() ?? "";
+
+                string novaSenha = usuarioAtual.Senha;
+                string novoPerfil = usuarioAtual.Perfil;
+
+                switch (opcao)
+                {
+                    case "1":
+                        Console.Write("Nova senha: ");
+                        novaSenha = Console.ReadLine() ?? "";
+                        break;
+                    case "2":
+                        Console.Write("Novo perfil (admin/usuario): ");
+                        novoPerfil = (Console.ReadLine() ?? "").ToLower();
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida.");
+                        PressioneParaContinuar();
+                        continue;
+                }
+
+                var usuarioAlterado = new Usuario(
+                    usuarioAtual.Nome,
+                    novaSenha,
+                    novoPerfil
+                );
 
                 try
                 {
-                    _servicoUsuario.AlterarUsuario(usuarioAtual, usuarioAlterado);
-
+                    _servicoUsuario.Alterar(usuarioAtual, usuarioAlterado);
                     Console.WriteLine("Usuário alterado com sucesso!");
                 }
-
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Erro: {ex.Message}");
+                    Console.WriteLine($"Erro ao alterar usuário: {ex.Message}");
                 }
+
+                PressioneParaContinuar();
+                break;
             }
-
-            Console.WriteLine("\nPressione qualquer tecla para continuar...");
-            Console.ReadKey();
         }
-
         private void Remover()
         {
             Console.Clear();
             Console.Write("Informe o nome do usuário que deseja remover: ");
-            var nomeBusca = InputObrigatorioString("Usuario").ToLower();
-            var usuario = _servicoUsuario.BuscarPorNome(nomeBusca);
+            string nome = (Console.ReadLine() ?? "").ToLower();
+
+            var usuario = _servicoUsuario.BuscarPorNome(nome);
 
             if (usuario == null)
             {
                 Console.WriteLine("Usuário não encontrado.");
+                PressioneParaContinuar();
+                return;
             }
 
-            else
+            try
             {
-                try
-                {
-                    _servicoUsuario.RemoverUsuario(usuario);
-                    Console.WriteLine("Usuário removido com sucesso!");
-                }
-
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Erro: {ex.Message}");
-                }
+                _servicoUsuario.Remover(usuario);
+                Console.WriteLine("Usuário removido com sucesso!");
             }
 
-            Console.WriteLine("Pressione Enter para continuar...");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+            }
+
+            PressioneParaContinuar();
+        }
+        private void PressioneParaContinuar()
+        {
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
-        }
-        private string InputObrigatorioString(string campo)
-        {
-            while (true)
-            {
-                Console.Write($"{campo}: ");
-                string valor = Console.ReadLine()?.Trim() ?? "";
-                if (!string.IsNullOrWhiteSpace(valor))
-                    return valor;
-                Console.WriteLine($"{campo} não pode ser vazio. Tente novamente.");
-            }
-        }
-        private string InputAlteracaoString(string campo, string valorAtual)
-        {
-            Console.Write($"{campo}: ");
-            string valor = Console.ReadLine()?.Trim() ?? "";
-            return string.IsNullOrEmpty(valor) ? valorAtual : valor;
         }
     }
 }

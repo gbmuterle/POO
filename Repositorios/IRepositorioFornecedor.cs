@@ -6,8 +6,8 @@ namespace Repositorios
     public interface IRepositorioFornecedor
     {
         void Adicionar(Fornecedor fornecedor);
-        void Alterar(Fornecedor fornecedor);
-        void Remover(int codigo);
+        void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado);
+        void Remover(Fornecedor fornecedor);
         Fornecedor? BuscarPorCodigo(int codigo);
         List<Fornecedor> BuscarTodos();
         List<Fornecedor> BuscarPorNome(string nome);

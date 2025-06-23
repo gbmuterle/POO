@@ -12,24 +12,30 @@ namespace Telas
             _autenticador = autenticador;
         }
 
-        public Usuario? Executar()
+        public Usuario Executar()
         {
-            Console.Clear();
-            Console.WriteLine("=== LOGIN ===");
-            Console.Write("Usuário: ");
-            string nome = Console.ReadLine() ?? "";
-            Console.Write("Senha: ");
-            string senha = Console.ReadLine() ?? "";
-
-            var usuario = _autenticador.Autenticar(nome, senha);
-
-            if (usuario == null)
+            while (true)
             {
-                Console.WriteLine("Usuário ou senha inválidos.");
-                Console.WriteLine("Pressione qualquer tecla para tentar novamente...");
-                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("=== LOGIN ===");
+                Console.Write("Usuário: ");
+                string nome = Console.ReadLine() ?? "";
+                Console.Write("Senha: ");
+                string senha = Console.ReadLine() ?? "";
+
+                var usuario = _autenticador.Autenticar(nome, senha);
+
+                if (usuario != null)
+                {
+                    return usuario;
+                }
+                else
+                {
+                    Console.WriteLine("Usuário ou senha inválidos.");
+                    Console.WriteLine("Pressione qualquer tecla para tentar novamente...");
+                    Console.ReadKey();
+                }
             }
-            return usuario;
         }
     }
 }

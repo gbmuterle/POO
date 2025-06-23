@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace Telas
 {
-    public class TelaCliente
+    public class TelaMenuCliente
     {
         private readonly ServicoProduto _servicoProduto;
         private readonly Carrinho _carrinho;
 
-        public TelaCliente(ServicoProduto servicoProduto)
+        public TelaMenuCliente(ServicoProduto servicoProduto)
         {
             _servicoProduto = servicoProduto;
             _carrinho = new Carrinho();
@@ -22,7 +22,7 @@ namespace Telas
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("=== MENU DO CLIENTE ===");
+                Console.WriteLine("=== BEM-VINDO ===");
                 Console.WriteLine("1 - Buscar produtos");
                 Console.WriteLine("2 - Ver carrinho");
                 Console.WriteLine("0 - Sair");
@@ -42,7 +42,7 @@ namespace Telas
                     default:
                         Console.WriteLine("Opção inválida!");
                         Console.ReadKey();
-                        break;
+                        continue;
                 }
             }
         }
@@ -58,7 +58,6 @@ namespace Telas
                 .Where(p =>
                     p.Codigo.ToString().Contains(termo) ||
                     p.Nome.ToLower().Contains(termo) ||
-                    p.Descricao.ToLower().Contains(termo))
                 .ToList();
 
             if (encontrados.Count == 0)

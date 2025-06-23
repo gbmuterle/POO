@@ -16,21 +16,21 @@ namespace Repositorios
             fornecedores = novos;
         }
 
-        public void Alterar(Fornecedor fornecedor)
+        public void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado)
         {
             for (int i = 0; i < fornecedores.Length; i++)
             {
-                if (fornecedores[i].Codigo == fornecedor.Codigo)
+                if (fornecedores[i].Codigo == fornecedorAlterado.Codigo)
                 {
-                    fornecedores[i] = fornecedor;
+                    fornecedores[i] = fornecedorAlterado;
                     break;
                 }
             }
         }
 
-        public void Remover(int codigo)
+        public void Remover(Fornecedor fornecedor)
         {
-            int index = Array.FindIndex(fornecedores, f => f.Codigo == codigo);
+            int index = Array.FindIndex(fornecedores, f => f.Codigo == fornecedor.Codigo);
             if (index >= 0)
             {
                 var novos = new Fornecedor[fornecedores.Length - 1];

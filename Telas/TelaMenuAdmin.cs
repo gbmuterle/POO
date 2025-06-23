@@ -17,16 +17,16 @@ namespace Telas
             _telaUsuario = telaUsuario;
         }
 
-        public void Exibir()
+        public void Menu()
         {
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("=== SISTEMA DE CADASTRO ===");
-                Console.WriteLine("1 - Produtos");
-                Console.WriteLine("2 - Fornecedores");
-                Console.WriteLine("3 - Transportadoras");
-                Console.WriteLine("99 - Usuários");
+                Console.WriteLine("=== MENU DE CADASTRO ===");
+                Console.WriteLine("1 - Usuários");
+                Console.WriteLine("2 - Produtos");
+                Console.WriteLine("3 - Fornecedores");
+                Console.WriteLine("4 - Transportadoras");
                 Console.WriteLine("0 - Sair");
                 Console.Write("Escolha uma opção: ");
 
@@ -35,16 +35,16 @@ namespace Telas
                 switch (opcao)
                 {
                     case "1":
-                        _telaProduto.Menu();
+                        _telaUsuario.Menu();
                         break;
                     case "2":
-                        _telaFornecedor.Menu();
+                        _telaProduto.Menu();
                         break;
                     case "3":
-                        _telaTransportadora.Menu();
+                        _telaFornecedor.Menu();
                         break;
-                    case "99":
-                        _telaUsuario.Menu();
+                    case "4":
+                        _telaTransportadora.Menu();
                         break;
                     case "0":
                         Console.WriteLine("Encerrando o sistema...");
@@ -52,7 +52,7 @@ namespace Telas
                     default:
                         Console.WriteLine("Opção inválida!");
                         PressioneParaContinuar();
-                        break;
+                        continue;
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace Telas
         private void PressioneParaContinuar()
         {
             Console.WriteLine("\nPressione qualquer tecla para continuar...");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }

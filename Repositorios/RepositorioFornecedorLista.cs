@@ -13,27 +13,19 @@ namespace Repositorios
             fornecedores.Add(fornecedor);
         }
 
-        public void Alterar(Fornecedor fornecedor)
+        public void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado)
         {
-            var fornecedorExistente = fornecedores.FirstOrDefault(f => f.Codigo == fornecedor.Codigo);
-            if (fornecedorExistente != null)
-            {
-                fornecedorExistente.Nome = fornecedor.Nome;
-                fornecedorExistente.Descricao = fornecedor.Descricao;
-                fornecedorExistente.Telefone = fornecedor.Telefone;
-                fornecedorExistente.Email = fornecedor.Email;
-                fornecedorExistente.Cnpj = fornecedor.Cnpj;
-                fornecedorExistente.Endereco = fornecedor.Endereco;
-            }
+                fornecedorAtual.Nome = fornecedorAlterado.Nome;
+                fornecedorAtual.Descricao = fornecedorAlterado.Descricao;
+                fornecedorAtual.Telefone = fornecedorAlterado.Telefone;
+                fornecedorAtual.Email = fornecedorAlterado.Email;
+                fornecedorAtual.Cnpj = fornecedorAlterado.Cnpj;
+                fornecedorAtual.Endereco = fornecedorAlterado.Endereco;
         }
 
-        public void Remover(int codigo)
+        public void Remover(Fornecedor fornecedor)
         {
-            var fornecedor = fornecedores.FirstOrDefault(f => f.Codigo == codigo);
-            if (fornecedor != null)
-            {
-                fornecedores.Remove(fornecedor);
-            }
+            fornecedores.Remove(fornecedor);
         }
 
         public Fornecedor? BuscarPorCodigo(int codigo)

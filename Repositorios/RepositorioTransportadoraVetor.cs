@@ -16,24 +16,24 @@ namespace Repositorios
             transportadoras = novos;
         }
 
-        public void Alterar(Transportadora transportadora)
+        public void Alterar(Transportadora transportadoraAtual, Transportadora transportadoraAlterada)
         {
             for (int i = 0; i < transportadoras.Length; i++)
             {
-                if (transportadoras[i].Codigo == transportadora.Codigo)
+                if (transportadoras[i].Codigo == transportadoraAlterada.Codigo)
                 {
-                    transportadoras[i] = transportadora;
+                    transportadoras[i] = transportadoraAlterada;
                     break;
                 }
             }
         }
 
-        public void Remover(int codigo)
+        public void Remover(Transportadora transportadora)
         {
             int index = -1;
             for (int i = 0; i < transportadoras.Length; i++)
             {
-                if (transportadoras[i].Codigo == codigo)
+                if (transportadoras[i].Codigo == transportadora.Codigo)
                 {
                     index = i;
                     break;

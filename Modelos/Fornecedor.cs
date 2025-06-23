@@ -6,11 +6,11 @@ namespace Modelos
         public string Descricao { get; set; }
         public Endereco Endereco { get; set; }
 
-        public Fornecedor(int codigo, string nome, string descricao, string telefone, string email, Endereco endereco, string cnpj)
+        public Fornecedor(int codigo, string nome, string descricao, string telefone, string email, string cnpj, Endereco endereco)
             : base(codigo, nome, telefone, email)
         {
-            Cnpj = cnpj;
             Descricao = descricao;
+            Cnpj = cnpj;
             Endereco = endereco;
         }
 

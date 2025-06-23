@@ -12,7 +12,8 @@ namespace Repositorios
         {
             _usuarios = new List<Usuario>
             {
-                new Usuario("admin", "admin", "admin")
+                new Usuario("admin", "admin", "admin"),
+                new Usuario("user", "user", "usuario")
             };
         }
 

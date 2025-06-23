@@ -13,26 +13,18 @@ namespace Repositorios
             transportadoras.Add(transportadora);
         }
 
-        public void Alterar(Transportadora transportadora)
+        public void Alterar(Transportadora transportadoraAtual, Transportadora transportadoraAlterada)
         {
-            var existente = transportadoras.FirstOrDefault(t => t.Codigo == transportadora.Codigo);
-            if (existente != null)
-            {
-                existente.Nome = transportadora.Nome;
-                existente.Telefone = transportadora.Telefone;
-                existente.Email = transportadora.Email;
-                existente.Cnpj = transportadora.Cnpj;
-                existente.PrecoPorKm = transportadora.PrecoPorKm;
-            }
+                transportadoraAtual.Nome = transportadoraAlterada.Nome;
+                transportadoraAtual.Telefone = transportadoraAlterada.Telefone;
+                transportadoraAtual.Email = transportadoraAlterada.Email;
+                transportadoraAtual.Cnpj = transportadoraAlterada.Cnpj;
+                transportadoraAtual.PrecoPorKm = transportadoraAlterada.PrecoPorKm;
         }
 
-        public void Remover(int codigo)
+        public void Remover(Transportadora transportadora)
         {
-            var existente = transportadoras.FirstOrDefault(t => t.Codigo == codigo);
-            if (existente != null)
-            {
-                transportadoras.Remove(existente);
-            }
+            transportadoras.Remove(transportadora);
         }
 
         public Transportadora? BuscarPorCodigo(int codigo)

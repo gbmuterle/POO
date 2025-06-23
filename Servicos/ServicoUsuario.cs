@@ -13,45 +13,23 @@ namespace Servicos
             _repositorioUsuario = repositorioUsuario;
         }
 
-        public void CadastrarUsuario(Usuario usuario)
+        public void Cadastrar(Usuario usuario)
         {
-            if (usuario == null)
-                throw new InvalidOperationException("Usuario não pode ser nulo.");
-
-            if (string.IsNullOrWhiteSpace(usuario.Nome))
-                throw new InvalidOperationException("Nome não pode ser vazio.");
-
-            if (string.IsNullOrWhiteSpace(usuario.Senha))
-                throw new InvalidOperationException("Senha não pode ser vazia.");
-
-            if (usuario.Perfil != "admin" && usuario.Perfil != "usuario")
-                throw new InvalidOperationException("Perfil inválido. Deve ser 'admin' ou 'usuario'.");
-            
-            if (_repositorioUsuario.BuscarPorNome(usuario.Nome) != null)
-                throw new InvalidOperationException("Já existe um usuário com esse nome.");
-
+            Validar(usuario, true);
             _repositorioUsuario.Cadastrar(usuario);
         }
 
-        public void AlterarUsuario(Usuario usuarioAtual, Usuario usuarioAlterado)
+        public void Alterar(Usuario usuarioAtual, Usuario usuarioAlterado)
         {
-            if (usuarioAlterado == null)
-                throw new InvalidOperationException("Usuário não pode ser nulo.");
-
-            if (string.IsNullOrWhiteSpace(usuarioAlterado.Senha))
-                throw new InvalidOperationException("Senha não pode ser vazia.");
-
-            if (usuarioAlterado.Perfil != "admin" && usuarioAlterado.Perfil != "usuario")
-                throw new InvalidOperationException("Perfil inválido. Deve ser 'admin' ou 'usuario'.");
-                
+            Validar(usuarioAlterado, false);
             _repositorioUsuario.Alterar(usuarioAtual, usuarioAlterado);
         }
 
-        public void RemoverUsuario(Usuario usuario)
+        public void Remover(Usuario usuario)
         {
             if (usuario == null)
-                throw new InvalidOperationException("Usuário não pode ser nulo.");
-                
+                throw new InvalidOperationException("Usuário inválido.");
+
             _repositorioUsuario.Remover(usuario);
         }
 
@@ -63,6 +41,31 @@ namespace Servicos
         public Usuario? BuscarPorNome(string nome)
         {
             return _repositorioUsuario.BuscarPorNome(nome);
+        }
+        private void Validar(Usuario usuario, bool novo)
+        {
+            if (usuario == null)
+                throw new InvalidOperationException("Usuário inválido");
+
+            if (string.IsNullOrWhiteSpace(usuario.Nome))
+                throw new InvalidOperationException("Nome do usuário inválido.");
+
+            if (string.IsNullOrWhiteSpace(usuario.Senha))
+                throw new InvalidOperationException("Senha inválida.");
+
+            if (usuario.Perfil != "admin" && usuario.Perfil != "usuario")
+                throw new InvalidOperationException("Perfil inválido.");
+
+            if (novo)
+            {
+                if (BuscarPorNome(usuario.Nome) != null)
+                    throw new InvalidOperationException("Já existe um usuário com esse nome.");
+            }
+            else
+            {
+                if (BuscarPorNome(usuario.Nome) == null)
+                    throw new InvalidOperationException("Usuário não encontrado para alteração.");
+            }
         }
     }
 }

@@ -8,9 +8,12 @@ namespace Telas
     {
         private readonly ServicoFornecedor _servicoFornecedor;
 
-        public TelaFornecedor(ServicoFornecedor servicoFornecedor)
+        private readonly TelaEndereco _telaEndereco;
+
+        public TelaFornecedor(ServicoFornecedor servicoFornecedor, TelaEndereco telaEndereco)
         {
             _servicoFornecedor = servicoFornecedor;
+            _telaEndereco = telaEndereco;
         }
 
         public void Menu()
@@ -18,7 +21,7 @@ namespace Telas
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("=== MENU DE FORNECEDORES ===");
+                Console.WriteLine("=== FORNECEDORES ===");
                 Console.WriteLine("1 - Cadastrar");
                 Console.WriteLine("2 - Listar todos");
                 Console.WriteLine("3 - Alterar");
@@ -55,7 +58,7 @@ namespace Telas
                     default:
                         Console.WriteLine("Opção inválida!");
                         PressioneParaContinuar();
-                        break;
+                        continue;
                 }
             }
         }
@@ -63,43 +66,45 @@ namespace Telas
         private void Cadastrar()
         {
             Console.Clear();
-            Console.WriteLine("Cadastro de Fornecedor:");
-            Console.Write("Código: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
+
+            int codigo;
+            while (true)
+            {
+                Console.Write("Código: ");
+                if (int.TryParse(Console.ReadLine(), out codigo))
+                    break;
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
+            }
+
             Console.Write("Nome: ");
             string nome = Console.ReadLine() ?? "";
+
             Console.Write("Descrição: ");
             string descricao = Console.ReadLine() ?? "";
+
             Console.Write("Telefone: ");
             string telefone = Console.ReadLine() ?? "";
+
             Console.Write("Email: ");
             string email = Console.ReadLine() ?? "";
-
-            Console.WriteLine("--- Endereço do Fornecedor ---");
-            Console.Write("Rua: ");
-            string rua = Console.ReadLine() ?? "";
-            Console.Write("Número: ");
-            string numero = Console.ReadLine() ?? "";
-            Console.Write("Complemento: ");
-            string complemento = Console.ReadLine() ?? "";
-            Console.Write("Bairro: ");
-            string bairro = Console.ReadLine() ?? "";
-            Console.Write("Cidade: ");
-            string cidade = Console.ReadLine() ?? "";
-            Console.Write("Estado (UF): ");
-            string estado = Console.ReadLine() ?? "";
-            Console.Write("CEP: ");
-            string cep = Console.ReadLine() ?? "";
-
-            var endereco = new Endereco(rua, numero, complemento, bairro, cidade, estado, cep);
 
             Console.Write("CNPJ: ");
             string cnpj = Console.ReadLine() ?? "";
 
-            var fornecedor = new Fornecedor(codigo, nome, descricao, telefone, email, endereco, cnpj);
-            _servicoFornecedor.Cadastrar(fornecedor);
+            Endereco endereco = _telaEndereco.Cadastrar();
 
-            Console.WriteLine("Fornecedor cadastrado com sucesso!");
+            var fornecedor = new Fornecedor(codigo, nome, descricao, telefone, email, cnpj, endereco);
+
+            try
+            {
+                _servicoFornecedor.Cadastrar(fornecedor);
+                Console.WriteLine("Fornecedor cadastrado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao cadastrar fornecedor: {ex.Message}");
+            }
+
             PressioneParaContinuar();
         }
 
@@ -108,16 +113,16 @@ namespace Telas
             Console.Clear();
             var fornecedores = _servicoFornecedor.ListarTodos();
 
-            if (fornecedores.Count == 0)
+            if (!fornecedores.Any())
             {
                 Console.WriteLine("Nenhum fornecedor cadastrado.");
+                PressioneParaContinuar();
+                return;
             }
-            else
-            {
-                Console.WriteLine("--- FORNECEDORES CADASTRADOS ---");
-                foreach (var f in fornecedores)
-                    Console.WriteLine(f);
-            }
+
+            Console.WriteLine("--- Lista de Transportadoras ---");
+            foreach (var f in fornecedores)
+                Console.WriteLine(f);
 
             PressioneParaContinuar();
         }
@@ -125,79 +130,150 @@ namespace Telas
         private void Alterar()
         {
             Console.Clear();
-            Console.WriteLine("Alteração de Fornecedor:");
-            Console.Write("Código do fornecedor a alterar: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
-            var fornecedor = _servicoFornecedor.BuscarPorCodigo(codigo);
+            int codigo;
+            while (true)
+            {
+                Console.Write("Código: ");
+                if (int.TryParse(Console.ReadLine(), out codigo))
+                    break;
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
+            }
 
-            if (fornecedor == null)
+            var fornecedorAtual = _servicoFornecedor.BuscarPorCodigo(codigo);
+
+            if (fornecedorAtual == null)
             {
                 Console.WriteLine("Fornecedor não encontrado!");
                 PressioneParaContinuar();
                 return;
             }
 
-            Console.Write("Novo nome: ");
-            string nome = Console.ReadLine() ?? "";
-            Console.Write("Nova descrição: ");
-            string descricao = Console.ReadLine() ?? "";
-            Console.Write("Novo telefone: ");
-            string telefone = Console.ReadLine() ?? "";
-            Console.Write("Novo email: ");
-            string email = Console.ReadLine() ?? "";
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("--- Dados atuais ---");
+                Console.WriteLine(fornecedorAtual);
+                Console.WriteLine("\nQual campo deseja alterar?");
+                Console.WriteLine("1 - Nome");
+                Console.WriteLine("2 - Descricao");
+                Console.WriteLine("3 - Telefone");
+                Console.WriteLine("4 - Email");
+                Console.WriteLine("5 - CNPJ");
+                Console.WriteLine("6 - Endereço");
+                Console.Write("\nEscolha uma opção: ");
+                string opcao = Console.ReadLine() ?? "";
 
-            Console.WriteLine("--- Novo Endereço ---");
-            Console.Write("Rua: ");
-            string rua = Console.ReadLine() ?? "";
-            Console.Write("Número: ");
-            string numero = Console.ReadLine() ?? "";
-            Console.Write("Complemento: ");
-            string complemento = Console.ReadLine() ?? "";
-            Console.Write("Bairro: ");
-            string bairro = Console.ReadLine() ?? "";
-            Console.Write("Cidade: ");
-            string cidade = Console.ReadLine() ?? "";
-            Console.Write("Estado (UF): ");
-            string estado = Console.ReadLine() ?? "";
-            Console.Write("CEP: ");
-            string cep = Console.ReadLine() ?? "";
+                string novoNome = fornecedorAtual.Nome;
+                string novaDescricao = fornecedorAtual.Descricao;
+                string novoTelefone = fornecedorAtual.Telefone;
+                string novoEmail = fornecedorAtual.Email;
+                string novoCnpj = fornecedorAtual.Cnpj;
+                Endereco novoEndereco = fornecedorAtual.Endereco;
 
-            var endereco = new Endereco(rua, numero, complemento, bairro, cidade, estado, cep);
+                switch (opcao)
+                {
+                    case "1":
+                        Console.Write("Novo nome: ");
+                        novoNome = Console.ReadLine() ?? "";
+                        break;
+                    case "2":
+                        Console.Write("Novo descrição: ");
+                        novoCnpj = Console.ReadLine() ?? "";
+                        break;
+                    case "3":
+                        Console.Write("Novo telefone: ");
+                        novoTelefone = Console.ReadLine() ?? "";
+                        break;
+                    case "4":
+                        Console.Write("Novo email: ");
+                        novoEmail = Console.ReadLine() ?? "";
+                        break;
+                    case "5":
+                        Console.Write("Novo CNPJ: ");
+                        novoCnpj = Console.ReadLine() ?? "";
+                        break;
+                    case "6":
+                        novoEndereco = _telaEndereco.Cadastrar();
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida.");
+                        PressioneParaContinuar();
+                        continue;
+                }
 
-            Console.Write("Novo CNPJ: ");
-            string cnpj = Console.ReadLine() ?? "";
+                var fornecedorAlterado = new Fornecedor(
+                    fornecedorAtual.Codigo,
+                    novoNome,
+                    novaDescricao,
+                    novoTelefone,
+                    novoEmail,
+                    novoCnpj,
+                    novoEndereco
+                );
 
-            var novoFornecedor = new Fornecedor(codigo, nome, descricao, telefone, email, endereco, cnpj);
-            _servicoFornecedor.Alterar(novoFornecedor);
+                try
+                {
+                    _servicoFornecedor.Alterar(fornecedorAtual, fornecedorAlterado);
+                    Console.WriteLine("Fornecedor alterado com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro ao alterar fornecedor: {ex.Message}");
+                }
 
-            Console.WriteLine("Fornecedor alterado com sucesso!");
-            PressioneParaContinuar();
+                PressioneParaContinuar();
+                break;
+            }
         }
 
         private void Remover()
         {
             Console.Clear();
-            Console.Write("Código do fornecedor a remover: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
+            Console.WriteLine("Informe o código do fornecedor:");
+            int codigo;
+            while (true)
+            {
+                Console.Write("Código: ");
+                if (int.TryParse(Console.ReadLine(), out codigo))
+                    break;
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
+            }
+
             var fornecedor = _servicoFornecedor.BuscarPorCodigo(codigo);
 
             if (fornecedor == null)
             {
-                Console.WriteLine("Fornecedor não encontrado!");
+                Console.WriteLine("Fornecedor não encontrado.");
                 PressioneParaContinuar();
                 return;
             }
 
-            _servicoFornecedor.Remover(codigo);
-            Console.WriteLine("Fornecedor removido com sucesso!");
+            try
+            {
+                _servicoFornecedor.Remover(fornecedor);
+                Console.WriteLine("Fornecedor removido com sucesso!");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+            }
+
             PressioneParaContinuar();
         }
 
         private void BuscarPorCodigo()
         {
             Console.Clear();
-            Console.Write("Digite o código do fornecedor: ");
-            int codigo = int.Parse(Console.ReadLine() ?? "0");
+            Console.WriteLine("Informe o código:");
+            int codigo;
+            while (true)
+            {
+                Console.Write("Código: ");
+                if (int.TryParse(Console.ReadLine(), out codigo))
+                    break;
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
+            }
             var fornecedor = _servicoFornecedor.BuscarPorCodigo(codigo);
             if (fornecedor != null)
                 Console.WriteLine(fornecedor);
@@ -209,21 +285,28 @@ namespace Telas
         private void BuscarPorNome()
         {
             Console.Clear();
-            Console.Write("Digite parte do nome do fornecedor: ");
+            Console.Write("Informe o nome: ");
             string nome = Console.ReadLine() ?? "";
             var fornecedores = _servicoFornecedor.BuscarPorNome(nome);
-            if (fornecedores.Count > 0)
-                fornecedores.ForEach(f => Console.WriteLine(f));
-            else
+
+            if (!fornecedores.Any())
+            {
                 Console.WriteLine("Nenhum fornecedor encontrado!");
+                PressioneParaContinuar();
+                return;
+            }
+
+            Console.WriteLine("--- Fornecedores encontrados ---");
+            foreach (var f in fornecedores)
+                Console.WriteLine(f);
+
             PressioneParaContinuar();
         }
 
         private void PressioneParaContinuar()
         {
-            Console.WriteLine();
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
     }
 }
