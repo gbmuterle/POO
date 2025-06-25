@@ -66,7 +66,19 @@ namespace Telas
             Console.Write("Descrição do pedido: ");
             string descricao = Console.ReadLine() ?? "";
 
-            var pedido = new Pedido(codigo, descricao, DateTime.Now);
+            double valorTotal;
+            while (true)
+            {
+                Console.Write("Valor total: ");
+                if (double.TryParse(Console.ReadLine(), out valorTotal))
+                    break;
+                Console.WriteLine("Preço inválido. Digite um número válido.");
+            }
+
+            Console.Write("Nome do cliente: ");
+            string cliente = Console.ReadLine() ?? "";
+
+            var pedido = new Pedido(codigo, descricao, DateTime.Now, valorTotal, cliente);
 
             try
             {
@@ -120,7 +132,16 @@ namespace Telas
             Console.Write("Nova descrição: ");
             string novaDescricao = Console.ReadLine() ?? "";
 
-            var pedidoAlterado = new Pedido(codigo, novaDescricao, pedidoAtual.DataCriacao);
+            double novoValorTotal;
+            while (true)
+            {
+                Console.Write("Valor total: ");
+                if (double.TryParse(Console.ReadLine(), out novoValorTotal))
+                    break;
+                Console.WriteLine("Preço inválido. Digite um número válido.");
+            }
+
+            var pedidoAlterado = new Pedido(codigo, novaDescricao, pedidoAtual.DataCriacao, novoValorTotal, pedidoAtual.Cliente);
 
             try
             {

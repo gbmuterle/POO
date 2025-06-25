@@ -7,7 +7,15 @@ namespace Repositorios
     public class RepositorioFornecedorLista : IRepositorioFornecedor
     {
         private List<Fornecedor> fornecedores = new List<Fornecedor>();
+        private readonly IArmazenamento<Fornecedor> _armazenamento;
+        private readonly string _caminhoArquivo;
 
+        public RepositorioFornecedorLista(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
+        {
+            _armazenamento = armazenamento;
+            _caminhoArquivo = caminhoArquivo;
+            fornecedores = _armazenamento.Carregar(_caminhoArquivo);
+        }
         public void Adicionar(Fornecedor fornecedor)
         {
             fornecedores.Add(fornecedor);

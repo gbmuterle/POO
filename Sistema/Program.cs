@@ -4,6 +4,7 @@ using Servicos;
 using Repositorios;
 using Autenticacao;
 using Modelos;
+using Sistema.Configuracoes;
 
 namespace Sistema
 {
@@ -15,14 +16,19 @@ namespace Sistema
             var autenticador = new Autenticador(repositorioUsuario.BuscarTodos());
             var telaLogin = new TelaLogin(autenticador);
 
+            ConfiguracaoArquivos.InicializarDiretorios();
+            var armazenamentoFornecedores = new ArmazenamentoJson<Fornecedor>();
+
             var repositorioProduto = new RepositorioProdutoLista();
-            var repositorioFornecedor = new RepositorioFornecedorLista();
+            var repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores,ConfiguracaoArquivos.ArquivoFornecedores);
             var repositorioTransportadora = new RepositorioTransportadoraLista();
+            var repositorioPedido = new RepositorioPedidoLista();
 
             var servicoProduto = new ServicoProduto(repositorioProduto);
             var servicoFornecedor = new ServicoFornecedor(repositorioFornecedor);
             var servicoTransportadora = new ServicoTransportadora(repositorioTransportadora);
             var servicoUsuario = new ServicoUsuario(repositorioUsuario);
+            var servicoPedido = new ServicoPedido(repositorioPedido);
 
             var servicoEndereco = new ServicoEndereco();
             var telaEndereco = new TelaEndereco(servicoEndereco);
@@ -31,7 +37,8 @@ namespace Sistema
             var telaFornecedor = new TelaFornecedor(servicoFornecedor, telaEndereco);
             var telaTransportadora = new TelaTransportadora(servicoTransportadora);
             var telaUsuario = new TelaUsuario(servicoUsuario);
-
+            var telaPedido = new TelaPedido(servicoPedido);
+            
             Usuario usuarioLogado = telaLogin.Executar();
 
             if (usuarioLogado.Perfil == "admin")
@@ -41,7 +48,7 @@ namespace Sistema
             }
             else
             {
-                var telaMenuCliente = new TelaMenuCliente(servicoProduto);
+                var telaMenuCliente = new TelaMenuCliente(telaProduto, telaPedido);
                 telaMenuCliente.Menu();
             }
         }
