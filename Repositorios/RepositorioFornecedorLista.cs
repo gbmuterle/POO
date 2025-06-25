@@ -19,21 +19,24 @@ namespace Repositorios
         public void Adicionar(Fornecedor fornecedor)
         {
             fornecedores.Add(fornecedor);
+            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
         }
 
         public void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado)
         {
-                fornecedorAtual.Nome = fornecedorAlterado.Nome;
-                fornecedorAtual.Descricao = fornecedorAlterado.Descricao;
-                fornecedorAtual.Telefone = fornecedorAlterado.Telefone;
-                fornecedorAtual.Email = fornecedorAlterado.Email;
-                fornecedorAtual.Cnpj = fornecedorAlterado.Cnpj;
-                fornecedorAtual.Endereco = fornecedorAlterado.Endereco;
+            fornecedorAtual.Nome = fornecedorAlterado.Nome;
+            fornecedorAtual.Descricao = fornecedorAlterado.Descricao;
+            fornecedorAtual.Telefone = fornecedorAlterado.Telefone;
+            fornecedorAtual.Email = fornecedorAlterado.Email;
+            fornecedorAtual.Cnpj = fornecedorAlterado.Cnpj;
+            fornecedorAtual.Endereco = fornecedorAlterado.Endereco;
+            _armazenamento.Salvar(fornecedores, _caminhoArquivo);    
         }
 
         public void Remover(Fornecedor fornecedor)
         {
             fornecedores.Remove(fornecedor);
+            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
         }
 
         public Fornecedor? BuscarPorCodigo(int codigo)

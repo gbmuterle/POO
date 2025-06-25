@@ -178,7 +178,7 @@ namespace Telas
                         break;
                     case "2":
                         Console.Write("Novo descrição: ");
-                        novoCnpj = Console.ReadLine() ?? "";
+                        novaDescricao = Console.ReadLine() ?? "";
                         break;
                     case "3":
                         Console.Write("Novo telefone: ");
