@@ -1,0 +1,39 @@
+# Diretórios de build do .NET
+**/bin/
+**/obj/
+
+# Configurações locais do VSCode
+.vscode/
+
+# Arquivos temporários do sistema
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Arquivos de log
+*.log
+
+# Arquivos de usuário do Visual Studio
+*.user
+*.suo
+
+# Arquivos de cache do Visual Studio
+*.vs/
+
+# Arquivos de configuração do Rider
+.idea/
+
+# Arquivos de backup do MacOS e Linux
+.DS_Store
+Thumbs.db
+
+# Arquivos de build gerados
+*.exe
+*.dll
+*.pdb
+*.cache
+*.db
+
+# Arquivos de lista de arquivos do projeto
+*.csproj.FileListAbsolute.txt
