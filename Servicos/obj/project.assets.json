@@ -46,19 +46,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gbmuterle\\.nuget\\packages\\": {}
+    "C:\\Users\\fsmartins3\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
+      "projectUniqueName": "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
       "projectName": "Servicos",
-      "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
-      "packagesPath": "C:\\Users\\gbmuterle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Servicos\\obj\\",
+      "projectPath": "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Servicos\\Servicos.csproj",
+      "packagesPath": "C:\\Users\\fsmartins3\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Servicos\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gbmuterle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fsmartins3\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -72,11 +72,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
-              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
+            "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj": {
+              "projectPath": "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Modelos\\Modelos.csproj"
             },
-            "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
-              "projectPath": "C:\\Users\\gbmuterle\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj"
+            "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj": {
+              "projectPath": "C:\\Users\\fsmartins3\\Documents\\GitHub\\POO\\Repositorios\\Repositorios.csproj"
             }
           }
         }
@@ -112,7 +112,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -18,6 +18,10 @@ namespace Sistema
 
             ConfiguracaoArquivos.InicializarDiretorios();
             var armazenamentoFornecedores = new ArmazenamentoJson<Fornecedor>();
+            var armazenamentoTransportadoras = new ArmazenamentoJson<Transportadora>();
+            var armazenamentoProdutos = new ArmazenamentoJson<Produto>();
+            var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
+            var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
 
             var repositorioProduto = new RepositorioProdutoLista();
             var repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores,ConfiguracaoArquivos.ArquivoFornecedores);
