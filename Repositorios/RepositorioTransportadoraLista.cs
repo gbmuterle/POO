@@ -8,23 +8,36 @@ namespace Repositorios
     {
         private List<Transportadora> transportadoras = new List<Transportadora>();
 
+        private readonly IArmazenamento<Transportadora> _armazenamento;
+        private readonly string _caminhoArquivo;
+
+        public RepositorioTransportadoraLista(IArmazenamento<Transportadora> armazenamento, string caminhoArquivo)
+        {
+            _armazenamento = armazenamento;
+            _caminhoArquivo = caminhoArquivo;
+            transportadoras = _armazenamento.Carregar(_caminhoArquivo);
+        }
+
         public void Adicionar(Transportadora transportadora)
         {
             transportadoras.Add(transportadora);
+            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
         }
 
         public void Alterar(Transportadora transportadoraAtual, Transportadora transportadoraAlterada)
         {
-                transportadoraAtual.Nome = transportadoraAlterada.Nome;
-                transportadoraAtual.Telefone = transportadoraAlterada.Telefone;
-                transportadoraAtual.Email = transportadoraAlterada.Email;
-                transportadoraAtual.Cnpj = transportadoraAlterada.Cnpj;
-                transportadoraAtual.PrecoPorKm = transportadoraAlterada.PrecoPorKm;
+            transportadoraAtual.Nome = transportadoraAlterada.Nome;
+            transportadoraAtual.Telefone = transportadoraAlterada.Telefone;
+            transportadoraAtual.Email = transportadoraAlterada.Email;
+            transportadoraAtual.Cnpj = transportadoraAlterada.Cnpj;
+            transportadoraAtual.PrecoPorKm = transportadoraAlterada.PrecoPorKm;
+            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
         }
 
         public void Remover(Transportadora transportadora)
         {
             transportadoras.Remove(transportadora);
+            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
         }
 
         public Transportadora? BuscarPorCodigo(int codigo)

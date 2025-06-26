@@ -6,6 +6,15 @@ namespace Repositorios
     public class RepositorioTransportadoraVetor : IRepositorioTransportadora
     {
         private Transportadora[] transportadoras = new Transportadora[0];
+        private readonly IArmazenamento<Fornecedor> _armazenamento;
+        private readonly string _caminhoArquivo;
+
+        public RepositorioFornecedorLista(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
+        {
+            _armazenamento = armazenamento;
+            _caminhoArquivo = caminhoArquivo;
+            transportadoras = _armazenamento.Carregar(_caminhoArquivo);
+        }
 
         public void Adicionar(Transportadora transportadora)
         {
@@ -14,6 +23,7 @@ namespace Repositorios
                 novos[i] = transportadoras[i];
             novos[novos.Length - 1] = transportadora;
             transportadoras = novos;
+            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
         }
 
         public void Alterar(Transportadora transportadoraAtual, Transportadora transportadoraAlterada)
@@ -23,6 +33,7 @@ namespace Repositorios
                 if (transportadoras[i].Codigo == transportadoraAlterada.Codigo)
                 {
                     transportadoras[i] = transportadoraAlterada;
+                    _armazenamento.Salvar(transportadoras[i], _caminhoArquivo);
                     break;
                 }
             }
@@ -50,6 +61,7 @@ namespace Repositorios
                         novos[j++] = transportadoras[i];
                 }
                 transportadoras = novos;
+                _armazenamento.Salvar(transportadoras, _caminhoArquivo);
             }
         }
 

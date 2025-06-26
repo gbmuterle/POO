@@ -6,6 +6,15 @@ namespace Repositorios
     public class RepositorioFornecedorVetor : IRepositorioFornecedor
     {
         private Fornecedor[] fornecedores = new Fornecedor[0];
+        private readonly IArmazenamento<Fornecedor> _armazenamento;
+        private readonly string _caminhoArquivo;
+
+        public RepositorioFornecedorLista(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
+        {
+            _armazenamento = armazenamento;
+            _caminhoArquivo = caminhoArquivo;
+            fornecedores = _armazenamento.Carregar(_caminhoArquivo);
+        }
 
         public void Adicionar(Fornecedor fornecedor)
         {
@@ -14,6 +23,7 @@ namespace Repositorios
                 novos[i] = fornecedores[i];
             novos[novos.Length - 1] = fornecedor;
             fornecedores = novos;
+            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
         }
 
         public void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado)
@@ -23,6 +33,7 @@ namespace Repositorios
                 if (fornecedores[i].Codigo == fornecedorAlterado.Codigo)
                 {
                     fornecedores[i] = fornecedorAlterado;
+                    _armazenamento.Salvar(fornecedores[i], _caminhoArquivo);
                     break;
                 }
             }
@@ -41,6 +52,7 @@ namespace Repositorios
                         novos[j++] = fornecedores[i];
                 }
                 fornecedores = novos;
+                _armazenamento.Salvar(fornecedores, _caminhoArquivo);
             }
         }
 
