@@ -15,7 +15,14 @@ namespace Telas
             _servicoFornecedor = servicoFornecedor;
         }
 
-        public void Menu()
+        public void Menu(Usuario usuario)
+        {
+            if (usuario.Perfil == "admin")
+                MenuAdmin();
+            else
+                MenuCliente();
+        }
+        private void MenuAdmin()
         {
             while (true)
             {
@@ -49,6 +56,40 @@ namespace Telas
                         BuscarPorCodigo();
                         break;
                     case "6":
+                        BuscarPorNome();
+                        break;
+                    case "0":
+                        return;
+                    default:
+                        Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
+                        continue;
+                }
+            }
+        }
+
+        private void MenuCliente()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("=== PRODUTOS ===");
+                Console.WriteLine("1 - Listar todos");
+                Console.WriteLine("2 - Buscar por código");
+                Console.WriteLine("3 - Buscar por nome");
+                Console.WriteLine("0 - Voltar");
+                Console.Write("\nEscolha uma opção: ");
+                string opcao = Console.ReadLine() ?? "";
+
+                switch (opcao)
+                {
+                    case "1":
+                        Listar();
+                        break;
+                    case "2":
+                        BuscarPorCodigo();
+                        break;
+                    case "3":
                         BuscarPorNome();
                         break;
                     case "0":

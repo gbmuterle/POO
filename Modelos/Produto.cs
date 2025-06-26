@@ -21,7 +21,7 @@ namespace Modelos
 
         public override string ToString()
         {
-            return $"Código: {Codigo}, Nome: {Nome}, Valor: {Valor:C}, Quantidade: {Quantidade}, Fornecedor: {Fornecedor.Codigo} - {Fornecedor.Nome.ToUpper()}";
+            return $"Código: {Codigo}, Nome: {Nome}, Valor: {Valor:C}, Estoque: {Quantidade}, Fornecedor: {Fornecedor.Codigo} - {Fornecedor.Nome.ToUpper()}";
         }
     }
 }

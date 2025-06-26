@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="Autenticacao/Autenticacao.csproj" />
   <Project Path="Modelos/Modelos.csproj" />
   <Project Path="Repositorios/Repositorios.csproj" />
   <Project Path="Servicos/Servicos.csproj" />

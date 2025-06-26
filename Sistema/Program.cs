@@ -23,8 +23,10 @@ namespace Sistema
             var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
             var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
 
+            Usuario usuarioLogado = telaLogin.Executar();
+
             var repositorioProduto = new RepositorioProdutoLista();
-            var repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores,ConfiguracaoArquivos.ArquivoFornecedores);
+            var repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores, ConfiguracaoArquivos.ArquivoFornecedores);
             var repositorioTransportadora = new RepositorioTransportadoraLista();
             var repositorioPedido = new RepositorioPedidoLista();
 
@@ -33,28 +35,18 @@ namespace Sistema
             var servicoTransportadora = new ServicoTransportadora(repositorioTransportadora);
             var servicoUsuario = new ServicoUsuario(repositorioUsuario);
             var servicoPedido = new ServicoPedido(repositorioPedido);
-
             var servicoEndereco = new ServicoEndereco();
-            var telaEndereco = new TelaEndereco(servicoEndereco);
 
+            var telaEndereco = new TelaEndereco(servicoEndereco);
             var telaProduto = new TelaProduto(servicoProduto, servicoFornecedor);
             var telaFornecedor = new TelaFornecedor(servicoFornecedor, telaEndereco);
             var telaTransportadora = new TelaTransportadora(servicoTransportadora);
-            var telaUsuario = new TelaUsuario(servicoUsuario);
+            var telaUsuario = new TelaUsuario(servicoUsuario, telaEndereco);
             var telaPedido = new TelaPedido(servicoPedido);
-            
-            Usuario usuarioLogado = telaLogin.Executar();
+            var telaCarrinho = new TelaCarrinho(); // estou fazendo
 
-            if (usuarioLogado.Perfil == "admin")
-            {
-                var telaMenuAdmin = new TelaMenuAdmin(telaProduto, telaFornecedor, telaTransportadora, telaUsuario);
-                telaMenuAdmin.Menu();
-            }
-            else
-            {
-                var telaMenuCliente = new TelaMenuCliente(telaProduto, telaPedido);
-                telaMenuCliente.Menu();
-            }
+            var telaMenu = new TelaMenu(telaProduto, telaFornecedor, telaTransportadora, telaUsuario, telaPedido, telaCarrinho, usuarioLogado);
+            telaMenu.Menu();
         }
     }
 }

@@ -14,7 +14,58 @@ namespace Telas
             _servicoPedido = servicoPedido;
         }
 
-        public void Menu()
+        public void Menu(Usuario usuario)
+        {
+            if (usuario.Perfil == "admin")
+                MenuAdmin();
+            else
+                MenuCliente();
+        }
+
+        private void MenuAdmin()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("=== PEDIDOS ===");
+                Console.WriteLine("1 - Listar todos");
+                Console.WriteLine("2 - Alterar");
+                Console.WriteLine("3 - Remover");
+                Console.WriteLine("4 - Buscar por n° do pedido");
+                Console.WriteLine("5 - Buscar por data");
+                Console.WriteLine("0 - Voltar");
+                Console.Write("Escolha uma opção: ");
+
+                string opcao = Console.ReadLine() ?? "";
+
+                switch (opcao)
+                {
+                    case "1":
+                        Listar();
+                        break;
+                    case "2":
+                        Alterar();
+                        break;
+                    case "3":
+                        Remover();
+                        break;
+                    case "4":
+                        //BuscarPorNumero();
+                        break;
+                    case "5":
+                        //BuscarPorData();
+                        break;
+                    case "0":
+                        return;
+                    default:
+                        Console.WriteLine("Opção inválida!");
+                        PressioneParaContinuar();
+                        break;
+                }
+            }
+        }
+
+        private void MenuCliente()
         {
             while (true)
             {
@@ -22,9 +73,8 @@ namespace Telas
                 Console.WriteLine("=== PEDIDOS ===");
                 Console.WriteLine("1 - Cadastrar");
                 Console.WriteLine("2 - Listar todos");
-                Console.WriteLine("3 - Alterar");
-                Console.WriteLine("4 - Remover");
-                Console.WriteLine("5 - Buscar por código");
+                Console.WriteLine("5 - Buscar por n° do pedido");
+                Console.WriteLine("6 - Buscar por data");
                 Console.WriteLine("0 - Voltar");
                 Console.Write("Escolha uma opção: ");
 

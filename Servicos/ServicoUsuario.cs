@@ -53,7 +53,7 @@ namespace Servicos
             if (string.IsNullOrWhiteSpace(usuario.Senha))
                 throw new InvalidOperationException("Senha inválida.");
 
-            if (usuario.Perfil != "admin" && usuario.Perfil != "usuario")
+            if (usuario.Perfil != "admin" && usuario.Perfil != "cliente")
                 throw new InvalidOperationException("Perfil inválido.");
 
             if (novo)

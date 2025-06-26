@@ -7,10 +7,12 @@ namespace Telas
     public class TelaUsuario
     {
         private readonly ServicoUsuario _servicoUsuario;
+        private readonly TelaEndereco _telaEndereco;
 
-        public TelaUsuario(ServicoUsuario servicoUsuario)
+        public TelaUsuario(ServicoUsuario servicoUsuario, TelaEndereco telaEndereco)
         {
             _servicoUsuario = servicoUsuario;
+            _telaEndereco = telaEndereco;
         }
 
         public void Menu()
@@ -56,12 +58,20 @@ namespace Telas
             Console.Write("Nome: ");
             string nome = (Console.ReadLine() ?? "").ToLower();
 
+            Console.Write("Perfil (admin/usuario): ");
+            string perfil = (Console.ReadLine() ?? "").ToLower();
+
             Console.Write("Senha: ");
             string senha = Console.ReadLine() ?? "";
 
-            Console.Write("Perfil (admin/usuario): ");
-            string perfil = (Console.ReadLine() ?? "").ToLower();
-            var usuario = new Usuario(nome, senha, perfil);
+            Console.Write("E-mail: ");
+            string telefone = Console.ReadLine() ?? "";
+
+            Console.Write("Telefone: ");
+            string email = Console.ReadLine() ?? "";
+
+            Endereco endereco = _telaEndereco.Cadastrar();
+            var usuario = new Usuario(nome, senha, perfil, telefone, email, endereco);
 
             try
             {
@@ -121,11 +131,17 @@ namespace Telas
                 Console.WriteLine("\nQual campo deseja alterar?");
                 Console.WriteLine("1 - Senha");
                 Console.WriteLine("2 - Perfil");
+                Console.WriteLine("3 - Telefone");
+                Console.WriteLine("4 - Email");
+                Console.WriteLine("5 - Endereço");
                 Console.Write("\nEscolha uma opção: ");
                 string opcao = Console.ReadLine() ?? "";
 
                 string novaSenha = usuarioAtual.Senha;
                 string novoPerfil = usuarioAtual.Perfil;
+                string novoTelefone = usuarioAtual.Telefone;
+                string novoEmail = usuarioAtual.Email;
+                Endereco novoEndereco = usuarioAtual.Endereco;
 
                 switch (opcao)
                 {
@@ -137,6 +153,18 @@ namespace Telas
                         Console.Write("Novo perfil (admin/usuario): ");
                         novoPerfil = (Console.ReadLine() ?? "").ToLower();
                         break;
+                    case "3":
+                        Console.Write("Novo telefone: ");
+                        novoTelefone = (Console.ReadLine() ?? "").ToLower();
+                        break;
+                    case "4":
+                        Console.Write("Novo e-mail: ");
+                        novoEmail = (Console.ReadLine() ?? "").ToLower();
+                        break;
+                    case "5":
+                        Console.Write("Novo perfil (admin/usuario): ");
+                        novoEndereco = _telaEndereco.Cadastrar();
+                        break;
                     default:
                         Console.WriteLine("Opção inválida.");
                         PressioneParaContinuar();
@@ -146,7 +174,10 @@ namespace Telas
                 var usuarioAlterado = new Usuario(
                     usuarioAtual.Nome,
                     novaSenha,
-                    novoPerfil
+                    novoPerfil,
+                    novoTelefone,
+                    novoEmail,
+                    novoEndereco
                 );
 
                 try
