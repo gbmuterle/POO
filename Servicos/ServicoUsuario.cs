@@ -52,6 +52,12 @@ namespace Servicos
 
             if (string.IsNullOrWhiteSpace(usuario.Senha))
                 throw new InvalidOperationException("Senha inválida.");
+            
+            if (string.IsNullOrWhiteSpace(usuario.Telefone))
+                throw new InvalidOperationException("Telefone inválido.");
+
+            if (string.IsNullOrWhiteSpace(usuario.Email))
+                throw new InvalidOperationException("E-mail inválido.");
 
             if (usuario.Perfil != "admin" && usuario.Perfil != "cliente")
                 throw new InvalidOperationException("Perfil inválido.");

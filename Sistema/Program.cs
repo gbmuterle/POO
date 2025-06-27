@@ -12,23 +12,66 @@ namespace Sistema
     {
         static void Main(string[] args)
         {
-            var repositorioUsuario = new RepositorioUsuario();
+            Console.WriteLine("Escolha o tipo de repositório:");
+            Console.WriteLine("1 - Vetor");
+            Console.WriteLine("2 - Lista");
+            string tipoRepositorio = "";
+            while (true)
+            {
+                Console.Write("Opção: ");
+                tipoRepositorio = Console.ReadLine() ?? "";
+                if (tipoRepositorio == "1" || tipoRepositorio == "2")
+                    break;
+                else
+                {
+                    Console.WriteLine("Opção inválida. Encerrando o programa.");
+                    return;
+                }
+            }
+
+            var configuracaoArquivos = new ConfiguracaoArquivos(tipoRepositorio);
+            configuracaoArquivos.InicializarDiretorios();
+
+
+
+            IRepositorioProduto repositorioProduto;
+            IRepositorioFornecedor repositorioFornecedor;
+            IRepositorioTransportadora repositorioTransportadora;
+            IRepositorioPedido repositorioPedido;
+
+            if (tipoRepositorio == "1")
+            {
+                var armazenamentoFornecedores = new ArmazenamentoJson<Fornecedor>();
+                var armazenamentoTransportadoras = new ArmazenamentoJson<Transportadora>();
+                var armazenamentoProdutos = new ArmazenamentoJson<Produto>();
+                var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
+                var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
+
+                repositorioProduto = new RepositorioProdutoVetor();
+                repositorioFornecedor = new RepositorioFornecedorVetor();
+                repositorioTransportadora = new RepositorioTransportadoraVetor();
+                repositorioPedido = new RepositorioPedidoVetor
+                var repositorioUsuario = new RepositorioUsuario();
+            }
+            else
+            {
+                var armazenamentoFornecedores = new ArmazenamentoJson<Fornecedor>();
+                var armazenamentoTransportadoras = new ArmazenamentoJson<Transportadora>();
+                var armazenamentoProdutos = new ArmazenamentoJson<Produto>();
+                var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
+                var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
+
+                repositorioProduto = new RepositorioProdutoLista(armazenamentoProdutos, ConfiguracaoArquivos.ArquivoProdutos);
+                repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores, ConfiguracaoArquivos.ArquivoFornecedores);
+                repositorioTransportadora = new RepositorioTransportadoraLista(armazenamentoTransportadoras, ConfiguracaoArquivos.ArquivoTransportadoras);
+                repositorioPedido = new RepositorioPedidoLista(armazenamentoPedidos, ConfiguracaoArquivos.ArquivoPedidos);
+                var repositorioUsuario = new RepositorioUsuario();
+            }
+
             var autenticador = new Autenticador(repositorioUsuario.BuscarTodos());
             var telaLogin = new TelaLogin(autenticador);
 
-            ConfiguracaoArquivos.InicializarDiretorios();
-            var armazenamentoFornecedores = new ArmazenamentoJson<Fornecedor>();
-            var armazenamentoTransportadoras = new ArmazenamentoJson<Transportadora>();
-            var armazenamentoProdutos = new ArmazenamentoJson<Produto>();
-            var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
-            var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
-
             Usuario usuarioLogado = telaLogin.Executar();
-
-            var repositorioProduto = new RepositorioProdutoLista();
-            var repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores, ConfiguracaoArquivos.ArquivoFornecedores);
-            var repositorioTransportadora = new RepositorioTransportadoraLista();
-            var repositorioPedido = new RepositorioPedidoLista();
 
             var servicoProduto = new ServicoProduto(repositorioProduto);
             var servicoFornecedor = new ServicoFornecedor(repositorioFornecedor);

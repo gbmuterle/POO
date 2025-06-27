@@ -13,9 +13,6 @@ namespace Servicos
             if (string.IsNullOrWhiteSpace(endereco.Rua))
                 throw new InvalidOperationException("Rua inválida.");
 
-            if (string.IsNullOrWhiteSpace(endereco.Numero))
-                throw new InvalidOperationException("Número inválido.");
-
             if (string.IsNullOrWhiteSpace(endereco.Bairro))
                 throw new InvalidOperationException("Bairro inválido.");
 

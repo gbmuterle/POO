@@ -1,27 +1,29 @@
-
 using System;
 using System.IO;
 
 namespace Sistema.Configuracoes
 {
-    public static class ConfiguracaoArquivos
+    public class ConfiguracaoArquivos
     {
-        public static string DiretorioBase => @"C:\temp\Dados";
-        public static string ArquivoFornecedores => Path.Combine(DiretorioBase, "fornecedores.json");
+        public string TipoRepositorio { get; }
+        public string DiretorioBase => @"C:\temp\Dados";
+        public string DiretorioTipo => Path.Combine(DiretorioBase, TipoRepositorio);
 
-        public static string ArquivoTransportadoras => Path.Combine(DiretorioBase, "transportadoras.json");
+        public string ListaFornecedores => Path.Combine(DiretorioTipo, "fornecedores.json");
+        public string ArquivoTransportadoras => Path.Combine(DiretorioTipo, "transportadoras.json");
+        public string ArquivoProdutos => Path.Combine(DiretorioTipo, "produtos.json");
+        public string ArquivoPedidos => Path.Combine(DiretorioTipo, "pedidos.json");
+        public string ArquivoUsuarios => Path.Combine(DiretorioTipo, "usuarios.json");
 
-        public static string ArquivoProdutos => Path.Combine(DiretorioBase, "produtos.json");
-
-        public static string ArquivoPedidos => Path.Combine(DiretorioBase, "pedidos.json");
-
-        public static string ArquivoUsuarios => Path.Combine(DiretorioBase, "usuarios.json");
-
-        public static void InicializarDiretorios()
+        public ConfiguracaoArquivos(string tipoRepositorio)
         {
+            TipoRepositorio = tipoRepositorio == "1" ? "Vetor" : "Lista";
+        }
 
-            if (!Directory.Exists(DiretorioBase))
-                Directory.CreateDirectory(DiretorioBase);
+        public void InicializarDiretorios()
+        {
+            if (!Directory.Exists(DiretorioTipo))
+                Directory.CreateDirectory(DiretorioTipo);
         }
     }
 }

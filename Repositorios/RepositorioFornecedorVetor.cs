@@ -9,7 +9,7 @@ namespace Repositorios
         private readonly IArmazenamento<Fornecedor> _armazenamento;
         private readonly string _caminhoArquivo;
 
-        public RepositorioFornecedorLista(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
+        public RepositorioFornecedorVetor(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
         {
             _armazenamento = armazenamento;
             _caminhoArquivo = caminhoArquivo;

@@ -10,10 +10,14 @@ namespace Repositorios
 
         public RepositorioUsuario()
         {
+            var enderecoPadrao = new Endereco(
+                "Rua", "1234", "Sede ERP", "Centro", "Flores da Cunha", "RS", "95270000"
+            );
+
             _usuarios = new List<Usuario>
             {
-                new Usuario("admin", "admin", "admin", "", ""),
-                new Usuario("user", "user", "usuario", "", "")
+                new Usuario("admin", "admin", "admin", "11999999999", "admin@email.com", enderecoPadrao),
+                new Usuario("user", "user", "usuario", "11999999999", "cliente@email.com", enderecoPadrao)
             };
         }
 
