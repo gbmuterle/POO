@@ -4,19 +4,18 @@ namespace Modelos
 {
     public class Pedido
     {
-        public int Codigo { get; set; }
-        public string Descricao { get; set; }
+        public int Numero { get; set; }
+        public Usuario Cliente { get; set; }
         public DateTime DataCriacao { get; set; }
+        public DateTime DataEntrega { get; set; }
         public double ValorTotal { get; set; }
-        public string Cliente { get; set; }
 
-        public Pedido(int codigo, string descricao, DateTime dataCriacao, double valorTotal, string cliente)
+        public Pedido(int numero, Usuario cliente, DateTime dataCriacao, DateTime dataEntrega, double valorTotal)
         {
-            Codigo = codigo;
-            Descricao = descricao;
+            Numero =  numero;
+            Cliente = cliente;
             DataCriacao = dataCriacao;
             ValorTotal = valorTotal;
-            Cliente = cliente;
         }
 
         public override string ToString()
