@@ -81,7 +81,7 @@ namespace Sistema
             var servicoUsuario = new ServicoUsuario(repositorioUsuario);
             var servicoPedido = new ServicoPedido(repositorioPedido);
             var servicoEndereco = new ServicoEndereco();
-            var servicoCarrinho = new ServicoCarrinho(repositorioCarrinho);
+            var servicoCarrinho = new ServicoCarrinho(repositorioCarrinho, servicoPedido);
 
             var telaEndereco = new TelaEndereco(servicoEndereco);
             var telaProduto = new TelaProduto(servicoProduto, servicoFornecedor);

@@ -14,10 +14,10 @@ namespace Servicos
             _repositorio = repositorio;
         }
 
-        public void Cadastrar(Pedido pedido)
+        public void Criar(Pedido pedido)
         {
             Validar(pedido, true);
-            _repositorio.Adicionar(pedido);
+            _repositorio.Criar(pedido);
         }
 
         public void Alterar(Pedido pedidoAtual, Pedido pedidoAlterado)
@@ -34,14 +34,30 @@ namespace Servicos
             _repositorio.Remover(pedido);
         }
 
+        public int GerarNumero()
+        {
+            var pedidos = _repositorio.BuscarTodos();
+            if (pedidos == null || pedidos.Count == 0)
+                return 1;
+            return pedidos.Max(p => p.Numero) + 1;
+        }
+
         public Pedido? BuscarPorNumero(int numero)
         {
             return _repositorio.BuscarPorNumero(numero);
         }
 
-        public List<Pedido> ListarTodos()
+        public List<Pedido> BuscarTodos()
         {
             return _repositorio.BuscarTodos();
+        }
+
+        public List<Pedido> BuscarPorCliente(Usuario cliente)
+        {
+            if (cliente == null)
+                throw new InvalidOperationException("Cliente não pode ser nulo.");
+
+            return _repositorio.BuscarPorCliente(cliente);
         }
 
         private void Validar(Pedido pedido, bool novo)
@@ -61,7 +77,7 @@ namespace Servicos
             if (novo)
             {
                 if (pedido.Situacao != null && pedido.Situacao != "novo")
-                    throw new InvalidOperationException("Situação do novo pedido deve ser 'novo'.");
+                    throw new InvalidOperationException("Situação do pedido deve ser 'novo'.");
 
                 if (BuscarPorNumero(pedido.Numero) != null)
                     throw new InvalidOperationException("Já existe um pedido com esse número.");

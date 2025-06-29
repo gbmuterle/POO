@@ -17,7 +17,7 @@ namespace Repositorios
             pedidos = _armazenamento.Carregar(_caminhoArquivo).ToArray();
         }
 
-        public void Adicionar(Pedido pedido)
+        public void Criar(Pedido pedido)
         {
             var novos = new Pedido[pedidos.Length + 1];
             for (int i = 0; i < pedidos.Length; i++)

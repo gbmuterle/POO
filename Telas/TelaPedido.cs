@@ -29,12 +29,11 @@ namespace Telas
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("=== PEDIDOS (ADMIN) ===");
+                Console.WriteLine("=== PEDIDOS ===");
                 Console.WriteLine("1 - Listar todos");
                 Console.WriteLine("2 - Alterar pedido");
-                Console.WriteLine("3 - Buscar por cliente");
-                Console.WriteLine("4 - Buscar por n° do pedido");
-                Console.WriteLine("5 - Buscar por data");
+                Console.WriteLine("3 - Buscar por n° do pedido");
+                Console.WriteLine("4 - Buscar por data");
                 Console.WriteLine("0 - Voltar");
                 Console.Write("Escolha uma opção: ");
 
@@ -43,18 +42,15 @@ namespace Telas
                 switch (opcao)
                 {
                     case "1":
-                        ListarTodos();
+                        BuscarTodos();
                         break;
                     case "2":
                         Alterar();
                         break;
                     case "3":
-                        BuscarPorCliente();
-                        break;
-                    case "4":
                         BuscarPorNumero();
                         break;
-                    case "5":
+                    case "4":
                         BuscarPorData();
                         break;
                     case "0":
@@ -102,10 +98,10 @@ namespace Telas
             }
         }
 
-        private void ListarTodos()
+        private void BuscarTodos()
         {
             Console.Clear();
-            var pedidos = _servicoPedido.ListarTodos();
+            var pedidos = _servicoPedido.BuscarTodos();
 
             if (!pedidos.Any())
                 Console.WriteLine("Nenhum pedido cadastrado.");
@@ -137,8 +133,8 @@ namespace Telas
             }
 
             string novaSituacao = pedidoAtual.Situacao;
-            DateTime novaDataEntrega = pedidoAtual.DataEntrega;
-            Transportadora novaTransportadora = pedidoAtual.Transportadora;
+            DateTime? novaDataEntrega = pedidoAtual.DataEntrega;
+            Transportadora? novaTransportadora = pedidoAtual.Transportadora;
 
             while (true)
             {
@@ -217,32 +213,10 @@ namespace Telas
             }
         }
 
-        private void BuscarPorCliente()
-        {
-            Console.Clear();
-            Console.Write("Nome do cliente: ");
-            string nome = Console.ReadLine() ?? "";
-
-            var pedidos = _servicoPedido.ListarTodos()
-                .Where(p => p.Cliente != null && p.Cliente.Nome == nome)
-                .ToList();
-
-            if (!pedidos.Any())
-                Console.WriteLine("Nenhum pedido encontrado para este cliente.");
-            else
-                foreach (var p in pedidos)
-                    Console.WriteLine(p);
-
-            PressioneParaContinuar();
-        }
-
         private void BuscarPorCliente(Usuario usuario)
         {
             Console.Clear();
-            var pedidos = _servicoPedido.ListarTodos()
-                .Where(p => p.Cliente != null && p.Cliente.Nome == usuario.Nome)
-                .ToList();
-
+            var pedidos = _servicoPedido.BuscarPorCliente(usuario);
             if (!pedidos.Any())
                 Console.WriteLine("Você não possui pedidos.");
             else
@@ -255,12 +229,13 @@ namespace Telas
         private void BuscarPorNumero()
         {
             Console.Clear();
-            Console.Write("Número do pedido: ");
-            if (!int.TryParse(Console.ReadLine(), out int numero))
+            int numero;
+            while (true)
             {
-                Console.WriteLine("Número inválido!");
-                PressioneParaContinuar();
-                return;
+                Console.Write("Nùmero do pedido: ");
+                if (int.TryParse(Console.ReadLine(), out numero))
+                    break;
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
             }
 
             var pedido = _servicoPedido.BuscarPorNumero(numero);
@@ -269,24 +244,24 @@ namespace Telas
                 Console.WriteLine(pedido);
             else
                 Console.WriteLine("Pedido não encontrado!");
-
             PressioneParaContinuar();
         }
 
         private void BuscarPorNumero(Usuario usuario)
         {
             Console.Clear();
-            Console.Write("Número do pedido: ");
-            if (!int.TryParse(Console.ReadLine(), out int numero))
+            int numero;
+            while (true)
             {
-                Console.WriteLine("Número inválido!");
-                PressioneParaContinuar();
-                return;
+                Console.Write("Nùmero do pedido: ");
+                if (int.TryParse(Console.ReadLine(), out numero))
+                    break;
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
             }
 
             var pedido = _servicoPedido.BuscarPorNumero(numero);
 
-            if (pedido != null && pedido.Cliente != null && pedido.Cliente.Nome == usuario.Nome)
+            if (pedido != null && pedido.Cliente.Nome == usuario.Nome)
                 Console.WriteLine(pedido);
             else
                 Console.WriteLine("Pedido não encontrado!");
@@ -305,7 +280,7 @@ namespace Telas
                 return;
             }
 
-            var pedidos = _servicoPedido.ListarTodos()
+            var pedidos = _servicoPedido.BuscarTodos()
                 .Where(p => p.DataCriacao.Date == data.Date)
                 .ToList();
 
@@ -329,7 +304,7 @@ namespace Telas
                 return;
             }
 
-            var pedidos = _servicoPedido.ListarTodos()
+            var pedidos = _servicoPedido.BuscarTodos()
                 .Where(p => p.Cliente != null && p.Cliente.Nome == usuario.Nome && p.DataCriacao.Date == data.Date)
                 .ToList();
 

@@ -17,7 +17,7 @@ namespace Repositorios
             pedidos = _armazenamento.Carregar(_caminhoArquivo);
         }
 
-        public void Adicionar(Pedido pedido)
+        public void Criar(Pedido pedido)
         {
             pedidos.Add(pedido);
             _armazenamento.Salvar(pedidos, _caminhoArquivo);

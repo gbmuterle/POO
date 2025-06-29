@@ -7,10 +7,12 @@ namespace Servicos
     public class ServicoCarrinho
     {
         private readonly IRepositorioCarrinho _repositorio;
+        private readonly ServicoPedido _servicoPedido;
 
-        public ServicoCarrinho(IRepositorioCarrinho repositorio)
+        public ServicoCarrinho(IRepositorioCarrinho repositorio, ServicoPedido servicoPedido)
         {
             _repositorio = repositorio;
+            _servicoPedido = servicoPedido;
         }
 
         public void AdicionarItem(Carrinho carrinho, ItemPedido item)
@@ -32,16 +34,26 @@ namespace Servicos
 
             _repositorio.Remover(carrinho, item);
         }
-
+        
         public void Finalizar(Carrinho carrinho)
         {
             if (carrinho == null)
                 throw new InvalidOperationException("Carrinho inválido.");
+            if (!carrinho.ItensInternos.Any())
+                throw new InvalidOperationException("Carrinho vazio. Não é possível finalizar a compra.");
 
-            if (carrinho.Itens.Count == 0)
-                throw new InvalidOperationException("Carrinho vazio. Adicione itens antes de finalizar.");
-
-            Console.WriteLine("Carrinho finalizado com sucesso!");
+            int numero = _servicoPedido.GerarNumero();
+            var pedido = new Pedido(
+                numero,
+                carrinho.Cliente,
+                DateTime.Now,
+                null,
+                "novo",
+                carrinho.ItensInternos,
+                null
+            );
+            _servicoPedido.Criar(pedido);
+            Limpar(carrinho);
         }
 
         public void Limpar(Carrinho carrinho)

@@ -190,9 +190,7 @@ public class TelaCarrinho
         try
         {
             _servicoCarrinho.Finalizar(carrinho);
-            //_servicoPedido.CriarPedido(carrinho);
             Console.WriteLine("Compra finalizada com sucesso!");
-            _servicoCarrinho.Limpar(carrinho);
         }
         catch (Exception ex)
         {
