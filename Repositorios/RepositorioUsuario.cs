@@ -42,7 +42,7 @@ namespace Repositorios
             return _usuarios.FirstOrDefault(u => u.Nome == nome);
         }
 
-        public List<Usuario> BuscarTodos()
+        public List<Usuario> ListarTodos()
         {
             return _usuarios;
         }

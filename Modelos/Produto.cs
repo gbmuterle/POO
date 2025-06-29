@@ -23,5 +23,10 @@ namespace Modelos
         {
             return $"Código: {Codigo}, Nome: {Nome}, Valor: {Valor:C}, Estoque: {Quantidade}, Fornecedor: {Fornecedor.Codigo} - {Fornecedor.Nome.ToUpper()}";
         }
+
+        public string InfoProduto()
+        {
+            return $"{Codigo} - {Nome} - Valor: {Valor:C} - Estoque: {Quantidade}";
+        }
     }
 }

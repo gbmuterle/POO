@@ -29,13 +29,12 @@ namespace Servicos
         {
             if (usuario == null)
                 throw new InvalidOperationException("Usuário inválido.");
-
             _repositorioUsuario.Remover(usuario);
         }
 
-        public List<Usuario> BuscarTodos()
+        public List<Usuario> ListarTodos()
         {
-            return _repositorioUsuario.BuscarTodos();
+            return _repositorioUsuario.ListarTodos();
         }
 
         public Usuario? BuscarPorNome(string nome)

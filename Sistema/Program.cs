@@ -32,12 +32,12 @@ namespace Sistema
             var configuracaoArquivos = new ConfiguracaoArquivos(tipoRepositorio);
             configuracaoArquivos.InicializarDiretorios();
 
-
-
             IRepositorioProduto repositorioProduto;
             IRepositorioFornecedor repositorioFornecedor;
             IRepositorioTransportadora repositorioTransportadora;
             IRepositorioPedido repositorioPedido;
+            IRepositorioUsuario repositorioUsuario;
+            IRepositorioCarrinho repositorioCarrinho;
 
             if (tipoRepositorio == "1")
             {
@@ -47,11 +47,12 @@ namespace Sistema
                 var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
                 var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
 
-                repositorioProduto = new RepositorioProdutoVetor();
-                repositorioFornecedor = new RepositorioFornecedorVetor();
-                repositorioTransportadora = new RepositorioTransportadoraVetor();
-                repositorioPedido = new RepositorioPedidoVetor
-                var repositorioUsuario = new RepositorioUsuario();
+                repositorioProduto = new RepositorioProdutoVetor(armazenamentoProdutos, configuracaoArquivos.ArquivoProdutos);
+                repositorioFornecedor = new RepositorioFornecedorVetor(armazenamentoFornecedores, configuracaoArquivos.ArquivoFornecedores);
+                repositorioTransportadora = new RepositorioTransportadoraVetor(armazenamentoTransportadoras, configuracaoArquivos.ArquivoTransportadoras);
+                repositorioPedido = new RepositorioPedidoVetor(armazenamentoPedidos, configuracaoArquivos.ArquivoPedidos);
+                repositorioUsuario = new RepositorioUsuario();
+                repositorioCarrinho = new RepositorioCarrinho();
             }
             else
             {
@@ -61,14 +62,15 @@ namespace Sistema
                 var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
                 var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
 
-                repositorioProduto = new RepositorioProdutoLista(armazenamentoProdutos, ConfiguracaoArquivos.ArquivoProdutos);
-                repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores, ConfiguracaoArquivos.ArquivoFornecedores);
-                repositorioTransportadora = new RepositorioTransportadoraLista(armazenamentoTransportadoras, ConfiguracaoArquivos.ArquivoTransportadoras);
-                repositorioPedido = new RepositorioPedidoLista(armazenamentoPedidos, ConfiguracaoArquivos.ArquivoPedidos);
-                var repositorioUsuario = new RepositorioUsuario();
+                repositorioProduto = new RepositorioProdutoLista(armazenamentoProdutos, configuracaoArquivos.ArquivoProdutos);
+                repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores, configuracaoArquivos.ArquivoFornecedores);
+                repositorioTransportadora = new RepositorioTransportadoraLista(armazenamentoTransportadoras, configuracaoArquivos.ArquivoTransportadoras);
+                repositorioPedido = new RepositorioPedidoLista(armazenamentoPedidos, configuracaoArquivos.ArquivoPedidos);
+                repositorioUsuario = new RepositorioUsuario();
+                repositorioCarrinho = new RepositorioCarrinho();
             }
 
-            var autenticador = new Autenticador(repositorioUsuario.BuscarTodos());
+            var autenticador = new Autenticador(repositorioUsuario.ListarTodos());
             var telaLogin = new TelaLogin(autenticador);
 
             Usuario usuarioLogado = telaLogin.Executar();
@@ -79,14 +81,15 @@ namespace Sistema
             var servicoUsuario = new ServicoUsuario(repositorioUsuario);
             var servicoPedido = new ServicoPedido(repositorioPedido);
             var servicoEndereco = new ServicoEndereco();
+            var servicoCarrinho = new ServicoCarrinho(repositorioCarrinho);
 
             var telaEndereco = new TelaEndereco(servicoEndereco);
             var telaProduto = new TelaProduto(servicoProduto, servicoFornecedor);
             var telaFornecedor = new TelaFornecedor(servicoFornecedor, telaEndereco);
             var telaTransportadora = new TelaTransportadora(servicoTransportadora);
             var telaUsuario = new TelaUsuario(servicoUsuario, telaEndereco);
-            var telaPedido = new TelaPedido(servicoPedido);
-            var telaCarrinho = new TelaCarrinho(); // estou fazendo
+            var telaPedido = new TelaPedido(servicoPedido, servicoTransportadora);
+            var telaCarrinho = new TelaCarrinho(servicoProduto, servicoCarrinho);
 
             var telaMenu = new TelaMenu(telaProduto, telaFornecedor, telaTransportadora, telaUsuario, telaPedido, telaCarrinho, usuarioLogado);
             telaMenu.Menu();

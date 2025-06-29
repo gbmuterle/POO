@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento", "Gerenciamento\Gerenciamento.csproj", "{AA62B27F-8F86-EAFE-60A1-1DD6A228BB62}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelos", "Modelos\Modelos.csproj", "{24742B48-7844-2A66-2697-4D31BBC53020}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorios", "Repositorios\Repositorios.csproj", "{A70C28D2-0914-B15D-5618-EABE74401973}"
@@ -20,10 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AA62B27F-8F86-EAFE-60A1-1DD6A228BB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA62B27F-8F86-EAFE-60A1-1DD6A228BB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA62B27F-8F86-EAFE-60A1-1DD6A228BB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA62B27F-8F86-EAFE-60A1-1DD6A228BB62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24742B48-7844-2A66-2697-4D31BBC53020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24742B48-7844-2A66-2697-4D31BBC53020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24742B48-7844-2A66-2697-4D31BBC53020}.Release|Any CPU.ActiveCfg = Release|Any CPU

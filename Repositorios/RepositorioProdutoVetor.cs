@@ -6,14 +6,14 @@ namespace Repositorios
     public class RepositorioProdutoVetor : IRepositorioProduto
     {
         private Produto[] produtos = new Produto[0];
-        private readonly IArmazenamento<Fornecedor> _armazenamento;
+        private readonly IArmazenamento<Produto> _armazenamento;
         private readonly string _caminhoArquivo;
 
-        public RepositorioFornecedorLista(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
+        public RepositorioProdutoVetor(IArmazenamento<Produto> armazenamento, string caminhoArquivo)
         {
             _armazenamento = armazenamento;
             _caminhoArquivo = caminhoArquivo;
-            produtos = _armazenamento.Carregar(_caminhoArquivo);
+            produtos = _armazenamento.Carregar(_caminhoArquivo).ToArray();
         }
 
 
@@ -34,7 +34,7 @@ namespace Repositorios
                 if (produtos[i].Codigo == produtoAlterado.Codigo)
                 {
                     produtos[i] = produtoAlterado;
-                    _armazenamento.Salvar(produtos[i], _caminhoArquivo);
+                    _armazenamento.Salvar(produtos, _caminhoArquivo);
                     break;
                 }
             }
@@ -73,7 +73,6 @@ namespace Repositorios
                 if (produtos[i].Codigo == codigo)
                     return produtos[i];
             }
-            // Não encontrado
             return null;
         }
 

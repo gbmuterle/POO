@@ -7,23 +7,27 @@ using System.Linq;
 public class TelaCarrinho
 {
     private readonly ServicoProduto _servicoProduto;
-    private List<(Produto Produto, int Quantidade)> _itensCarrinho;
+    private readonly ServicoCarrinho _servicoCarrinho;
+    private readonly List<ItemPedido> _itensCarrinho = new();
 
-    public TelaCarrinho(ServicoProduto servicoProduto)
+    public TelaCarrinho(ServicoProduto servicoProduto, ServicoCarrinho servicoCarrinho)
     {
         _servicoProduto = servicoProduto;
-        _itensCarrinho = new List<(Produto, int)>();
+        _servicoCarrinho = servicoCarrinho;
     }
 
     public void Menu(Usuario usuario)
     {
+        var carrinho = _servicoCarrinho.ObterCarrinho(usuario);
+
         while (true)
         {
             Console.Clear();
             Console.WriteLine("=== CARRINHO DE COMPRAS ===");
-            Console.WriteLine("1 - Buscar produto por código");
-            Console.WriteLine("2 - Buscar produto por nome");
-            Console.WriteLine("3 - Visualizar carrinho");
+            Console.WriteLine("1 - Adicionar Produto");
+            Console.WriteLine("2 - Alterar Produto");
+            Console.WriteLine("3 - Remover Produto");
+            Console.WriteLine("4 - Finalizar compra");
             Console.WriteLine("0 - Voltar");
             Console.Write("\nEscolha uma opção: ");
 
@@ -32,13 +36,16 @@ public class TelaCarrinho
             switch (opcao)
             {
                 case "1":
-                    BuscarEAdicionarPorCodigo();
+                    Adicionar(carrinho);
                     break;
                 case "2":
-                    BuscarEAdicionarPorNome();
+                    Alterar(carrinho);
                     break;
                 case "3":
-                    VisualizarCarrinho();
+                    Remover(carrinho);
+                    break;
+                case "4":
+                    Finalizar(carrinho);
                     break;
                 case "0":
                     return;
@@ -50,104 +57,190 @@ public class TelaCarrinho
         }
     }
 
-    private void BuscarEAdicionarPorCodigo()
+    private void Adicionar(Carrinho carrinho)
     {
+        var produto = BuscarProduto();
         Console.Clear();
-        Console.Write("Digite o código do produto: ");
-        if (int.TryParse(Console.ReadLine(), out int codigo))
+        Console.WriteLine(produto.InfoProduto());
+
+        int quantidade;
+        while (true)
         {
-            var produto = _servicoProduto.BuscarPorCodigo(codigo);
-            if (produto != null)
+            Console.Write("Digite a quantidade: ");
+            if (int.TryParse(Console.ReadLine(), out quantidade) && quantidade > 0)
+                break;
+            Console.WriteLine("Quantidade inválida!");
+        }
+
+        var item = new ItemPedido(produto, quantidade);
+        try
+        {
+            _servicoCarrinho.AdicionarItem(carrinho, item);
+            Console.WriteLine("Produto adicionado ao carrinho!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+        PressioneParaContinuar();
+    }
+
+    private void Alterar(Carrinho carrinho)
+    {
+        var itens = _servicoCarrinho.ListarTodos(carrinho);
+        if (!itens.Any())
+        {
+            Console.WriteLine("Carrinho vazio!");
+            PressioneParaContinuar();
+            return;
+        }
+
+        Console.WriteLine("Produtos no carrinho:");
+        foreach (var i in itens)
+            Console.WriteLine(i);
+
+        int codigo;
+        while (true)
+        {
+            Console.Write("Digite o código do produto que deseja alterar: ");
+            if (int.TryParse(Console.ReadLine(), out codigo))
+                break;
+            Console.WriteLine("Código inválido. Digite um número inteiro.");
+        }
+
+        var itemAtual = itens.FirstOrDefault(i => i.Produto.Codigo == codigo);
+        if (itemAtual == null)
+        {
+            Console.WriteLine("Produto não encontrado no carrinho!");
+            PressioneParaContinuar();
+            return;
+        }
+
+        Console.Write("Nova quantidade: ");
+        int novaQuantidade;
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out novaQuantidade) && novaQuantidade > 0)
+                break;
+            Console.WriteLine("Quantidade inválida!");
+        }
+
+        var itemAlterado = new ItemPedido(
+            itemAtual.Produto,
+            novaQuantidade
+        );
+
+        try
+        {
+            _servicoCarrinho.AlterarItem(carrinho, itemAtual, itemAlterado);
+            Console.WriteLine("Quantidade alterada com sucesso!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+        PressioneParaContinuar();
+    }
+
+    private void Remover(Carrinho carrinho)
+    {
+        var itens = _servicoCarrinho.ListarTodos(carrinho);
+        if (!itens.Any())
+        {
+            Console.WriteLine("Carrinho vazio!");
+            PressioneParaContinuar();
+            return;
+        }
+
+        Console.WriteLine("Produtos no carrinho:");
+        foreach (var i in itens)
+            Console.WriteLine(i);
+
+        int codigo;
+        while (true)
+        {
+            Console.Write("Digite o código do produto que deseja alterar: ");
+            if (int.TryParse(Console.ReadLine(), out codigo))
+                break;
+            Console.WriteLine("Código inválido. Digite um número inteiro.");
+        }
+
+        var item = itens.FirstOrDefault(i => i.Produto.Codigo == codigo);
+        if (item == null)
+        {
+            Console.WriteLine("Produto não encontrado no carrinho!");
+            PressioneParaContinuar();
+            return;
+        }
+
+        try
+        {
+            _servicoCarrinho.RemoverItem(carrinho, item);
+            Console.WriteLine("Produto removido do carrinho!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+        PressioneParaContinuar();
+    }
+
+    private void Finalizar(Carrinho carrinho)
+    {
+        try
+        {
+            _servicoCarrinho.Finalizar(carrinho);
+            //_servicoPedido.CriarPedido(carrinho);
+            Console.WriteLine("Compra finalizada com sucesso!");
+            _servicoCarrinho.Limpar(carrinho);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao finalizar a compra: {ex.Message}");
+        }
+        PressioneParaContinuar();
+    }
+
+    private Produto BuscarProduto()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("Digite o código ou nome do produto: ");
+            string entrada = Console.ReadLine() ?? "";
+
+            if (int.TryParse(entrada, out int codigo))
             {
-                Console.WriteLine("\nProduto encontrado:");
-                Console.WriteLine(produto);
-                AdicionarAoCarrinho(produto);
+                var produto = _servicoProduto.BuscarPorCodigo(codigo);
+                if (produto != null)
+                    return produto;
+                Console.WriteLine("Produto não encontrado!");
             }
             else
             {
-                Console.WriteLine("Produto não encontrado!");
-                PressioneParaContinuar();
+                var produtos = _servicoProduto.BuscarPorNome(entrada);
+                if (produtos.Count == 1)
+                    return produtos[0];
+                if (produtos.Count > 1)
+                {
+                    Console.WriteLine("Produtos encontrados:");
+                    foreach (var p in produtos)
+                        Console.WriteLine(p.InfoProduto());
+                    Console.Write("Digite o código do produto desejado: ");
+                    if (int.TryParse(Console.ReadLine(), out int codEscolhido))
+                    {
+                        var produto = produtos.FirstOrDefault(p => p.Codigo == codEscolhido);
+                        if (produto != null)
+                            return produto;
+                    }
+                    Console.WriteLine("Código inválido.");
+                }
+                else
+                {
+                    Console.WriteLine("Nenhum produto encontrado!");
+                }
             }
         }
-    }
-
-    private void BuscarEAdicionarPorNome()
-    {
-        Console.Clear();
-        Console.Write("Digite o nome do produto: ");
-        string nome = Console.ReadLine() ?? "";
-        
-        var produtos = _servicoProduto.BuscarPorNome(nome).ToList();
-        
-        if (produtos.Any())
-        {
-            Console.WriteLine("\nProdutos encontrados:");
-            for (int i = 0; i < produtos.Count; i++)
-            {
-                Console.WriteLine($"{i + 1} - {produtos[i]}");
-            }
-
-            Console.Write("\nEscolha o número do produto desejado (0 para cancelar): ");
-            if (int.TryParse(Console.ReadLine(), out int escolha) && escolha > 0 && escolha <= produtos.Count)
-            {
-                var produtoEscolhido = produtos[escolha - 1];
-                AdicionarAoCarrinho(produtoEscolhido);
-            }
-            else if (escolha != 0)
-            {
-                Console.WriteLine("Opção inválida!");
-                PressioneParaContinuar();
-            }
-        }
-        else
-        {
-            Console.WriteLine("Nenhum produto encontrado!");
-            PressioneParaContinuar();
-        }
-    }
-
-    private void AdicionarAoCarrinho(Produto produto)
-    {
-        Console.Write("\nQuantidade desejada: ");
-        if (int.TryParse(Console.ReadLine(), out int quantidade) && quantidade > 0)
-        {
-            Console.WriteLine($"\nTotal do item: R$ {produto.Valor * quantidade:F2}");
-            Console.Write("Confirmar adição ao carrinho? (S/N): ");
-            
-            if (Console.ReadLine()?.ToUpper() == "S")
-            {
-                _itensCarrinho.Add((produto, quantidade));
-                Console.WriteLine("Produto adicionado ao carrinho!");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Quantidade inválida!");
-        }
-        PressioneParaContinuar();
-    }
-
-    private void VisualizarCarrinho()
-    {
-        Console.Clear();
-        Console.WriteLine("=== ITENS NO CARRINHO ===");
-        
-        if (!_itensCarrinho.Any())
-        {
-            Console.WriteLine("Carrinho vazio!");
-        }
-        else
-        {
-            foreach (var item in _itensCarrinho)
-            {
-                Console.WriteLine($"Produto: {item.Produto.Nome}");
-                Console.WriteLine($"Quantidade: {item.Quantidade}");
-                Console.WriteLine($"Valor unitário: R$ {item.Produto.Valor:F2}");
-                Console.WriteLine($"Subtotal: R$ {item.Produto.Valor * item.Quantidade:F2}");
-                Console.WriteLine("------------------------");
-            }
-        }
-        PressioneParaContinuar();
     }
 
     private void PressioneParaContinuar()

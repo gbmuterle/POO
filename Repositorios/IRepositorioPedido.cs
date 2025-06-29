@@ -8,8 +8,8 @@ namespace Repositorios
         void Adicionar(Pedido pedido);
         void Alterar(Pedido pedidoAtual, Pedido pedidoAlterado);
         void Remover(Pedido pedido);
-        Pedido? BuscarPorCodigo(int codigo);
+        Pedido? BuscarPorNumero(int numero);
         List<Pedido> BuscarTodos();
-        List<Pedido> BuscarPorCliente(string cliente);
+        List<Pedido> BuscarPorCliente(Usuario cliente);
     }
 }

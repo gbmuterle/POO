@@ -7,6 +7,7 @@ namespace Modelos
     {
         public Produto Produto { get; set; }
         public int Quantidade { get; set; }
+        public double ValorUnitario => Produto.Valor;
         public double ValorTotal => Produto.Valor * Quantidade;
 
         public ItemPedido(Produto produto, int quantidade)

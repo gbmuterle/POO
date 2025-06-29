@@ -25,10 +25,10 @@ namespace Repositorios
 
         public void Alterar(Pedido pedidoAtual, Pedido pedidoAlterado)
         {
-            pedidoAtual.Descricao = pedidoAlterado.Descricao;
-            pedidoAtual.ValorTotal = pedidoAlterado.ValorTotal;
-            pedidoAtual.Cliente = pedidoAlterado.Cliente;
             pedidoAtual.DataCriacao = pedidoAlterado.DataCriacao;
+            pedidoAtual.DataEntrega = pedidoAlterado.DataEntrega;
+            pedidoAtual.Situacao = pedidoAlterado.Situacao;
+            pedidoAtual.Transportadora = pedidoAlterado.Transportadora;
             _armazenamento.Salvar(pedidos, _caminhoArquivo);
         }
 
@@ -38,9 +38,9 @@ namespace Repositorios
             _armazenamento.Salvar(pedidos, _caminhoArquivo);
         }
 
-        public Pedido? BuscarPorCodigo(int codigo)
+        public Pedido? BuscarPorNumero(int numero)
         {
-            return pedidos.FirstOrDefault(p => p.Codigo == codigo);
+            return pedidos.FirstOrDefault(p => p.Numero == numero);
         }
 
         public List<Pedido> BuscarTodos()
@@ -48,10 +48,10 @@ namespace Repositorios
             return new List<Pedido>(pedidos);
         }
 
-        public List<Pedido> BuscarPorCliente(string cliente)
+        public List<Pedido> BuscarPorCliente(Usuario cliente)
         {
             return pedidos
-                .Where(p => p.Cliente.ToLower().Contains(cliente.ToLower()))
+                .Where(p => p.Cliente != null && p.Cliente.Nome == cliente.Nome)
                 .ToList();
         }
     }

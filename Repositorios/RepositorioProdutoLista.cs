@@ -7,11 +7,10 @@ namespace Repositorios
     public class RepositorioProdutoLista : IRepositorioProduto
     {
         private List<Produto> produtos = new List<Produto>();
-
         private readonly IArmazenamento<Produto> _armazenamento;
         private readonly string _caminhoArquivo;
 
-        public RepositorioFornecedorLista(IArmazenamento<Fornecedor> armazenamento, string caminhoArquivo)
+        public RepositorioProdutoLista(IArmazenamento<Produto> armazenamento, string caminhoArquivo)
         {
             _armazenamento = armazenamento;
             _caminhoArquivo = caminhoArquivo;

@@ -28,6 +28,8 @@ namespace Servicos
 
         public void Remover(Transportadora transportadora)
         {
+            if (transportadora == null)
+                throw new InvalidOperationException("Transportadora não pode ser nula.");
             _repositorio.Remover(transportadora);
         }
 

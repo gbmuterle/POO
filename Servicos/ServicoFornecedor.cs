@@ -27,6 +27,8 @@ namespace Servicos
 
         public void Remover(Fornecedor fornecedor)
         {
+            if (fornecedor == null)
+                throw new InvalidOperationException("Fornecedor não pode ser nulo.");
             _repositorio.Remover(fornecedor);
         }
 

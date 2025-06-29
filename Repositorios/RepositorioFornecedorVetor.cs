@@ -13,7 +13,7 @@ namespace Repositorios
         {
             _armazenamento = armazenamento;
             _caminhoArquivo = caminhoArquivo;
-            fornecedores = _armazenamento.Carregar(_caminhoArquivo);
+            fornecedores = _armazenamento.Carregar(_caminhoArquivo).ToArray();
         }
 
         public void Adicionar(Fornecedor fornecedor)
@@ -33,7 +33,7 @@ namespace Repositorios
                 if (fornecedores[i].Codigo == fornecedorAlterado.Codigo)
                 {
                     fornecedores[i] = fornecedorAlterado;
-                    _armazenamento.Salvar(fornecedores[i], _caminhoArquivo);
+                    _armazenamento.Salvar(fornecedores, _caminhoArquivo);
                     break;
                 }
             }

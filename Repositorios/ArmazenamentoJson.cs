@@ -5,7 +5,7 @@ namespace Repositorios
 {
     public class ArmazenamentoJson<T> : IArmazenamento<T>
     {
-        public void Salvar(List<T> items, string arquivo)
+        public void Salvar(IEnumerable<T> items, string arquivo)
         {
             try
             {

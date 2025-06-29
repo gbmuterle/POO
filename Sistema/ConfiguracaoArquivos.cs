@@ -9,7 +9,7 @@ namespace Sistema.Configuracoes
         public string DiretorioBase => @"C:\temp\Dados";
         public string DiretorioTipo => Path.Combine(DiretorioBase, TipoRepositorio);
 
-        public string ListaFornecedores => Path.Combine(DiretorioTipo, "fornecedores.json");
+        public string ArquivoFornecedores => Path.Combine(DiretorioTipo, "fornecedores.json");
         public string ArquivoTransportadoras => Path.Combine(DiretorioTipo, "transportadoras.json");
         public string ArquivoProdutos => Path.Combine(DiretorioTipo, "produtos.json");
         public string ArquivoPedidos => Path.Combine(DiretorioTipo, "pedidos.json");

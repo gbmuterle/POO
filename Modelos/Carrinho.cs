@@ -6,12 +6,15 @@ namespace Modelos
 {
     public class Carrinho
     {
+        public Usuario Cliente { get; set; }
         private readonly List<ItemPedido> _itens;
-        public Usuario Usuario { get; private set; }
+        public IReadOnlyList<ItemPedido> Itens => _itens.AsReadOnly();
+        public List<ItemPedido> ItensInternos => _itens;
+        public double ValorTotal => _itens.Sum(i => i.ValorTotal);
 
-        public Carrinho(Usuario usuario)
+        public Carrinho(Usuario cliente)
         {
-            Usuario = usuario;
+            Cliente = cliente;
             _itens = new List<ItemPedido>();
         }
         
@@ -22,14 +25,12 @@ namespace Modelos
                 return "Carrinho vazio";
             }
             
-            var result = $"Carrinho de {Usuario.Nome}\n";
-            double valorTotal = 0;
+            var result = $"Itens no carrinho:\n";
             foreach (var item in _itens)
             {
-                valorTotal += item.ValorTotal;
-                result += $"{item.Produto.Nome}, {item.Quantidade} unid. - {item.ValorTotal:C}\n";
+                result += $"{item.Produto.Nome} - {item.Quantidade} un. - {item.ValorTotal:C}\n";
             }
-            result += $"\nValor Total: {valorTotal:C}";
+            result += $"\nValor Total: {ValorTotal:C}";
             
             return result;
         }
