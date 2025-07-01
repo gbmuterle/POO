@@ -145,14 +145,6 @@ namespace Telas
             }
 
             int codFornecedor;
-            while (true)
-            {
-                Console.Write("Código do fornecedor: ");
-                if (int.TryParse(Console.ReadLine(), out codFornecedor))
-                    break;
-                Console.WriteLine("Código inválido. Digite um número inteiro.");
-            }
-
             Fornecedor fornecedor;
             while (true)
             {
@@ -160,7 +152,7 @@ namespace Telas
                 if (int.TryParse(Console.ReadLine(), out codFornecedor))
                 {
                     var fornecedorEncontrado = _servicoFornecedor.BuscarPorCodigo(codFornecedor);
-                    if (fornecedorEncontrado != null)
+                    if (fornecedorEncontrado!= null)
                     {
                         fornecedor = fornecedorEncontrado;
                         break;

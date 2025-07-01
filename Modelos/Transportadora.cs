@@ -16,5 +16,10 @@ namespace Modelos
         {
             return $"Código: {Codigo}, Nome: {Nome}, Telefone: {Telefone}, Email: {Email}, CNPJ: {Cnpj}, Preço por Km: {PrecoPorKm:C}";
         }
+
+        public string InfoTransportadora()
+        {
+            return $"{Codigo} - {Nome} - Preço por km: {PrecoPorKm:C}";
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace Servicos
         public void Remover(Pedido pedido)
         {
             if (pedido == null)
-                throw new InvalidOperationException("Pedido não pode ser nulo.");
+                throw new InvalidOperationException("Pedido inválido.");
 
             _repositorio.Remover(pedido);
         }
@@ -47,23 +47,63 @@ namespace Servicos
             return _repositorio.BuscarPorNumero(numero);
         }
 
+        public Pedido? BuscarPorNumero(int numero, Usuario cliente)
+        {
+            if (cliente == null)
+                throw new InvalidOperationException("Usuário inválido.");
+
+            var pedido = _repositorio.BuscarPorNumero(numero);
+
+            if (pedido == null)
+                return null;
+
+            if (pedido.Cliente.Nome != cliente.Nome)
+                throw new InvalidOperationException("O pedido pertence a outro cliente. Você não tem permissão para acessá-lo.");
+
+            return pedido;
+        }
+
         public List<Pedido> BuscarTodos()
         {
             return _repositorio.BuscarTodos();
         }
 
-        public List<Pedido> BuscarPorCliente(Usuario cliente)
+        public List<Pedido> BuscarTodos(Usuario cliente)
         {
             if (cliente == null)
-                throw new InvalidOperationException("Cliente não pode ser nulo.");
+                throw new InvalidOperationException("Usuário inválido.");
 
-            return _repositorio.BuscarPorCliente(cliente);
+            var pedidos = _repositorio.BuscarTodos();
+            return pedidos.Where(p => p.Cliente.Nome == cliente.Nome)
+            .ToList();
+        }
+
+        public List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal)
+        {
+            if (dataInicial > dataFinal)
+                throw new InvalidOperationException("Data inicial não pode ser maior que a data final.");
+
+            return _repositorio.BuscarPorData(dataInicial, dataFinal);
+        }
+
+        public List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal, Usuario cliente)
+        {
+            if (dataInicial > dataFinal)
+                throw new InvalidOperationException("Data inicial não pode ser maior que a data final.");
+
+            if (cliente == null)
+                throw new InvalidOperationException("Usuário inválido.");
+
+            var pedidos = _repositorio.BuscarTodos();
+            return pedidos
+                .Where(p => p.Cliente.Nome == cliente.Nome && p.DataCriacao >= dataInicial && p.DataCriacao <= dataFinal)
+                .ToList();
         }
 
         private void Validar(Pedido pedido, bool novo)
         {
             if (pedido == null)
-                throw new InvalidOperationException("Pedido não pode ser nulo.");
+                throw new InvalidOperationException("Pedido inválido.");
 
             if (pedido.Cliente == null)
                 throw new InvalidOperationException("Cliente inválido!.");
@@ -85,7 +125,7 @@ namespace Servicos
             else
             {
                 if (pedido.Situacao != "novo" && pedido.Situacao != "transporte" && pedido.Situacao != "entregue" && pedido.Situacao != "cancelado")
-                    throw new InvalidOperationException("Situação do pedido inválida.");
+                    throw new InvalidOperationException("Situação inválida. Deve ser 'novo', 'transporte', 'entregue' ou 'cancelado'.");
             }
         }
     }

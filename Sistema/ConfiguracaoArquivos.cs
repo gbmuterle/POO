@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 
-namespace Sistema.Configuracoes
+namespace Sistema
 {
     public class ConfiguracaoArquivos
     {
         public string TipoRepositorio { get; }
-        public string DiretorioBase => @"C:\temp\Dados";
+        public string DiretorioBase => @"C:\SistemaLoja\Dados";
         public string DiretorioTipo => Path.Combine(DiretorioBase, TipoRepositorio);
 
         public string ArquivoFornecedores => Path.Combine(DiretorioTipo, "fornecedores.json");

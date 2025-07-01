@@ -81,12 +81,12 @@ namespace Repositorios
             return pedidos.ToList();
         }
 
-        public List<Pedido> BuscarPorCliente(Usuario cliente)
+        public List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal)
         {
             var lista = new List<Pedido>();
             foreach (var p in pedidos)
             {
-                if (p.Cliente.Nome == cliente.Nome)
+                if (p.DataCriacao >= dataInicial && p.DataCriacao <= dataFinal)
                     lista.Add(p);
             }
             return lista;

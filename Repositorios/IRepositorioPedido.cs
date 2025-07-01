@@ -2,6 +2,7 @@ namespace Repositorios
 {
     using System.Collections.Generic;
     using Modelos;
+    using System;
 
     public interface IRepositorioPedido
     {
@@ -10,6 +11,6 @@ namespace Repositorios
         void Remover(Pedido pedido);
         Pedido? BuscarPorNumero(int numero);
         List<Pedido> BuscarTodos();
-        List<Pedido> BuscarPorCliente(Usuario cliente);
+        List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal);
     }
 }

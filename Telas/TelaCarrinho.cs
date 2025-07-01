@@ -8,12 +8,14 @@ public class TelaCarrinho
 {
     private readonly ServicoProduto _servicoProduto;
     private readonly ServicoCarrinho _servicoCarrinho;
+    private readonly ServicoTransportadora _servicoTransportadora;
     private readonly List<ItemPedido> _itensCarrinho = new();
 
-    public TelaCarrinho(ServicoProduto servicoProduto, ServicoCarrinho servicoCarrinho)
+    public TelaCarrinho(ServicoProduto servicoProduto, ServicoCarrinho servicoCarrinho, ServicoTransportadora servicoTransportadora)
     {
         _servicoProduto = servicoProduto;
         _servicoCarrinho = servicoCarrinho;
+        _servicoTransportadora = servicoTransportadora;
     }
 
     public void Menu(Usuario usuario)
@@ -187,9 +189,51 @@ public class TelaCarrinho
 
     private void Finalizar(Carrinho carrinho)
     {
+        double distancia;
+        while (true)
+            {
+                Console.Write("Informe a distância em km: ");
+                if (double.TryParse(Console.ReadLine(), out distancia) && distancia > 0 && distancia <= 5000)
+                    break;
+                Console.WriteLine("Distância inválida.");
+            }
+
+        var transportadoras = _servicoTransportadora.BuscarTodos();
+        if (!transportadoras.Any())
+        {
+            Console.WriteLine("Nenhuma transportadora disponível!");
+            PressioneParaContinuar();
+            return;
+        }
+
+        Console.WriteLine("Transportadoras:");
+        foreach (var t in transportadoras)
+            Console.WriteLine(t.InfoTransportadora());
+
+        int codTransportadora;
+        Transportadora transportadora;
+        while (true)
+        {
+            Console.Write("Código da transportadora: ");
+            if (int.TryParse(Console.ReadLine(), out codTransportadora))
+            {
+                var transportadoraEncontrada = _servicoTransportadora.BuscarPorCodigo(codTransportadora);
+                if (transportadoraEncontrada != null)
+                {
+                    transportadora = transportadoraEncontrada;
+                    break;
+                }
+                Console.WriteLine("Transportadora não encontrada! Digite um código válido.");
+            }
+            else
+            {
+                Console.WriteLine("Código inválido. Digite um número inteiro.");
+            }
+        }
+
         try
         {
-            _servicoCarrinho.Finalizar(carrinho);
+            _servicoCarrinho.Finalizar(carrinho, distancia, transportadora);
             Console.WriteLine("Compra finalizada com sucesso!");
         }
         catch (Exception ex)

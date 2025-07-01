@@ -38,7 +38,7 @@ namespace Servicos
             return _repositorio.BuscarPorCodigo(codigo);
         }
 
-        public List<Transportadora> ListarTodos()
+        public List<Transportadora> BuscarTodos()
         {
             return _repositorio.BuscarTodos();
         }

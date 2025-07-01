@@ -112,7 +112,7 @@ namespace Telas
         private void Listar()
         {
             Console.Clear();
-            var transportadoras = _servicoTransportadora.ListarTodos();
+            var transportadoras = _servicoTransportadora.BuscarTodos();
 
             if (!transportadoras.Any())
             {

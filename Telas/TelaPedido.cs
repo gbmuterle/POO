@@ -80,7 +80,7 @@ namespace Telas
                 switch (opcao)
                 {
                     case "1":
-                        BuscarPorCliente(usuario);
+                        BuscarTodos(usuario);
                         break;
                     case "2":
                         BuscarPorNumero(usuario);
@@ -98,20 +98,6 @@ namespace Telas
             }
         }
 
-        private void BuscarTodos()
-        {
-            Console.Clear();
-            var pedidos = _servicoPedido.BuscarTodos();
-
-            if (!pedidos.Any())
-                Console.WriteLine("Nenhum pedido cadastrado.");
-            else
-                foreach (var p in pedidos)
-                    Console.WriteLine(p);
-
-            PressioneParaContinuar();
-        }
-
         private void Alterar()
         {
             Console.Clear();
@@ -124,7 +110,6 @@ namespace Telas
             }
 
             var pedidoAtual = _servicoPedido.BuscarPorNumero(numero);
-
             if (pedidoAtual == null)
             {
                 Console.WriteLine("Pedido não encontrado!");
@@ -134,7 +119,8 @@ namespace Telas
 
             string novaSituacao = pedidoAtual.Situacao;
             DateTime? novaDataEntrega = pedidoAtual.DataEntrega;
-            Transportadora? novaTransportadora = pedidoAtual.Transportadora;
+            DateTime? novaDataCancelamento = pedidoAtual.DataCancelamento;
+            Transportadora novaTransportadora = pedidoAtual.Transportadora;
 
             while (true)
             {
@@ -145,26 +131,49 @@ namespace Telas
                 Console.WriteLine("1 - Situação");
                 Console.WriteLine("2 - Data de entrega");
                 Console.WriteLine("3 - Transportadora");
-                Console.WriteLine("0 - Salvar e sair");
+                Console.WriteLine("0 - Voltar");
                 Console.Write("\nEscolha uma opção: ");
                 string opcao = Console.ReadLine() ?? "";
 
                 switch (opcao)
                 {
                     case "1":
-                        Console.WriteLine("Situações possíveis: novo, transporte, entregue, cancelado");
                         Console.Write("Nova situação: ");
                         novaSituacao = Console.ReadLine() ?? pedidoAtual.Situacao;
-                        break;
-                    case "2":
-                        Console.Write("Nova data de entrega (dd/MM/yyyy): ");
-                        if (!DateTime.TryParse(Console.ReadLine(), out novaDataEntrega))
+
+                        if (novaSituacao.Equals("entregue", StringComparison.OrdinalIgnoreCase))
                         {
-                            Console.WriteLine("Data inválida. Mantendo a data atual.");
-                            novaDataEntrega = pedidoAtual.DataEntrega;
+                            novaDataEntrega = DateTime.Now;
+                            novaDataCancelamento = null; // deixa o cancelamento nulo se entregou
+                        }
+                        else if (novaSituacao.Equals("cancelado", StringComparison.OrdinalIgnoreCase))
+                        {
+                            novaDataCancelamento = DateTime.Now;
+                            novaDataEntrega = null; // deixa a entrega nula se cancelou
                         }
                         break;
+
+                    case "2":
+                        while (true)
+                        {
+                            Console.Write("Nova data de entrega (dd/MM/yyyy): ");
+                            if (DateTime.TryParse(Console.ReadLine(), out DateTime novaData))
+                            {
+                                novaDataEntrega = novaData;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Data inválida. Tente novamente.");
+                            }
+                        }
+                        break;
+
                     case "3":
+                        var transportadoras = _servicoTransportadora.BuscarTodos();
+                        Console.WriteLine("--- Lista de Transportadoras ---");
+                        foreach (var t in transportadoras)
+                            Console.WriteLine(t);
                         while (true)
                         {
                             Console.Write("Novo código da transportadora: ");
@@ -176,7 +185,7 @@ namespace Telas
                                     novaTransportadora = transportadoraEncontrada;
                                     break;
                                 }
-                                Console.WriteLine("Fornecedor não encontrado! Digite um código válido.");
+                                Console.WriteLine("Transportadora não encontrada! Digite um código válido.");
                             }
                             else
                             {
@@ -184,132 +193,135 @@ namespace Telas
                             }
                         }
                         break;
+
                     case "0":
-                        var pedidoAlterado = new Pedido(
-                            pedidoAtual.Numero,
-                            pedidoAtual.Cliente,
-                            pedidoAtual.DataCriacao,
-                            novaDataEntrega,
-                            novaSituacao,
-                            pedidoAtual.Itens,
-                            novaTransportadora
-                        );
-                        try
-                        {
-                            _servicoPedido.Alterar(pedidoAtual, pedidoAlterado);
-                            Console.WriteLine("Pedido alterado com sucesso!");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Erro: {ex.Message}");
-                        }
-                        PressioneParaContinuar();
                         return;
+
                     default:
                         Console.WriteLine("Opção inválida.");
                         PressioneParaContinuar();
                         break;
                 }
+
+                var pedidoAlterado = new Pedido(
+                    pedidoAtual.Numero,
+                    pedidoAtual.Cliente,
+                    pedidoAtual.DataCriacao,
+                    novaDataEntrega,
+                    novaDataCancelamento,
+                    novaSituacao,
+                    pedidoAtual.Itens,
+                    novaTransportadora,
+                    pedidoAtual.Distancia
+                );
+
+                try
+                {
+                    _servicoPedido.Alterar(pedidoAtual, pedidoAlterado);
+                    Console.WriteLine("Pedido alterado com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro: {ex.Message}");
+                }
+                PressioneParaContinuar();
+                return;
             }
         }
 
-        private void BuscarPorCliente(Usuario usuario)
+        private void BuscarTodos(Usuario? usuario = null)
         {
             Console.Clear();
-            var pedidos = _servicoPedido.BuscarPorCliente(usuario);
-            if (!pedidos.Any())
-                Console.WriteLine("Você não possui pedidos.");
-            else
-                foreach (var p in pedidos)
-                    Console.WriteLine(p);
+            try
+            {
+                var pedidos = usuario == null
+                    ? _servicoPedido.BuscarTodos()
+                    : _servicoPedido.BuscarTodos(usuario);
+
+                if (!pedidos.Any())
+                    Console.WriteLine("Nenhum pedido encontrado.");
+                else
+                    foreach (var p in pedidos)
+                        Console.WriteLine(p);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+            }
 
             PressioneParaContinuar();
         }
 
-        private void BuscarPorNumero()
+        private void BuscarPorNumero(Usuario? usuario = null)
         {
             Console.Clear();
             int numero;
             while (true)
             {
-                Console.Write("Nùmero do pedido: ");
+                Console.Write("Número do pedido: ");
                 if (int.TryParse(Console.ReadLine(), out numero))
                     break;
                 Console.WriteLine("Código inválido. Digite um número inteiro.");
             }
 
-            var pedido = _servicoPedido.BuscarPorNumero(numero);
+            try
+            {
+                var pedido = usuario == null
+                    ? _servicoPedido.BuscarPorNumero(numero)
+                    : _servicoPedido.BuscarPorNumero(numero, usuario);
 
-            if (pedido != null)
-                Console.WriteLine(pedido);
-            else
-                Console.WriteLine("Pedido não encontrado!");
+                if (pedido != null)
+                    Console.WriteLine(pedido);
+                else
+                    Console.WriteLine("Pedido não encontrado!");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+            }
+
             PressioneParaContinuar();
         }
 
-        private void BuscarPorNumero(Usuario usuario)
+        private void BuscarPorData(Usuario? usuario = null)
         {
             Console.Clear();
-            int numero;
+            DateTime dataInicial;
             while (true)
             {
-                Console.Write("Nùmero do pedido: ");
-                if (int.TryParse(Console.ReadLine(), out numero))
+                Console.Write("Data inicial (dd/MM/yyyy): ");
+                if (DateTime.TryParse(Console.ReadLine(), out dataInicial))
                     break;
-                Console.WriteLine("Código inválido. Digite um número inteiro.");
+
+                Console.WriteLine("Data inválida! Tente novamente.");
             }
 
-            var pedido = _servicoPedido.BuscarPorNumero(numero);
-
-            if (pedido != null && pedido.Cliente.Nome == usuario.Nome)
-                Console.WriteLine(pedido);
-            else
-                Console.WriteLine("Pedido não encontrado!");
-
-            PressioneParaContinuar();
-        }
-
-        private void BuscarPorData()
-        {
-            Console.Clear();
-            Console.Write("Data (dd/MM/yyyy): ");
-            if (!DateTime.TryParse(Console.ReadLine(), out DateTime data))
+            DateTime dataFinal;
+            while (true)
             {
-                Console.WriteLine("Data inválida!");
+                Console.Write("Data final (dd/MM/yyyy): ");
+                if (DateTime.TryParse(Console.ReadLine(), out dataFinal))
+                    break;
+
+                Console.WriteLine("Data inválida! Tente novamente.");
+            }
+
+            List<Pedido> pedidos;
+            try
+            {
+                pedidos = usuario == null
+                    ? _servicoPedido.BuscarPorData(dataInicial, dataFinal)
+                    : _servicoPedido.BuscarPorData(dataInicial, dataFinal, usuario);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
                 PressioneParaContinuar();
                 return;
             }
 
-            var pedidos = _servicoPedido.BuscarTodos()
-                .Where(p => p.DataCriacao.Date == data.Date)
-                .ToList();
-
             if (!pedidos.Any())
-                Console.WriteLine("Nenhum pedido encontrado para esta data.");
-            else
-                foreach (var p in pedidos)
-                    Console.WriteLine(p);
-
-            PressioneParaContinuar();
-        }
-
-        private void BuscarPorData(Usuario usuario)
-        {
-            Console.Clear();
-            Console.Write("Data (dd/MM/yyyy): ");
-            if (!DateTime.TryParse(Console.ReadLine(), out DateTime data))
-            {
-                Console.WriteLine("Data inválida!");
-                PressioneParaContinuar();
-                return;
-            }
-
-            var pedidos = _servicoPedido.BuscarTodos()
-                .Where(p => p.Cliente != null && p.Cliente.Nome == usuario.Nome && p.DataCriacao.Date == data.Date)
-                .ToList();
-
-            if (!pedidos.Any())
-                Console.WriteLine("Nenhum pedido encontrado para esta data.");
+                Console.WriteLine("Nenhum pedido encontrado para esse período.");
             else
                 foreach (var p in pedidos)
                     Console.WriteLine(p);

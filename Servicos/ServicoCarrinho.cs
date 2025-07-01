@@ -35,12 +35,16 @@ namespace Servicos
             _repositorio.Remover(carrinho, item);
         }
         
-        public void Finalizar(Carrinho carrinho)
+        public void Finalizar(Carrinho carrinho, double distancia, Transportadora transportadora)
         {
             if (carrinho == null)
                 throw new InvalidOperationException("Carrinho inválido.");
+
             if (!carrinho.ItensInternos.Any())
                 throw new InvalidOperationException("Carrinho vazio. Não é possível finalizar a compra.");
+
+            if (transportadora == null)
+                throw new InvalidOperationException("Transportadora inválida.");
 
             int numero = _servicoPedido.GerarNumero();
             var pedido = new Pedido(
@@ -48,9 +52,11 @@ namespace Servicos
                 carrinho.Cliente,
                 DateTime.Now,
                 null,
+                null,
                 "novo",
                 carrinho.ItensInternos,
-                null
+                transportadora,
+                distancia
             );
             _servicoPedido.Criar(pedido);
             Limpar(carrinho);

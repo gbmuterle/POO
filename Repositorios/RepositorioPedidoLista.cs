@@ -48,10 +48,10 @@ namespace Repositorios
             return new List<Pedido>(pedidos);
         }
 
-        public List<Pedido> BuscarPorCliente(Usuario cliente)
+        public List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal)
         {
             return pedidos
-                .Where(p => p.Cliente != null && p.Cliente.Nome == cliente.Nome)
+                .Where(p => p.DataCriacao >= dataInicial && p.DataCriacao <= dataFinal)
                 .ToList();
         }
     }
