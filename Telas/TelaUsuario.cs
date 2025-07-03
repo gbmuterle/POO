@@ -58,7 +58,7 @@ namespace Telas
             Console.Write("Nome: ");
             string nome = (Console.ReadLine() ?? "").ToLower();
 
-            Console.Write("Perfil (admin/usuario): ");
+            Console.Write("Perfil (admin/cliente): ");
             string perfil = (Console.ReadLine() ?? "").ToLower();
 
             Console.Write("Senha: ");
@@ -150,7 +150,7 @@ namespace Telas
                         novaSenha = Console.ReadLine() ?? "";
                         break;
                     case "2":
-                        Console.Write("Novo perfil (admin/usuario): ");
+                        Console.Write("Novo perfil (admin/cliente): ");
                         novoPerfil = (Console.ReadLine() ?? "").ToLower();
                         break;
                     case "3":
