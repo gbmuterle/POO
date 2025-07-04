@@ -14,6 +14,7 @@ namespace Sistema
         public string ArquivoProdutos => Path.Combine(DiretorioTipo, "produtos.json");
         public string ArquivoPedidos => Path.Combine(DiretorioTipo, "pedidos.json");
         public string ArquivoUsuarios => Path.Combine(DiretorioTipo, "usuarios.json");
+        public string ArquivoCarrinhos => Path.Combine(DiretorioTipo, "carrinhos.json");
 
         public ConfiguracaoArquivos(string tipoRepositorio)
         {

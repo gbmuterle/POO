@@ -9,6 +9,6 @@ namespace Repositorios
         void Alterar(Usuario usuarioAtual, Usuario usuarioAlterado);
         void Remover(Usuario usuario);
         Usuario? BuscarPorNome(string nome);
-        List<Usuario> ListarTodos();
+        List<Usuario> BuscarTodos();
     }
 }

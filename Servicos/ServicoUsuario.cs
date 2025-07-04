@@ -29,12 +29,14 @@ namespace Servicos
         {
             if (usuario == null)
                 throw new InvalidOperationException("Usuário inválido.");
+            if (usuario.Nome == "admin")
+                throw new InvalidOperationException("Não é possível excluir o usuário admin.");
             _repositorioUsuario.Remover(usuario);
         }
 
-        public List<Usuario> ListarTodos()
+        public List<Usuario> BuscarTodos()
         {
-            return _repositorioUsuario.ListarTodos();
+            return _repositorioUsuario.BuscarTodos();
         }
 
         public Usuario? BuscarPorNome(string nome)

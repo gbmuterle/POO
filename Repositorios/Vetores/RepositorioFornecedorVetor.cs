@@ -41,7 +41,16 @@ namespace Repositorios
 
         public void Remover(Fornecedor fornecedor)
         {
-            int index = Array.FindIndex(fornecedores, f => f.Codigo == fornecedor.Codigo);
+            int index = -1;
+            for (int i = 0; i < fornecedores.Length; i++)
+            {
+                if (fornecedores[i].Codigo == fornecedor.Codigo)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
             if (index >= 0)
             {
                 var novos = new Fornecedor[fornecedores.Length - 1];
@@ -66,14 +75,19 @@ namespace Repositorios
             return null;
         }
 
-        public System.Collections.Generic.List<Fornecedor> BuscarTodos()
+        public List<Fornecedor> BuscarTodos()
         {
-            return new System.Collections.Generic.List<Fornecedor>(fornecedores);
+            var lista = new List<Fornecedor>();
+            foreach (var f in fornecedores)
+            {
+                lista.Add(f);
+            }
+            return lista;
         }
 
-        public System.Collections.Generic.List<Fornecedor> BuscarPorNome(string nome)
+        public List<Fornecedor> BuscarPorNome(string nome)
         {
-            var lista = new System.Collections.Generic.List<Fornecedor>();
+            var lista = new List<Fornecedor>();
             for (int i = 0; i < fornecedores.Length; i++)
             {
                 if (fornecedores[i].Nome.ToLower().Contains(nome.ToLower()))

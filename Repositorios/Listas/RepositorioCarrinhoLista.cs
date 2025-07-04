@@ -5,28 +5,41 @@ using Modelos;
 
 namespace Repositorios
 {
-    public class RepositorioCarrinho : IRepositorioCarrinho
+    public class RepositorioCarrinhoLista : IRepositorioCarrinho
     {
-        private readonly List<Carrinho> _carrinhos = new();
+        private List<Carrinho> _carrinhos = new List<Carrinho>();
+        private readonly IArmazenamento<Carrinho> _armazenamento;
+        private readonly string _caminhoArquivo;
+
+        public RepositorioCarrinhoLista(IArmazenamento<Carrinho> armazenamento, string caminhoArquivo)
+        {
+            _armazenamento = armazenamento;
+            _caminhoArquivo = caminhoArquivo;
+            _carrinhos = _armazenamento.Carregar(_caminhoArquivo);
+        }
 
         public void Adicionar(Carrinho carrinho, ItemPedido item)
         {
             carrinho.ItensInternos.Add(item);
+            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
         }
 
         public void Alterar(Carrinho carrinho, ItemPedido itemAtual, ItemPedido itemAlterado)
         {
             itemAtual.Quantidade = itemAlterado.Quantidade;
+            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
         }
 
         public void Remover(Carrinho carrinho, ItemPedido item)
         {
             carrinho.ItensInternos.Remove(item);
+            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
         }
 
         public void Limpar(Carrinho carrinho)
         {
             carrinho.ItensInternos.Clear();
+            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
         }
 
         public Carrinho ObterCarrinho(Usuario cliente)
@@ -36,6 +49,7 @@ namespace Repositorios
             {
                 carrinho = new Carrinho(cliente);
                 _carrinhos.Add(carrinho);
+                _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
             }
             return carrinho;
         }
@@ -45,7 +59,7 @@ namespace Repositorios
             return carrinho.ItensInternos.FirstOrDefault(i => i.Produto.Codigo == produto.Codigo);
         }
 
-        public List<ItemPedido> ListarTodos(Carrinho carrinho)
+        public List<ItemPedido> BuscarTodos(Carrinho carrinho)
         {
             return carrinho.ItensInternos.ToList();
         }

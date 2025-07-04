@@ -13,6 +13,6 @@ namespace Repositorios
         void Limpar(Carrinho carrinho);
         Carrinho ObterCarrinho(Usuario cliente);
         ItemPedido? BuscarItem(Carrinho carrinho, Produto produto);
-        List<ItemPedido> ListarTodos(Carrinho carrinho);
+        List<ItemPedido> BuscarTodos(Carrinho carrinho);
     }
 }

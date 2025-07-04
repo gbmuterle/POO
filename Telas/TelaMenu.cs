@@ -91,7 +91,7 @@ namespace Telas
                 switch (opcao)
                 {
                     case "1":
-                        //_telaCarrinho.Menu(_usuario);
+                        _telaCarrinho.Menu(_usuario);
                         break;
                     case "2":
                         _telaPedido.Menu(_usuario);

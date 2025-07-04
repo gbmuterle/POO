@@ -77,9 +77,9 @@ namespace Servicos
             return _repositorio.BuscarItem(carrinho, produto);
         }
 
-        public List<ItemPedido> ListarTodos(Carrinho carrinho)
+        public List<ItemPedido> BuscarTodos(Carrinho carrinho)
         {
-            return _repositorio.ListarTodos(carrinho);
+            return _repositorio.BuscarTodos(carrinho);
         }
 
         private void Validar(Carrinho carrinho, ItemPedido item, bool novo)

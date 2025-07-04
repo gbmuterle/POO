@@ -90,7 +90,7 @@ namespace Telas
         private void Listar()
         {
             Console.Clear();
-            var usuarios = _servicoUsuario.ListarTodos();
+            var usuarios = _servicoUsuario.BuscarTodos();
 
             if (!usuarios.Any())
             {

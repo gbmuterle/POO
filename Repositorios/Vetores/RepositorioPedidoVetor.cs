@@ -78,7 +78,12 @@ namespace Repositorios
 
         public List<Pedido> BuscarTodos()
         {
-            return pedidos.ToList();
+            var lista = new List<Pedido>();
+            foreach (var p in pedidos)
+            {
+                lista.Add(p);
+            }
+            return lista;
         }
 
         public List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal)

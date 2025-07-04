@@ -89,7 +89,7 @@ public class TelaCarrinho
 
     private void Alterar(Carrinho carrinho)
     {
-        var itens = _servicoCarrinho.ListarTodos(carrinho);
+        var itens = _servicoCarrinho.BuscarTodos(carrinho);
         if (!itens.Any())
         {
             Console.WriteLine("Carrinho vazio!");
@@ -146,7 +146,7 @@ public class TelaCarrinho
 
     private void Remover(Carrinho carrinho)
     {
-        var itens = _servicoCarrinho.ListarTodos(carrinho);
+        var itens = _servicoCarrinho.BuscarTodos(carrinho);
         if (!itens.Any())
         {
             Console.WriteLine("Carrinho vazio!");
@@ -245,9 +245,9 @@ public class TelaCarrinho
 
     private Produto BuscarProduto()
     {
+        Console.Clear();
         while (true)
         {
-            Console.Clear();
             Console.Write("Digite o código ou nome do produto: ");
             string entrada = Console.ReadLine() ?? "";
 

@@ -43,6 +43,7 @@ namespace Sistema
             var armazenamentoProdutos = new ArmazenamentoJson<Produto>();
             var armazenamentoPedidos = new ArmazenamentoJson<Pedido>();
             var armazenamentoUsuarios = new ArmazenamentoJson<Usuario>();
+            var armazenamentoCarrinhos = new ArmazenamentoJson<Carrinho>();
 
             if (tipoRepositorio == "1")
             {
@@ -50,8 +51,8 @@ namespace Sistema
                 repositorioFornecedor = new RepositorioFornecedorVetor(armazenamentoFornecedores, configuracaoArquivos.ArquivoFornecedores);
                 repositorioTransportadora = new RepositorioTransportadoraVetor(armazenamentoTransportadoras, configuracaoArquivos.ArquivoTransportadoras);
                 repositorioPedido = new RepositorioPedidoVetor(armazenamentoPedidos, configuracaoArquivos.ArquivoPedidos);
-                repositorioUsuario = new RepositorioUsuario();
-                repositorioCarrinho = new RepositorioCarrinho();
+                repositorioUsuario = new RepositorioUsuarioVetor(armazenamentoUsuarios, configuracaoArquivos.ArquivoUsuarios);
+                repositorioCarrinho = new RepositorioCarrinhoVetor(armazenamentoCarrinhos, configuracaoArquivos.ArquivoCarrinhos);
             }
             else
             {
@@ -59,11 +60,11 @@ namespace Sistema
                 repositorioFornecedor = new RepositorioFornecedorLista(armazenamentoFornecedores, configuracaoArquivos.ArquivoFornecedores);
                 repositorioTransportadora = new RepositorioTransportadoraLista(armazenamentoTransportadoras, configuracaoArquivos.ArquivoTransportadoras);
                 repositorioPedido = new RepositorioPedidoLista(armazenamentoPedidos, configuracaoArquivos.ArquivoPedidos);
-                repositorioUsuario = new RepositorioUsuario();
-                repositorioCarrinho = new RepositorioCarrinho();
+                repositorioUsuario = new RepositorioUsuarioLista(armazenamentoUsuarios, configuracaoArquivos.ArquivoUsuarios);
+                repositorioCarrinho = new RepositorioCarrinhoLista(armazenamentoCarrinhos, configuracaoArquivos.ArquivoCarrinhos);
             }
 
-            var autenticador = new Autenticador(repositorioUsuario.ListarTodos());
+            var autenticador = new Autenticador(repositorioUsuario.BuscarTodos());
             var telaLogin = new TelaLogin(autenticador);
 
             Usuario usuarioLogado = telaLogin.Executar();

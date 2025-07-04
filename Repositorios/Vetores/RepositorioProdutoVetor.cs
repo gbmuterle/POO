@@ -81,7 +81,7 @@ namespace Repositorios
             var lista = new List<Produto>();
             foreach (var p in produtos)
             {
-                if (p != null) lista.Add(p);
+                lista.Add(p);
             }
             return lista;
         }
@@ -91,7 +91,7 @@ namespace Repositorios
             var lista = new List<Produto>();
             foreach (var p in produtos)
             {
-                if (p != null && p.Nome != null && p.Nome.ToLower().Contains(nome.ToLower()))
+                if (p.Nome.ToLower().Contains(nome.ToLower()))
                     lista.Add(p);
             }
             return lista;

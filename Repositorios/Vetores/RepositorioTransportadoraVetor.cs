@@ -80,7 +80,7 @@ namespace Repositorios
             var lista = new List<Transportadora>();
             foreach (var t in transportadoras)
             {
-                if (t != null) lista.Add(t);
+                lista.Add(t);
             }
             return lista;
         }
@@ -90,7 +90,7 @@ namespace Repositorios
             var lista = new List<Transportadora>();
             foreach (var t in transportadoras)
             {
-                if (t != null && t.Nome != null && t.Nome.ToLower().Contains(nome.ToLower()))
+                if (t.Nome.ToLower().Contains(nome.ToLower()))
                     lista.Add(t);
             }
             return lista;
