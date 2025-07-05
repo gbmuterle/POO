@@ -162,7 +162,7 @@ namespace Telas
                         novoEmail = (Console.ReadLine() ?? "").ToLower();
                         break;
                     case "5":
-                        Console.Write("Novo perfil (admin/usuario): ");
+                        Console.Write("Novo endereço: ");
                         novoEndereco = _telaEndereco.Cadastrar();
                         break;
                     default:
