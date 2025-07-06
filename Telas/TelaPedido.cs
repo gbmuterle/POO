@@ -138,9 +138,16 @@ namespace Telas
                 switch (opcao)
                 {
                     case "1":
+                        if (pedidoAtual.Situacao.Equals("entregue") || pedidoAtual.Situacao.Equals("cancelado"))
+                        {
+                            Console.WriteLine("Não é possível alterar a situação de um pedido já entregue ou cancelado.");
+                            PressioneParaContinuar();
+                            return;
+                        }
+
                         Console.Write("Nova situação: ");
                         novaSituacao = Console.ReadLine() ?? pedidoAtual.Situacao;
-
+                        
                         if (novaSituacao.Equals("entregue", StringComparison.OrdinalIgnoreCase))
                         {
                             novaDataEntrega = DateTime.Now;
@@ -150,6 +157,7 @@ namespace Telas
                         {
                             novaDataCancelamento = DateTime.Now;
                             novaDataEntrega = null;
+                            _servicoPedido.ReporEstoque(pedidoAtual.Itens);
                         }
                         break;
 

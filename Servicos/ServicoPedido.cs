@@ -2,21 +2,25 @@ namespace Servicos
 {
     using System;
     using System.Collections.Generic;
+    using System.Security.Cryptography.X509Certificates;
     using Modelos;
     using Repositorios;
 
     public class ServicoPedido
     {
         private readonly IRepositorioPedido _repositorio;
+        private readonly ServicoProduto _servicoProduto;
 
-        public ServicoPedido(IRepositorioPedido repositorio)
+        public ServicoPedido(IRepositorioPedido repositorio, ServicoProduto servicoProduto)
         {
             _repositorio = repositorio;
+            _servicoProduto = servicoProduto;
         }
 
         public void Criar(Pedido pedido)
         {
             Validar(pedido, true);
+            BaixarEstoque(pedido.Itens);
             _repositorio.Criar(pedido);
         }
 
@@ -31,6 +35,7 @@ namespace Servicos
             if (pedido == null)
                 throw new InvalidOperationException("Pedido inválido.");
 
+            ReporEstoque(pedido.Itens);
             _repositorio.Remover(pedido);
         }
 
@@ -129,6 +134,16 @@ namespace Servicos
                 if (pedido.DataEntrega.HasValue && pedido.DataEntrega.Value < pedido.DataCriacao)
                     throw new InvalidOperationException("Data de entrega não pode ser anterior à data de criação do pedido.");
             }
+        }
+
+        public void BaixarEstoque(List<ItemPedido> itens)
+        {
+            _servicoProduto.BaixarEstoque(itens);
+        }
+
+        public void ReporEstoque(List<ItemPedido> itens)
+        {
+            _servicoProduto.ReporEstoque(itens);
         }
     }
 }

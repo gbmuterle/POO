@@ -75,5 +75,34 @@
                     throw new InvalidOperationException("Produto não encontrado para alteração.");
             }
         }
+
+        public void BaixarEstoque(List<ItemPedido> itens)
+        {
+            foreach (var item in itens)
+            {
+                var produtoAlterado = BuscarPorCodigo(item.Produto.Codigo);
+                if (produtoAlterado == null)
+                    throw new InvalidOperationException($"Produto não encontrado.");
+
+                if (produtoAlterado.Quantidade < item.Quantidade)
+                    throw new InvalidOperationException($"Estoque insuficiente para o produto {produtoAlterado.Nome}.");
+
+                produtoAlterado.Quantidade -= item.Quantidade;
+                _repositorio.Alterar(item.Produto, produtoAlterado);
+            }
+        }
+
+        public void ReporEstoque(List<ItemPedido> itens)
+        {
+            foreach (var item in itens)
+            {
+                var produtoAlterado = BuscarPorCodigo(item.Produto.Codigo);
+                if (produtoAlterado == null)
+                    throw new InvalidOperationException($"Produto não encontrado.");
+
+                produtoAlterado.Quantidade += item.Quantidade;
+                _repositorio.Alterar(item.Produto, produtoAlterado);
+            }
+        }
     }
 }

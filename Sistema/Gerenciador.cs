@@ -73,7 +73,7 @@ namespace Sistema
             var servicoFornecedor = new ServicoFornecedor(repositorioFornecedor);
             var servicoTransportadora = new ServicoTransportadora(repositorioTransportadora);
             var servicoUsuario = new ServicoUsuario(repositorioUsuario);
-            var servicoPedido = new ServicoPedido(repositorioPedido);
+            var servicoPedido = new ServicoPedido(repositorioPedido, servicoProduto);
             var servicoEndereco = new ServicoEndereco();
             var servicoCarrinho = new ServicoCarrinho(repositorioCarrinho, servicoPedido);
 

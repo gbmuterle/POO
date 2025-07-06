@@ -165,7 +165,7 @@ public class TelaCarrinho
         int codigo;
         while (true)
         {
-            Console.Write("Digite o código do produto que deseja alterar: ");
+            Console.Write("Digite o código do produto que deseja remover: ");
             if (int.TryParse(Console.ReadLine(), out codigo))
                 break;
             Console.WriteLine("Código inválido. Digite um número inteiro.");

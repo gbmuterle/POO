@@ -8,23 +8,13 @@ namespace Modelos
     public class Carrinho
     {
         public Usuario Cliente { get; private set; }
-
-        // Tire o underline e torne público com set privado
-        public List<ItemPedido> Itens { get; private set; } = new List<ItemPedido>();
-
+        public List<ItemPedido> Itens { get; private set; }
         public double ValorTotal => Itens.Sum(i => i.ValorTotal);
 
-        public Carrinho(Usuario cliente)
-        {
-            Cliente = cliente;
-            Itens = new List<ItemPedido>();
-        }
-
-        [JsonConstructor]
         public Carrinho(Usuario cliente, List<ItemPedido> itens)
         {
             Cliente = cliente;
-            Itens = itens ?? new List<ItemPedido>();
+            Itens = itens;
         }
 
         public void AdicionarItem(ItemPedido item)

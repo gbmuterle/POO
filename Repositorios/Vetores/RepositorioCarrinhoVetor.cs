@@ -24,7 +24,8 @@ namespace Repositorios
 
             if (carrinho == null)
             {
-                carrinho = new Carrinho(cliente);
+                var itens = new List<ItemPedido>();
+                carrinho = new Carrinho(cliente, itens);
 
                 var novos = new Carrinho[carrinhos.Length + 1];
                 for (int i = 0; i < carrinhos.Length; i++)

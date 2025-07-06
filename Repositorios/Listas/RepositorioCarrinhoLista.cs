@@ -23,7 +23,8 @@ namespace Repositorios
             var carrinho = carrinhos.FirstOrDefault(c => c.Cliente.Nome == cliente.Nome);
             if (carrinho == null)
             {
-                carrinho = new Carrinho(cliente);
+                var itens = new List<ItemPedido>();
+                carrinho = new Carrinho(cliente, itens);
                 carrinhos.Add(carrinho);
                 Salvar();
             }
