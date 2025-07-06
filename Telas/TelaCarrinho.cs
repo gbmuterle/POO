@@ -29,7 +29,8 @@ public class TelaCarrinho
             Console.WriteLine("1 - Adicionar Produto");
             Console.WriteLine("2 - Alterar Produto");
             Console.WriteLine("3 - Remover Produto");
-            Console.WriteLine("4 - Finalizar compra");
+            Console.WriteLine("4 - Listar Produtos no Carrinho");
+            Console.WriteLine("5 - Finalizar compra");
             Console.WriteLine("0 - Voltar");
             Console.Write("\nEscolha uma opção: ");
 
@@ -47,6 +48,9 @@ public class TelaCarrinho
                     Remover(carrinho);
                     break;
                 case "4":
+                    Listar(carrinho);
+                    break;
+                case "5":
                     Finalizar(carrinho);
                     break;
                 case "0":
@@ -187,16 +191,39 @@ public class TelaCarrinho
         PressioneParaContinuar();
     }
 
+    private void Listar(Carrinho carrinho)
+    {
+        Console.Clear();
+        var itens = _servicoCarrinho.BuscarTodos(carrinho);
+        if (!itens.Any())
+        {
+            Console.WriteLine("Carrinho vazio!");
+        }
+        else
+        {
+            Console.WriteLine(carrinho);
+        }
+        PressioneParaContinuar();
+    }
+
     private void Finalizar(Carrinho carrinho)
     {
+        var itens = _servicoCarrinho.BuscarTodos(carrinho);
+        if (!itens.Any())
+        {
+            Console.WriteLine("Carrinho vazio!");
+            PressioneParaContinuar();
+            return;
+        }
+
         double distancia;
         while (true)
-            {
-                Console.Write("Informe a distância em km: ");
-                if (double.TryParse(Console.ReadLine(), out distancia) && distancia > 0 && distancia <= 5000)
-                    break;
-                Console.WriteLine("Distância inválida.");
-            }
+        {
+            Console.Write("Informe a distância em km: ");
+            if (double.TryParse(Console.ReadLine(), out distancia) && distancia > 0 && distancia <= 5000)
+                break;
+            Console.WriteLine("Distância inválida.");
+        }
 
         var transportadoras = _servicoTransportadora.BuscarTodos();
         if (!transportadoras.Any())

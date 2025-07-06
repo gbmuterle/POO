@@ -12,5 +12,6 @@ namespace Repositorios
         Pedido? BuscarPorNumero(int numero);
         List<Pedido> BuscarTodos();
         List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal);
+        void Salvar();
     }
 }

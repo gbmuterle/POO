@@ -23,7 +23,7 @@ namespace Repositorios
                 novos[i] = fornecedores[i];
             novos[novos.Length - 1] = fornecedor;
             fornecedores = novos;
-            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado)
@@ -33,7 +33,7 @@ namespace Repositorios
                 if (fornecedores[i].Codigo == fornecedorAlterado.Codigo)
                 {
                     fornecedores[i] = fornecedorAlterado;
-                    _armazenamento.Salvar(fornecedores, _caminhoArquivo);
+                    Salvar();
                     break;
                 }
             }
@@ -61,7 +61,7 @@ namespace Repositorios
                         novos[j++] = fornecedores[i];
                 }
                 fornecedores = novos;
-                _armazenamento.Salvar(fornecedores, _caminhoArquivo);
+                Salvar();
             }
         }
 
@@ -94,6 +94,11 @@ namespace Repositorios
                     lista.Add(fornecedores[i]);
             }
             return lista;
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(fornecedores.ToList(), _caminhoArquivo);
         }
     }
 }

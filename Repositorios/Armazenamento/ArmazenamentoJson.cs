@@ -13,9 +13,9 @@ namespace Repositorios
                 if (!Directory.Exists(diretorio))
                     Directory.CreateDirectory(diretorio!);
 
-                var json = JsonSerializer.Serialize(items, new JsonSerializerOptions 
-                { 
-                    WriteIndented = true 
+                var json = JsonSerializer.Serialize(items, new JsonSerializerOptions
+                {
+                    WriteIndented = true
                 });
                 File.WriteAllText(arquivo, json);
             }

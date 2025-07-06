@@ -144,12 +144,12 @@ namespace Telas
                         if (novaSituacao.Equals("entregue", StringComparison.OrdinalIgnoreCase))
                         {
                             novaDataEntrega = DateTime.Now;
-                            novaDataCancelamento = null; // deixa o cancelamento nulo se entregou
+                            novaDataCancelamento = null;
                         }
                         else if (novaSituacao.Equals("cancelado", StringComparison.OrdinalIgnoreCase))
                         {
                             novaDataCancelamento = DateTime.Now;
-                            novaDataEntrega = null; // deixa a entrega nula se cancelou
+                            novaDataEntrega = null;
                         }
                         break;
 

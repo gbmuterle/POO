@@ -23,7 +23,7 @@ namespace Repositorios
                 novos[i] = transportadoras[i];
             novos[novos.Length - 1] = transportadora;
             transportadoras = novos;
-            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Transportadora transportadoraAtual, Transportadora transportadoraAlterada)
@@ -33,7 +33,7 @@ namespace Repositorios
                 if (transportadoras[i].Codigo == transportadoraAlterada.Codigo)
                 {
                     transportadoras[i] = transportadoraAlterada;
-                    _armazenamento.Salvar(transportadoras, _caminhoArquivo);
+                    Salvar();
                     break;
                 }
             }
@@ -61,7 +61,7 @@ namespace Repositorios
                         novos[j++] = transportadoras[i];
                 }
                 transportadoras = novos;
-                _armazenamento.Salvar(transportadoras, _caminhoArquivo);
+                Salvar();
             }
         }
 
@@ -94,6 +94,11 @@ namespace Repositorios
                     lista.Add(t);
             }
             return lista;
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
         }
     }
 }

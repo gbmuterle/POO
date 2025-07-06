@@ -11,5 +11,6 @@ namespace Repositorios
         Fornecedor? BuscarPorCodigo(int codigo);
         List<Fornecedor> BuscarTodos();
         List<Fornecedor> BuscarPorNome(string nome);
+        void Salvar();
     }
 }

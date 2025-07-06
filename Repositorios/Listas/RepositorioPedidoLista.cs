@@ -20,22 +20,23 @@ namespace Repositorios
         public void Criar(Pedido pedido)
         {
             pedidos.Add(pedido);
-            _armazenamento.Salvar(pedidos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Pedido pedidoAtual, Pedido pedidoAlterado)
         {
             pedidoAtual.DataCriacao = pedidoAlterado.DataCriacao;
             pedidoAtual.DataEntrega = pedidoAlterado.DataEntrega;
+            pedidoAtual.DataCancelamento = pedidoAlterado.DataCancelamento;
             pedidoAtual.Situacao = pedidoAlterado.Situacao;
             pedidoAtual.Transportadora = pedidoAlterado.Transportadora;
-            _armazenamento.Salvar(pedidos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Remover(Pedido pedido)
         {
             pedidos.Remove(pedido);
-            _armazenamento.Salvar(pedidos, _caminhoArquivo);
+            Salvar();
         }
 
         public Pedido? BuscarPorNumero(int numero)
@@ -51,8 +52,13 @@ namespace Repositorios
         public List<Pedido> BuscarPorData(DateTime dataInicial, DateTime dataFinal)
         {
             return pedidos
-                .Where(p => p.DataCriacao >= dataInicial && p.DataCriacao <= dataFinal)
+                .Where(p => p.DataCriacao >= dataInicial.Date && p.DataCriacao <= dataFinal.Date)
                 .ToList();
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(pedidos, _caminhoArquivo);
         }
     }
 }

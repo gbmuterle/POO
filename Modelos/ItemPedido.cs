@@ -18,7 +18,7 @@ namespace Modelos
 
         public override string ToString()
         {
-            return $"Nome: {Produto.Nome}, {Quantidade}, Valor Unitário: {Produto.Valor:C}, Valor Total: {ValorTotal:C}";
+            return $"Código: {Produto.Codigo}, Nome: {Produto.Nome}, Quantidade: {Quantidade}, Valor Unitário: {Produto.Valor:C}, Valor Total: {ValorTotal:C}";
         }
     }
 }

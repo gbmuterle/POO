@@ -21,7 +21,7 @@ namespace Repositorios
         public void Adicionar(Transportadora transportadora)
         {
             transportadoras.Add(transportadora);
-            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Transportadora transportadoraAtual, Transportadora transportadoraAlterada)
@@ -31,13 +31,13 @@ namespace Repositorios
             transportadoraAtual.Email = transportadoraAlterada.Email;
             transportadoraAtual.Cnpj = transportadoraAlterada.Cnpj;
             transportadoraAtual.PrecoPorKm = transportadoraAlterada.PrecoPorKm;
-            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
+            Salvar();
         }
 
         public void Remover(Transportadora transportadora)
         {
             transportadoras.Remove(transportadora);
-            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
+            Salvar();
         }
 
         public Transportadora? BuscarPorCodigo(int codigo)
@@ -55,6 +55,11 @@ namespace Repositorios
             return transportadoras
                 .Where(t => t.Nome.ToLower().Contains(nome.ToLower()))
                 .ToList();
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(transportadoras, _caminhoArquivo);
         }
     }
 }

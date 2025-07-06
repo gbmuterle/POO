@@ -126,6 +126,8 @@ namespace Servicos
             {
                 if (pedido.Situacao != "novo" && pedido.Situacao != "transporte" && pedido.Situacao != "entregue" && pedido.Situacao != "cancelado")
                     throw new InvalidOperationException("Situação inválida. Deve ser 'novo', 'transporte', 'entregue' ou 'cancelado'.");
+                if (pedido.DataEntrega.HasValue && pedido.DataEntrega.Value < pedido.DataCriacao)
+                    throw new InvalidOperationException("Data de entrega não pode ser anterior à data de criação do pedido.");
             }
         }
     }

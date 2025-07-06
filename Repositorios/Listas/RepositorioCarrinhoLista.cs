@@ -7,7 +7,7 @@ namespace Repositorios
 {
     public class RepositorioCarrinhoLista : IRepositorioCarrinho
     {
-        private List<Carrinho> _carrinhos = new List<Carrinho>();
+        private List<Carrinho> carrinhos;
         private readonly IArmazenamento<Carrinho> _armazenamento;
         private readonly string _caminhoArquivo;
 
@@ -15,53 +15,29 @@ namespace Repositorios
         {
             _armazenamento = armazenamento;
             _caminhoArquivo = caminhoArquivo;
-            _carrinhos = _armazenamento.Carregar(_caminhoArquivo);
-        }
-
-        public void Adicionar(Carrinho carrinho, ItemPedido item)
-        {
-            carrinho.ItensInternos.Add(item);
-            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
-        }
-
-        public void Alterar(Carrinho carrinho, ItemPedido itemAtual, ItemPedido itemAlterado)
-        {
-            itemAtual.Quantidade = itemAlterado.Quantidade;
-            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
-        }
-
-        public void Remover(Carrinho carrinho, ItemPedido item)
-        {
-            carrinho.ItensInternos.Remove(item);
-            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
-        }
-
-        public void Limpar(Carrinho carrinho)
-        {
-            carrinho.ItensInternos.Clear();
-            _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
+            carrinhos = _armazenamento.Carregar(_caminhoArquivo);
         }
 
         public Carrinho ObterCarrinho(Usuario cliente)
         {
-            var carrinho = _carrinhos.FirstOrDefault(c => c.Cliente.Nome == cliente.Nome);
+            var carrinho = carrinhos.FirstOrDefault(c => c.Cliente.Nome == cliente.Nome);
             if (carrinho == null)
             {
                 carrinho = new Carrinho(cliente);
-                _carrinhos.Add(carrinho);
-                _armazenamento.Salvar(_carrinhos, _caminhoArquivo);
+                carrinhos.Add(carrinho);
+                Salvar();
             }
             return carrinho;
         }
 
-        public ItemPedido? BuscarItem(Carrinho carrinho, Produto produto)
+        public List<Carrinho> BuscarTodos()
         {
-            return carrinho.ItensInternos.FirstOrDefault(i => i.Produto.Codigo == produto.Codigo);
+            return new List<Carrinho>(carrinhos);
         }
-
-        public List<ItemPedido> BuscarTodos(Carrinho carrinho)
+        
+        public void Salvar()
         {
-            return carrinho.ItensInternos.ToList();
+            _armazenamento.Salvar(carrinhos, _caminhoArquivo);
         }
     }
 }

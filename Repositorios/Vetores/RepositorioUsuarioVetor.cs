@@ -17,7 +17,7 @@ namespace Repositorios
             _armazenamento = armazenamento;
             _caminhoArquivo = caminhoArquivo;
             usuarios = _armazenamento.Carregar(_caminhoArquivo).ToArray();
-             if (usuarios.Length == 0)
+            if (usuarios.Length == 0)
             {
                 Cadastrar(admin);
             }
@@ -30,7 +30,7 @@ namespace Repositorios
                 novos[i] = usuarios[i];
             novos[novos.Length - 1] = usuario;
             usuarios = novos;
-            _armazenamento.Salvar(usuarios, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Usuario usuarioAtual, Usuario usuarioAlterado)
@@ -40,7 +40,7 @@ namespace Repositorios
                 if (usuarios[i].Nome == usuarioAlterado.Nome)
                 {
                     usuarios[i] = usuarioAlterado;
-                    _armazenamento.Salvar(usuarios, _caminhoArquivo);
+                    Salvar();
                     break;
                 }
             }
@@ -68,7 +68,7 @@ namespace Repositorios
                         novos[j++] = usuarios[i];
                 }
                 usuarios = novos;
-                _armazenamento.Salvar(usuarios, _caminhoArquivo);
+                Salvar();
             }
         }
 
@@ -90,6 +90,11 @@ namespace Repositorios
                 lista.Add(u);
             }
             return lista;
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(usuarios, _caminhoArquivo);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Repositorios
         public void Adicionar(Produto produto)
         {
             produtos.Add(produto);
-            _armazenamento.Salvar(produtos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Produto produtoAtual, Produto produtoAlterado)
@@ -29,13 +29,13 @@ namespace Repositorios
             produtoAtual.Valor = produtoAlterado.Valor;
             produtoAtual.Quantidade = produtoAlterado.Quantidade;
             produtoAtual.Fornecedor = produtoAlterado.Fornecedor;
-            _armazenamento.Salvar(produtos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Remover(Produto produto)
         {
             produtos.Remove(produto);
-            _armazenamento.Salvar(produtos, _caminhoArquivo);
+            Salvar();
         }
 
         public Produto? BuscarPorCodigo(int codigo)
@@ -53,6 +53,11 @@ namespace Repositorios
             return produtos
                 .Where(p => p.Nome.ToLower().Contains(nome.ToLower()))
                 .ToList();
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(produtos, _caminhoArquivo);
         }
     }
 }

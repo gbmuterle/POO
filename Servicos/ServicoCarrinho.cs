@@ -18,13 +18,15 @@ namespace Servicos
         public void AdicionarItem(Carrinho carrinho, ItemPedido item)
         {
             Validar(carrinho, item, true);
-            _repositorio.Adicionar(carrinho, item);
+            carrinho.AdicionarItem(item);
+            _repositorio.Salvar();
         }
 
         public void AlterarItem(Carrinho carrinho, ItemPedido itemAtual, ItemPedido itemAlterado)
         {
             Validar(carrinho, itemAlterado, false);
-            _repositorio.Alterar(carrinho, itemAtual, itemAlterado);
+            carrinho.AlterarItem(itemAtual, itemAlterado);
+            _repositorio.Salvar();
         }
 
         public void RemoverItem(Carrinho carrinho, ItemPedido item)
@@ -32,15 +34,16 @@ namespace Servicos
             if (item == null)
                 throw new InvalidOperationException("Item não pode ser nulo.");
 
-            _repositorio.Remover(carrinho, item);
+            carrinho.RemoverItem(item);
+            _repositorio.Salvar();
         }
-        
+
         public void Finalizar(Carrinho carrinho, double distancia, Transportadora transportadora)
         {
             if (carrinho == null)
                 throw new InvalidOperationException("Carrinho inválido.");
 
-            if (!carrinho.ItensInternos.Any())
+            if (!carrinho.Itens.Any())
                 throw new InvalidOperationException("Carrinho vazio. Não é possível finalizar a compra.");
 
             if (transportadora == null)
@@ -54,17 +57,19 @@ namespace Servicos
                 null,
                 null,
                 "novo",
-                carrinho.ItensInternos,
+                carrinho.Itens.ToList(),
                 transportadora,
                 distancia
             );
             _servicoPedido.Criar(pedido);
-            Limpar(carrinho);
+            carrinho.Limpar();
+            _repositorio.Salvar();
         }
 
         public void Limpar(Carrinho carrinho)
         {
-            _repositorio.Limpar(carrinho);
+            carrinho.Limpar();
+            _repositorio.Salvar();
         }
 
         public Carrinho ObterCarrinho(Usuario cliente)
@@ -74,12 +79,12 @@ namespace Servicos
 
         public ItemPedido? BuscarItem(Carrinho carrinho, Produto produto)
         {
-            return _repositorio.BuscarItem(carrinho, produto);
+            return carrinho.BuscarItem(produto);
         }
 
         public List<ItemPedido> BuscarTodos(Carrinho carrinho)
         {
-            return _repositorio.BuscarTodos(carrinho);
+            return carrinho.Itens.ToList();
         }
 
         private void Validar(Carrinho carrinho, ItemPedido item, bool novo)

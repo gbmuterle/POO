@@ -24,7 +24,7 @@ namespace Repositorios
                 novos[i] = produtos[i];
             novos[novos.Length - 1] = produto;
             produtos = novos;
-            _armazenamento.Salvar(produtos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Produto produtoAtual, Produto produtoAlterado)
@@ -34,7 +34,7 @@ namespace Repositorios
                 if (produtos[i].Codigo == produtoAlterado.Codigo)
                 {
                     produtos[i] = produtoAlterado;
-                    _armazenamento.Salvar(produtos, _caminhoArquivo);
+                    Salvar();
                     break;
                 }
             }
@@ -62,7 +62,7 @@ namespace Repositorios
                         novos[j++] = produtos[i];
                 }
                 produtos = novos;
-                _armazenamento.Salvar(produtos, _caminhoArquivo);
+                Salvar();
             }
         }
 
@@ -95,6 +95,11 @@ namespace Repositorios
                     lista.Add(p);
             }
             return lista;
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(produtos, _caminhoArquivo);
         }
     }
 }

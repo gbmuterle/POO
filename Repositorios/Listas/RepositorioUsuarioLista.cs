@@ -13,7 +13,7 @@ namespace Repositorios
         private readonly Usuario admin = new Usuario("admin", "admin", "admin", "11999999999", "admin@email.com", new Endereco(
             "Rua", "1234", "Sede ERP", "Centro", "Flores da Cunha", "RS", "95270000")
         );
-       
+
 
         public RepositorioUsuarioLista(IArmazenamento<Usuario> armazenamento, string caminhoArquivo)
         {
@@ -29,7 +29,7 @@ namespace Repositorios
         public void Cadastrar(Usuario usuario)
         {
             usuarios.Add(usuario);
-            _armazenamento.Salvar(usuarios, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Usuario usuarioAtual, Usuario usuarioAlterado)
@@ -39,13 +39,13 @@ namespace Repositorios
             usuarioAtual.Telefone = usuarioAlterado.Telefone;
             usuarioAtual.Email = usuarioAlterado.Email;
             usuarioAtual.Endereco = usuarioAlterado.Endereco;
-            _armazenamento.Salvar(usuarios, _caminhoArquivo);
+            Salvar();
         }
 
         public void Remover(Usuario usuario)
         {
             usuarios.Remove(usuario);
-            _armazenamento.Salvar(usuarios, _caminhoArquivo);
+            Salvar();
         }
         public Usuario? BuscarPorNome(string nome)
         {
@@ -55,6 +55,11 @@ namespace Repositorios
         public List<Usuario> BuscarTodos()
         {
             return usuarios;
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(usuarios, _caminhoArquivo);
         }
     }
 }

@@ -37,39 +37,14 @@ namespace Repositorios
             return carrinho;
         }
 
-        public void Adicionar(Carrinho carrinho, ItemPedido item)
+        public List<Carrinho> BuscarTodos()
         {
-            carrinho.ItensInternos.Add(item);
+            return new List<Carrinho>(carrinhos);
+        }
+
+        public void Salvar()
+        {
             _armazenamento.Salvar(carrinhos, _caminhoArquivo);
-        }
-
-        public void Alterar(Carrinho carrinho, ItemPedido itemAtual, ItemPedido itemAlterado)
-        {
-            var index = carrinho.ItensInternos.IndexOf(itemAtual);
-            carrinho.ItensInternos[index] = itemAlterado;
-            _armazenamento.Salvar(carrinhos, _caminhoArquivo);
-        }
-
-        public void Remover(Carrinho carrinho, ItemPedido item)
-        {
-            carrinho.ItensInternos.Remove(item);
-            _armazenamento.Salvar(carrinhos, _caminhoArquivo);
-        }
-
-        public void Limpar(Carrinho carrinho)
-        {
-            carrinho.ItensInternos.Clear();
-            _armazenamento.Salvar(carrinhos, _caminhoArquivo);
-        }
-
-        public ItemPedido? BuscarItem(Carrinho carrinho, Produto produto)
-        {
-            return carrinho.ItensInternos.FirstOrDefault(i => i.Produto.Codigo == produto.Codigo);
-        }
-
-        public List<ItemPedido> BuscarTodos(Carrinho carrinho)
-        {
-            return new List<ItemPedido>(carrinho.ItensInternos);
         }
     }
 }

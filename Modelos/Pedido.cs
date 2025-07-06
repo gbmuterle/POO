@@ -44,10 +44,10 @@ namespace Modelos
         public override string ToString()
         {
             var dataEntregaStr = DataEntrega.HasValue ? DataEntrega.Value.ToString("dd/MM/yyyy") : "Não definida";
-            var pedidoItem = $"Número: {Numero}, Cliente: {Cliente.Nome}, Data de Criação: {DataCriacao:dd/MM/yyyy}, Data de Entrega: {dataEntregaStr}, Situação: {Situacao}\nTransportadora: {Transportadora}, Distância: {Distancia}, Valor Frete: {ValorFrete:C}, Valor Total: {ValorTotal:C}\n";
+            var pedidoItem = $"Pedido N°: {Numero}, Cliente: {Cliente.Nome}, Data de Criação: {DataCriacao:dd/MM/yyyy}, Data de Entrega: {dataEntregaStr}, Situação: {Situacao}\nTransportadora: {Transportadora.Nome}, Distância: {Distancia}km, Valor Frete: {ValorFrete:C}, Valor Total: {ValorTotal:C}\n";
             foreach (var item in Itens)
             {
-                pedidoItem += $"    {item.Produto.Nome} - {item.Quantidade} un. - {item.ValorTotal:C}\n";
+                pedidoItem += $"        - {item.Produto.Nome}   | {item.Quantidade} UN  | Valor Unitário: {item.ValorUnitario:C}    | Valor Total: {item.ValorTotal:C}\n";
             }
             if (Situacao.Equals("cancelado", StringComparison.OrdinalIgnoreCase) && DataCancelamento.HasValue)
             {

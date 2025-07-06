@@ -10,5 +10,6 @@ namespace Repositorios
         void Remover(Usuario usuario);
         Usuario? BuscarPorNome(string nome);
         List<Usuario> BuscarTodos();
+        void Salvar();
     }
 }

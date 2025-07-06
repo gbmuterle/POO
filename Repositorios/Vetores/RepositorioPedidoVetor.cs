@@ -24,7 +24,7 @@ namespace Repositorios
                 novos[i] = pedidos[i];
             novos[novos.Length - 1] = pedido;
             pedidos = novos;
-            _armazenamento.Salvar(pedidos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Pedido pedidoAtual, Pedido pedidoAlterado)
@@ -37,7 +37,7 @@ namespace Repositorios
                     break;
                 }
             }
-            _armazenamento.Salvar(pedidos, _caminhoArquivo);
+            Salvar();
         }
 
         public void Remover(Pedido pedido)
@@ -62,7 +62,7 @@ namespace Repositorios
                         novos[j++] = pedidos[i];
                 }
                 pedidos = novos;
-                _armazenamento.Salvar(pedidos, _caminhoArquivo);
+                Salvar();
             }
         }
 
@@ -95,6 +95,11 @@ namespace Repositorios
                     lista.Add(p);
             }
             return lista;
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(pedidos.ToList(), _caminhoArquivo);
         }
     }
 }

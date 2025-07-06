@@ -19,7 +19,7 @@ namespace Repositorios
         public void Adicionar(Fornecedor fornecedor)
         {
             fornecedores.Add(fornecedor);
-            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
+            Salvar();
         }
 
         public void Alterar(Fornecedor fornecedorAtual, Fornecedor fornecedorAlterado)
@@ -30,13 +30,13 @@ namespace Repositorios
             fornecedorAtual.Email = fornecedorAlterado.Email;
             fornecedorAtual.Cnpj = fornecedorAlterado.Cnpj;
             fornecedorAtual.Endereco = fornecedorAlterado.Endereco;
-            _armazenamento.Salvar(fornecedores, _caminhoArquivo);    
+            Salvar();
         }
 
         public void Remover(Fornecedor fornecedor)
         {
             fornecedores.Remove(fornecedor);
-            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
+            Salvar();
         }
 
         public Fornecedor? BuscarPorCodigo(int codigo)
@@ -54,6 +54,11 @@ namespace Repositorios
             return fornecedores
                 .Where(f => f.Nome.ToLower().Contains(nome.ToLower()))
                 .ToList();
+        }
+
+        public void Salvar()
+        {
+            _armazenamento.Salvar(fornecedores, _caminhoArquivo);
         }
     }
 }

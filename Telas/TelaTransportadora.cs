@@ -20,7 +20,7 @@ namespace Telas
                 Console.Clear();
                 Console.WriteLine("=== TRANSPORTADORAS ===");
                 Console.WriteLine("1 - Cadastrar");
-                Console.WriteLine("2 - Listar todos");
+                Console.WriteLine("2 - Listar todas");
                 Console.WriteLine("3 - Alterar");
                 Console.WriteLine("4 - Remover");
                 Console.WriteLine("5 - Buscar por código");

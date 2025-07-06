@@ -11,5 +11,6 @@ namespace Repositorios
         Produto? BuscarPorCodigo(int codigo);
         List<Produto> BuscarTodos();
         List<Produto> BuscarPorNome(string nome);
+        void Salvar();
     }
 }
